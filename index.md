@@ -25,7 +25,7 @@ feature_row:
     url: "https://pentestmag.com/download/pentest-open-source-pentesting-toolkit/"
     btn_class: "btn--primary"
     btn_label: "Read Article"
-  - image_path: /assets/images/trophy-achievements.jpg
+  - image_path: /assets/images/trophy-achievements.png
     alt: "achievements"
     title: "Recognition & Achievements"
     excerpt: "Ranked #1 in Turkey and Top 11 worldwide on TryHackMe. Featured on Discord’s Security Hall of Fame for responsible disclosure. Creator of AutoPWN-Suite, a widely recognized open-source offensive security framework."
