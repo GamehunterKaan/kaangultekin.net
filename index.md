@@ -15,7 +15,7 @@ feature_row:
     alt: "hands-on"
     title: "Hands-On Security"
     excerpt: "Exploring, automating, securing. I work across USB exploits, network scanning, and post-exploitation, turning creative ideas into practical tools and repeatable tests."
-    url: "/aboutme/"
+    url: "/projects/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
   - image_path: /assets/images/pentest-mag.png
@@ -29,7 +29,7 @@ feature_row:
     alt: "achievements"
     title: "Recognition & Achievements"
     excerpt: "Ranked #1 in Turkey and Top 11 worldwide on TryHackMe. Featured on Discord’s Security Hall of Fame for responsible disclosure. Creator of AutoPWN-Suite, a widely recognized open-source offensive security framework."
-    url: "/achievements"
+    url: "/aboutme/"
     btn_class: "btn--primary"
     btn_label: "Learn more"      
 ---
