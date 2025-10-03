@@ -4,7 +4,7 @@ permalink: /
 hidden: true
 header:
   overlay_color: "#5e616c"
-  overlay_image: /assets/images/splas-banner.png
+  overlay_image: /assets/images/splash-banner.png
   actions:
     - label: "<i class='fas fa-code'></i> View Projects"
       url: "/projects/"
@@ -19,17 +19,17 @@ feature_row:
     btn_class: "btn--primary"
     btn_label: "Learn more"
   - image_path: /assets/images/pentest-mag.png
-    alt: "fully responsive"
+    alt: "Pentest Mag"
     title: "Featured in Pentest Mag"
     excerpt: "Invited by Pentest Magazine to write about my project, AutoPWN-Suite, showcasing its impact on the security community."
     url: "https://pentestmag.com/download/pentest-open-source-pentesting-toolkit/"
     btn_class: "btn--primary"
     btn_label: "Read Article"
-  - image_path: /assets/images/mm-free-feature.png
-    alt: "100% free"
-    title: "100% free"
-    excerpt: "Free to use however you want under the MIT License. Clone it, fork it, customize it... whatever!"
-    url: "/docs/license/"
+  - image_path: /assets/images/trophy-achievements.png
+    alt: "achievements"
+    title: "Recognition & Achievements"
+    excerpt: "Ranked #1 in Turkey and Top 11 worldwide on TryHackMe. Featured on Discord’s Security Hall of Fame for responsible disclosure. Creator of AutoPWN-Suite, a widely recognized open-source offensive security framework."
+    url: "/achievements"
     btn_class: "btn--primary"
     btn_label: "Learn more"      
 ---
