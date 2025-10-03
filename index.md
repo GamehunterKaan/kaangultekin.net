@@ -11,11 +11,11 @@ header:
 excerpt: >
   Software Engineer & Cybersecurity Researcher - From full-stack tooling to offensive security: building reliable, usable security tools and finding real-world bugs.
 feature_row:
-  - image_path: /assets/images/mm-customizable-feature.png
-    alt: "customizable"
-    title: "Super customizable"
-    excerpt: "Everything from the menus, sidebars, comments, and more can be configured or set with YAML Front Matter."
-    url: "/docs/configuration/"
+  - image_path: /assets/images/hands-on-security.png
+    alt: "hands-on"
+    title: "Hands-On Security"
+    excerpt: "Exploring, automating, securing. I work across USB exploits, network scanning, and post-exploitation, turning creative ideas into practical tools and repeatable tests."
+    url: "/aboutme/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
   - image_path: /assets/images/pentest-mag.png
@@ -25,7 +25,7 @@ feature_row:
     url: "https://pentestmag.com/download/pentest-open-source-pentesting-toolkit/"
     btn_class: "btn--primary"
     btn_label: "Read Article"
-  - image_path: /assets/images/trophy-achievements.png
+  - image_path: /assets/images/trophy-achievements.jpg
     alt: "achievements"
     title: "Recognition & Achievements"
     excerpt: "Ranked #1 in Turkey and Top 11 worldwide on TryHackMe. Featured on Discord’s Security Hall of Fame for responsible disclosure. Creator of AutoPWN-Suite, a widely recognized open-source offensive security framework."
