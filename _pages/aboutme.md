@@ -1,5 +1,5 @@
 ---
 layout: collection
-permalink: /aboutme
+permalink: /aboutme/
 hidden: true
 ---

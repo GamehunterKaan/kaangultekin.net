@@ -1,5 +1,5 @@
 ---
 layout: collection
-permalink: /projects
+permalink: /projects/
 hidden: true
 ---
