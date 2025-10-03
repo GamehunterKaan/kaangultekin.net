@@ -4,13 +4,15 @@ permalink: /
 hidden: true
 header:
   overlay_color: "#5e616c"
-  overlay_image: /assets/images/mm-home-page-feature.jpg
+  overlay_image: /assets/images/splas-banner-png
   actions:
     - label: "<i class='fas fa-code'></i> View Projects"
-      url: "/docs/quick-start-guide/"
+      url: "/projects/"
+  actions:
+    - label: "<i class='fas fa-user'></i> About Me"
+      url: "/about/"
 excerpt: >
-  Software Engineer & Cybersecurity Researcher
-  From full-stack tooling to offensive security: building reliable, usable security tools and finding real-world bugs.
+  Software Engineer & Cybersecurity Researcher - From full-stack tooling to offensive security: building reliable, usable security tools and finding real-world bugs.
 feature_row:
   - image_path: /assets/images/mm-customizable-feature.png
     alt: "customizable"
