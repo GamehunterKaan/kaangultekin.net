@@ -8,8 +8,6 @@ header:
   actions:
     - label: "<i class='fas fa-code'></i> View Projects"
       url: "/projects/"
-    - label: "<i class='fas fa-user'></i> About Me"
-      url: "/about/"
 excerpt: >
   Software Engineer & Cybersecurity Researcher - From full-stack tooling to offensive security: building reliable, usable security tools and finding real-world bugs.
 feature_row:
