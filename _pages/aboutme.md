@@ -1,8 +1,15 @@
 ---
-layout: collection
+layout: single
 permalink: /aboutme/
 hidden: true
 ---
+
+---
+toc: true
+toc_label: "My Table of Contents"
+toc_icon: "cog"
+---
+
 # 👋 About Me — Kaan Gültekin
 
 ![Profile Banner](/assets//images/splash-banner.png)
@@ -119,14 +126,3 @@ I publish openly but operate within a strict **ethics-first framework**:
 - Commitment to transparency and educational value  
 
 **Contact:** [Email me](mailto:kaan@kaangultekin.net) · [GitHub](https://github.com/GamehunterKaan)
-
----
-
-# ⚡ Quick Bio
-
-Software engineer & cybersecurity researcher.  
-Creator of AutoPWN-Suite.  
-Ranked #1 in Turkey / Top 11 worldwide on TryHackMe.  
-Published research on fileless PowerShell malware, USB-based attack vectors, and offensive automation.  
-
----
