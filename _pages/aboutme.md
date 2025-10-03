@@ -5,6 +5,7 @@ hidden: true
 toc: true
 toc_label: "Table of Contents"
 toc_icon: "cog"
+author_profile: true
 ---
 
 # 👋 About Me — Kaan Gültekin

@@ -3,8 +3,9 @@ layout: splash
 permalink: /
 hidden: true
 header:
-  overlay_color: "#5e616c"
+  overlay_color: "#242730ff"
   overlay_image: /assets/images/splash-banner.png
+  overlay_filter: 0.3
   actions:
     - label: "<i class='fas fa-code'></i> View Projects"
       url: "/projects/"
