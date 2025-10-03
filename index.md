@@ -8,7 +8,6 @@ header:
   actions:
     - label: "<i class='fas fa-code'></i> View Projects"
       url: "/projects/"
-  actions:
     - label: "<i class='fas fa-user'></i> About Me"
       url: "/about/"
 excerpt: >
