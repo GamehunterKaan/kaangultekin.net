@@ -16,13 +16,13 @@ search: false
   justify-content: center;
 }
 
-@media (min-width: 1200px) {
-  .projects {
-    grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
-    gap: 2.4rem;
-    padding: 0 2rem;
-  }
-}
+// @media (min-width: 1200px) {
+//   .projects {
+//     grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+//     gap: 2.4rem;
+//     padding: 0 2rem;
+//   }
+// }
 
 .project-card {
   position: relative;
