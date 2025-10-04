@@ -8,27 +8,30 @@ search: false
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
-/* Grid container */
+/* Grid container: fixed 2 columns on desktop */
 .projects {
   display: grid;
-  grid-template-columns: repeat(2, minmax(340px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* always 2 columns */
   gap: 2.2rem;
   margin-top: 2rem;
   justify-content: center;
+  max-width: 1600px; /* optional: limit grid width */
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Card container using padding-top for 16:9 */
+/* Card container with 16:9 aspect ratio */
 .project-card {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
+  padding-top: 56.25%; /* 16:9 ratio */
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Image and overlay absolutely positioned to fill card */
+/* Image and overlay absolutely fill the card */
 .project-card img,
 .project-overlay {
   position: absolute;
@@ -106,7 +109,7 @@ search: false
   box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
-/* Responsive: single column on mobile */
+/* Mobile: switch to single column below 720px */
 @media (max-width: 720px) {
   .projects {
     grid-template-columns: 1fr;
