@@ -2,6 +2,12 @@
 layout: collection
 permalink: /projects/autopwn-suite/
 hidden: true
+toc: true
+toc_label: "Table of Contents"
+toc_icon: "cog"
+toc_sticky: true
+author_profile: true
+use_mermaid: true
 ---
 
 # AutoPWN Suite
@@ -52,7 +58,7 @@ Below is a combined textual + visual explanation of the runtime architecture and
 
 ### Sequence diagram (runtime interaction)
 
-```mermaid
+<div class="mermaid">
 sequenceDiagram
     participant User as User / CLI
     participant AutoPWN as autopwn.py
@@ -80,13 +86,13 @@ sequenceDiagram
     API->>Report: Aggregate results
     Report-->>AutoPWN: Save as JSON / HTML / TXT
     AutoPWN-->>User: Display summary + output path
-```
+</div>
 
 ---
 
 ### Flow diagram (data pipeline view)
 
-```mermaid
+<div class="mermaid">
 flowchart TD
     A[CLI / User Input] --> B[autopwn.py<br>Parse args, config, mode]
     B --> C[AutoScanner API<br>(Core Engine)]
@@ -100,7 +106,7 @@ flowchart TD
     J --> K[Webhook / Email / Console Output]
     style A fill:#f3f4f6,stroke:#111,stroke-width:1px
     style K fill:#f3f4f6,stroke:#111,stroke-width:1px
-```
+</div>
 
 ---
 
