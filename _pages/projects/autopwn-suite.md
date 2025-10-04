@@ -1,8 +1,7 @@
 ---
 Title: AutoPWN Suite
-layout: collection
+layout: splash
 permalink: /projects/autopwn-suite/
-hidden: true
 toc: true
 toc_label: "Table of Contents"
 toc_icon: "cog"
@@ -10,14 +9,15 @@ toc_sticky: true
 author_profile: true
 use_mermaid: true
 classes: wide
----
-
-# AutoPWN Suite
-
-*Automated vulnerability scanning & exploitation framework*
-
-**GitHub**: [https://github.com/GamehunterKaan/AutoPWN-Suite](https://github.com/GamehunterKaan/AutoPWN-Suite)
-
+header:
+  overlay_color: "#242730ff"
+  overlay_image: /assets/images/autopwn-suite.jpg
+  overlay_filter: 0.3
+  actions:
+    - label: "<i class='fas fa-code'></i> View On GitHub"
+      url: "https://github.com/GamehunterKaan/AutoPWN-Suite/"
+excerpt: >
+  Automated vulnerability scanning & exploitation framework
 ---
 
 ## 🚀 Introduction
@@ -239,7 +239,41 @@ Scan a specific target:
 autopwn-suite -t 192.168.1.100
 ```
 
-Use as a module:
+Set scanning speed
+
+```bash
+autopwn-suite -s 5
+```
+
+Choose mode (normal / evade / noise):
+
+```bash
+autopwn-suite -m evade
+```
+
+Custom Nmap flags:
+
+```bash
+autopwn-suite -nf "-O -sV"
+```
+
+Output file and format:
+
+```bash
+autopwn-suite -o result.html -ot html
+```
+
+Webhook / Email reporting:
+
+```bash
+autopwn-suite --report webhook --report-webhook <URL>
+autopwn-suite --report email --report-email-to you@example.com ...
+```
+
+Use `-h` or `--help` to see all options.
+
+
+### Use as a module:
 
 ```python
 from autopwn_suite.api import AutoScanner

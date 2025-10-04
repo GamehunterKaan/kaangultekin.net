@@ -2,7 +2,6 @@
 layout: single
 permalink: /projects/
 hidden: true
-classes: wide
 ---
 
 <section class="projects">
