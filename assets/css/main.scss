@@ -8,66 +8,96 @@ search: false
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
-// Your custom CSS after imports
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2.2rem;
   margin-top: 2rem;
+  justify-content: center;
+}
+
+@media (min-width: 1200px) {
+  .projects {
+    grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+    gap: 2.4rem;
+    padding: 0 2rem;
+  }
 }
 
 .project-card {
+  position: relative;
   background: var(--mm-surface-bg, #111);
   border-radius: 1rem;
-  padding: 1.5rem;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  max-width: 780px;
+  margin: 0 auto;
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .project-image {
   width: 100%;
-  height: 180px;
+  height: 260px;
   object-fit: cover;
-  border-radius: 0.75rem;
-  margin-bottom: 1rem;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
-.project-card h3 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.75rem;
+.project-card:hover .project-image {
+  transform: scale(1.05);
 }
 
-.project-card p {
+.project-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.2rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1));
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.project-overlay h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.project-overlay p {
   font-size: 0.95rem;
   color: #ccc;
-  line-height: 1.5;
-  margin-bottom: 1.2rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
 }
 
 .project-card .buttons {
   display: flex;
-  justify-content: center;
-  gap: 0.6rem;
   flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
 .project-card .btn {
   background: #007bff;
   color: white !important;
-  padding: 0.5rem 1.1rem;
+  padding: 0.45rem 1rem;
   border-radius: 0.5rem;
   text-decoration: none;
-  transition: background 0.2s ease;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
 .project-card .btn:hover {
   background: #0056b3;
+  transform: scale(1.05);
 }
 
 .project-card .btn-secondary {
