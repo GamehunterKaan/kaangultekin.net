@@ -6,34 +6,7 @@ toc: true
 toc_label: "Table of Contents"
 toc_icon: "cog"
 author_profile: true
-mobile_hide_toc: true
-mobile_hide_author: true
 ---
-
-<!-- Table of Contents (desktop only) -->
-<div class="hide-for-small-only">
-  {% if page.toc %}
-    <nav id="toc" class="toc-wrapper">
-      {{ content | toc }}
-    </nav>
-  {% endif %}
-</div>
-
-<!-- Author Profile (desktop only) -->
-<div class="hide-for-small-only">
-  {% if page.author_profile %}
-    <div class="author">
-      <h3>{{ site.data.authors[page.author].name }}</h3>
-      <p>{{ site.data.authors[page.author].bio }}</p>
-      <!-- optional social links -->
-      {% assign author = site.data.authors[page.author] %}
-      {% if author.github %}
-        <a href="https://github.com/{{ author.github }}">GitHub</a>
-      {% endif %}
-    </div>
-  {% endif %}
-</div>
-
 
 # 👋 About Me — Kaan Gültekin
 
