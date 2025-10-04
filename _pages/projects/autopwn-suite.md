@@ -1,4 +1,5 @@
 ---
+Title: AutoPWN Suite
 layout: collection
 permalink: /projects/autopwn-suite/
 hidden: true
@@ -59,29 +60,23 @@ Below is a combined textual + visual explanation of the runtime architecture and
 ### Sequence diagram (runtime interaction)
 
 <div class="mermaid">
-%% AutoPWN-Suite Vertical Sequence Diagram
 sequenceDiagram
-    box "AutoPWN-Suite Execution Flow" #002244
-        participant U as "User / CLI"
-        participant P as "autopwn.py"
-        participant A as "AutoScanner API"
-        participant S as "Scan Modules"
-        participant V as "Vulnerability Lookup"
-        participant E as "Exploit Fetcher"
-        participant R as "Reporter"
-    end
+    participant U as "User / CLI"
+    participant Core as "autopwn.py / AutoScanner"
+    participant Scan as "Scan → Nmap"
+    participant Vuln as "CVE Lookup"
+    participant Exploit as "Exploit Fetcher"
+    participant Report as "Reporter / Exporter"
 
-    U->>P: Start scan (autopwn-suite -t <target> -y)
-    P->>A: Initialize engine and configuration
-    A->>S: Run Nmap / Port scan
-    S-->>A: Return hosts, ports, service versions
-    A->>V: Search CVEs by service/version
-    V-->>A: Return matched vulnerabilities
-    A->>E: Fetch PoC / exploit data
-    E-->>A: Return exploit metadata
-    A->>R: Generate structured report
-    R-->>P: Save output (HTML, JSON, TXT)
-    P-->>U: Display summary and report location
+    U->>Core: Start scan (autopwn-suite -t <target> -y)
+    Core->>Scan: Perform host and port discovery
+    Scan-->>Core: Return services and versions
+    Core->>Vuln: Match CVEs by service/version
+    Vuln-->>Core: CVE list with severity
+    Core->>Exploit: Fetch exploit references
+    Exploit-->>Core: Exploit metadata
+    Core->>Report: Export results to HTML / JSON
+    Report-->>U: Display summary and output
 </div>
 
 ---
