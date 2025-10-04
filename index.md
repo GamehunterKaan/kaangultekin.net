@@ -137,47 +137,38 @@ feature_row:
 
 ---
 
-## 💻 My Toolkit
+## 🚀 On The Horizon
 
-<div class="toolkit-grid">
-  <div class="toolkit-category">
-    <h3><i class="fas fa-desktop"></i> Daily Drivers</h3>
-    <ul>
-      <li><strong>OS:</strong> Windows 11 / Kali Linux (Hyper-V)</li>
-      <li><strong>Editor:</strong> Visual Studio Code</li>
-      <li><strong>Terminal:</strong> Windows Terminal with PowerShell</li>
-    </ul>
+<div class="horizon-list">
+  <div class="horizon-item">
+    <div class="horizon-item__icon"><i class="fas fa-award"></i></div>
+    <div class="horizon-item__text">
+      <p>Aiming to achieve the <strong>OSCP certification</strong> to validate my offensive security expertise and practical penetration testing skills.</p>
+    </div>
   </div>
-  <div class="toolkit-category">
-    <h3><i class="fas fa-bug"></i> Core Security Tools</h3>
-    <ul>
-      <li>Burp Suite</li>
-      <li>Nmap</li>
-      <li>Nuclei</li>
-    </ul>
+  <div class="horizon-item">
+    <div class="horizon-item__icon"><i class="fas fa-user-secret"></i></div>
+    <div class="horizon-item__text">
+      <p>Targeting the <strong>OSEP certification</strong> to master advanced adversary simulation, evasion techniques, and Active Directory exploitation.</p>
+    </div>
   </div>
-  <div class="toolkit-category">
-    <h3><i class="fas fa-tasks"></i> Productivity</h3>
-    <ul>
-      <li>Obsidian.md for notes</li>
-      <li>GitHub for version control</li>
-      <li>Docker for containerization</li>
-    </ul>
+</div>
+
+---
+
+## 🧭 Guiding Principles
+
+<div class="principles-grid">
+  <div class="principle-card">
+    <h3>Offense Informs Defense</h3>
+    <p>I believe the most effective way to build resilient defenses is to deeply understand and simulate modern attack vectors. My offensive research directly fuels defensive strategies.</p>
   </div>
-  <div class="toolkit-category">
-    <h3><i class="fas fa-globe"></i> Web & Automation</h3>
-    <ul>
-      <li>Selenium for browser automation</li>
-      <li>Puppeteer for headless scripting</li>
-      <li>IFTTT & Zapier for integrations</li>
-    </ul>
+  <div class="principle-card">
+    <h3>Automation for Impact</h3>
+    <p>My focus is on automating repetitive tasks to free up human expertise for creative problem-solving. Good tooling empowers security professionals to focus on what matters.</p>
   </div>
-  <div class="toolkit-category">
-    <h3><i class="fas fa-server"></i> Virtualization & Labs</h3>
-    <ul>
-      <li>Hyper-V for Windows virtualization</li>
-      <li>VMware Workstation for labs</li>
-      <li>VirtualBox for vulnerable boxes</li>
-    </ul>
+  <div class="principle-card">
+    <h3>Commitment to Open Source</h3>
+    <p>Sharing knowledge and tools with the community raises the bar for everyone. I am dedicated to contributing to open-source projects that make security more accessible and effective.</p>
   </div>
 </div>
