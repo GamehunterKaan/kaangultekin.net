@@ -11,27 +11,27 @@ search: false
 /* Grid container */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* cards never smaller than 340px */
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 2.2rem;
   margin: 2rem auto 0 auto;
   justify-content: center;
-  max-width: 1600px; /* optional max width to prevent super wide layouts */
+  max-width: 1600px;
 }
 
 /* Card container with 16:9 aspect ratio */
 .project-card {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
+  padding-top: 56.25%; /* 16:9 ratio */
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  min-width: 340px; /* prevent shrinking below 340px */
-  max-width: 780px; /* optional max width */
+  min-width: 340px; /* prevent shrinking */
+  max-width: 780px;
 }
 
-/* Image and overlay absolutely fill the card */
+/* Image and overlay fill the card */
 .project-card img,
 .project-overlay {
   position: absolute;
@@ -62,19 +62,22 @@ search: false
   border-radius: 1rem;
 }
 
+/* Title dynamically resizes */
 .project-overlay h3 {
   margin: 0 0 0.5rem 0;
-  font-size: 1.25rem;
   font-weight: 600;
+  font-size: clamp(1rem, 2vw, 1.5rem); /* min 1rem, ideal 2vw, max 1.5rem */
 }
 
+/* Paragraph dynamically resizes */
 .project-overlay p {
   margin: 0 0 1rem 0;
-  font-size: 0.95rem;
   line-height: 1.4;
   color: #ccc;
+  font-size: clamp(0.8rem, 1.5vw, 1rem); /* min 0.8rem, ideal 1.5vw, max 1rem */
 }
 
+/* Buttons scale with card size */
 .project-card .buttons {
   display: flex;
   flex-wrap: wrap;
@@ -84,9 +87,9 @@ search: false
 .project-card .btn {
   background: #007bff;
   color: #fff;
-  padding: 0.45rem 1rem;
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+  padding: clamp(0.35rem, 0.8vw, 0.45rem) clamp(0.8rem, 1.5vw, 1rem);
   border-radius: 0.5rem;
-  font-size: 0.9rem;
   text-decoration: none;
   transition: 0.2s ease;
 }
@@ -104,12 +107,13 @@ search: false
   background: #666;
 }
 
+/* Card hover effect */
 .project-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
-/* Mobile: switch to single column below 720px */
+/* Mobile: single column */
 @media (max-width: 720px) {
   .projects {
     grid-template-columns: 1fr;
