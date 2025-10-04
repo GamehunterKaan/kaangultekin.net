@@ -10,98 +10,63 @@ search: false
 
 .projects {
   display: grid;
-  grid-template-columns: 1fr; /* 1 column on small screens */
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.8rem;
   margin-top: 2rem;
-  justify-content: center; /* center cards when 1 column */
-}
-
-@media (min-width: 720px) {
-  .projects {
-    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns fill available space */
-    gap: 2.5rem;
-    justify-content: center;
-  }
 }
 
 .project-card {
-  position: relative;
   background: var(--mm-surface-bg, #111);
   border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  width: 100%;
-  max-width: 500px;
-  aspect-ratio: 16 / 9;
-  margin: 0 auto;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
 .project-image {
   width: 100%;
-  height: 100%;
+  height: 180px;
   object-fit: cover;
-  display: block;
-  transition: transform 0.3s ease;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
 }
 
-.project-card:hover .project-image {
-  transform: scale(1.05);
+.project-card h3 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
-.project-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 5%; /* scales with card size */
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1));
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  box-sizing: border-box;
-}
-
-.project-overlay h3 {
-  margin: 0 0 0.3rem 0;
-  font-size: 1.2rem;  /* fixed font size */
-  font-weight: 600;
-}
-
-.project-overlay p {
-  font-size: 0.95rem; /* fixed font size */
+.project-card p {
+  font-size: 0.95rem;
   color: #ccc;
-  line-height: 1.4;
-  margin-bottom: 0.8rem; /* consistent spacing */
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
 }
 
 .project-card .buttons {
   display: flex;
+  justify-content: center;
+  gap: 0.6rem;
   flex-wrap: wrap;
-  gap: 0.5rem;
 }
 
 .project-card .btn {
   background: #007bff;
   color: white !important;
-  padding: 0.4rem 0.9rem;
+  padding: 0.5rem 1.1rem;
   border-radius: 0.5rem;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9rem; /* fixed size */
-  transition: background 0.2s ease, transform 0.1s ease;
-  white-space: nowrap;
+  transition: background 0.2s ease;
 }
 
 .project-card .btn:hover {
   background: #0056b3;
-  transform: scale(1.05);
 }
 
 .project-card .btn-secondary {
