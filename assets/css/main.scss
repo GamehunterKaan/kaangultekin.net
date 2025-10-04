@@ -8,27 +8,27 @@ search: false
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
-/* Grid container: fixed 2 columns on desktop */
+/* Grid container */
 .projects {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* always 2 columns */
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* cards never smaller than 340px */
   gap: 2.2rem;
-  margin-top: 2rem;
+  margin: 2rem auto 0 auto;
   justify-content: center;
-  max-width: 1600px; /* optional: limit grid width */
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 1600px; /* optional max width to prevent super wide layouts */
 }
 
 /* Card container with 16:9 aspect ratio */
 .project-card {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 ratio */
+  padding-top: 56.25%; /* 16:9 aspect ratio */
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  min-width: 340px; /* prevent shrinking below 340px */
+  max-width: 780px; /* optional max width */
 }
 
 /* Image and overlay absolutely fill the card */
