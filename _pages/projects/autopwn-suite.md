@@ -21,7 +21,7 @@ excerpt: >
   Automated vulnerability scanning & exploitation framework
 ---
 
-## 🚀 Introduction
+# 🚀 Introduction
 
 Security testers, red teams, and bug bounty hunters spend a lot of time chaining reconnaissance, service/version detection, vulnerability lookup and exploit retrieval. **AutoPWN Suite** automates that pipeline — from discovery to exploit suggestion — reducing manual overhead and letting you focus on investigation and exploitation logic rather than plumbing.
 
@@ -29,7 +29,7 @@ Built in Python and intended to run cross-platform (Linux/macOS/Windows), AutoPW
 
 ---
 
-## 📖 Features
+# 📖 Features
 
 * Fully automatic mode (`-y`) for minimal interaction.
 * Automatic network range detection and host discovery.
@@ -42,11 +42,19 @@ Built in Python and intended to run cross-platform (Linux/macOS/Windows), AutoPW
 
 ---
 
-## 🧠 How It Works — Overview (developer-friendly)
+# Demo
+
+AutoPWN Suite has a very user friendly easy to read output.
+
+[![asciicast](https://asciinema.org/a/509345.svg)](https://asciinema.org/a/509345)
+
+---
+
+# 🧠 How It Works — Overview (developer-friendly)
 
 Below is a combined textual + visual explanation of the runtime architecture and data flow. Paste the Mermaid diagrams directly into your docs (GitHub renders Mermaid).
 
-### High-level runtime flow (short)
+## High-level runtime flow (short)
 
 1. CLI (`autopwn.py`) or API call starts a scan.
 2. `AutoScanner` launches an nmap discovery scan (via python-nmap).
@@ -59,7 +67,7 @@ Below is a combined textual + visual explanation of the runtime architecture and
 
 ---
 
-### Sequence diagram (runtime interaction)
+## Sequence diagram (runtime interaction)
 
 <div class="mermaid">
 sequenceDiagram
@@ -93,7 +101,7 @@ sequenceDiagram
 
 ---
 
-### Flow diagram (data pipeline view)
+## Flow diagram (data pipeline view)
 
 <div class="mermaid">
 flowchart TD
@@ -114,11 +122,11 @@ flowchart TD
 
 ---
 
-## 🧩 How the code works — detailed code workflow
+# 🧩 How the code works — detailed code workflow
 
 This section explains runtime internals, responsibilities of main files, data structures, and extension points.
 
-### Main components & responsibilities
+## Main components & responsibilities
 
 * **`autopwn.py` (CLI orchestrator)**
 
@@ -134,7 +142,7 @@ This section explains runtime internals, responsibilities of main files, data st
   * `web_helpers.py` — directory brute, XSS/LFI/SQLi quick checks and basic web probes.
   * `utils.py` — logging, root checks, formatting, timing helpers.
 
-### Step-by-step runtime sequence (expanded)
+## Step-by-step runtime sequence (expanded)
 
 1. **Argument parsing & config**
 
@@ -172,7 +180,7 @@ This section explains runtime internals, responsibilities of main files, data st
 
     * API returns structured result; CLI prints summary and output location. Recoverable errors are logged; non-recoverable errors exit with clear messages.
 
-### Core data models (conceptual)
+## Core data models (conceptual)
 
 * **ScanResult**
 
@@ -218,7 +226,7 @@ This section explains runtime internals, responsibilities of main files, data st
 
 ---
 
-## 🛠 Installation & Quick Usage
+# 🛠 Installation & Quick Usage
 
 Clone & install:
 
@@ -274,7 +282,7 @@ autopwn-suite --report email --report-email-to you@example.com ...
 Use `-h` or `--help` to see all options.
 
 
-### Use as a module:
+## Use as a module:
 
 ```python
 from autopwn_suite.api import AutoScanner
@@ -285,9 +293,49 @@ scanner.save_to_file("autopwn.json")
 
 ---
 
-## 🤝 Contributing & Developer Notes
+# Development and Testing
+
+You can use poetry to install dependencies and run tests.
+
+## Installing dependencies
+```console
+poetry install
+```
+
+## Running Tests
+```console
+# Run all tests with coverage
+poetry run test
+
+# Run tests without coverage
+poetry run test --no-cov
+
+# Run only unit tests
+poetry run test -m unit
+
+# Run only integration tests
+poetry run test -m integration
+
+# Run tests excluding slow tests
+poetry run test -m "not slow"
+```
+---
+
+# 🤝 Contributing & Developer Notes
 
 * Add new feature modules under `modules/`. Import or register them with `api.py` or the CLI where appropriate.
 * To add a new CVE source, implement a normalizer that returns the same CVE object shape used by `nist_search`.
 * Implement new output formats by adding an exporter and registering its flag in `autopwn.py`.
 * For contributors, a `docs/DEVELOPER.md` with the sequence/flow diagrams and minimal plug-in example is recommended.
+
+I would be glad if you are willing to contribute this project. I am looking forward to merge your pull request unless its something that is not needed or just a personal preference. Also minor changes and bug fixes will not be merged. Please create an issue for those and I will do it myself. [Click here for more info!](https://github.com/GamehunterKaan/AutoPWN-Suite/blob/main/.github/CONTRIBUTING.md)
+
+
+# Legal
+
+You may not rent or lease, distribute, modify, sell or transfer the software to a third party. AutoPWN Suite is free for distribution, and modification with the condition that credit is provided to the creator and not used for commercial use. You may not use software for illegal or nefarious purposes. No liability for consequential damages to the maximum extent permitted by all applicable laws.
+
+
+# Support or Contact
+
+Having trouble using this tool? You can [create an issue](https://github.com/GamehunterKaan/AutoPWN-Suite/issues/new/choose) or [create a discussion!](https://github.com/GamehunterKaan/AutoPWN-Suite/discussions)
