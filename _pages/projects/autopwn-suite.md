@@ -9,6 +9,7 @@ toc_icon: "cog"
 toc_sticky: true
 author_profile: true
 use_mermaid: true
+classes: wide
 ---
 
 # AutoPWN Suite
@@ -61,26 +62,32 @@ Below is a combined textual + visual explanation of the runtime architecture and
 
 <div class="mermaid">
 sequenceDiagram
-    participant U as "User / CLI"
-    participant P as "autopwn.py"
-    participant A as "AutoScanner API"
-    participant S as "Scan Modules"
-    participant V as "Vulnerability Lookup"
-    participant E as "Exploit Fetcher"
-    participant R as "Reporter"
+    participant User as "User / CLI"
+    participant AutoPWN as "autopwn.py"
+    participant API as "AutoScanner (Core Engine)"
+    participant Nmap as "nmap (python-nmap)"
+    participant Parser as "InitHostInfo"
+    participant Vuln as "searchvuln + nist_search"
+    participant Exploit as "exploit_fetcher"
+    participant Report as "Reporter / Exporter"
 
-    %% --- Flow of execution ---
-    U->>P: Start scan (autopwn-suite -t <target> -y)
-    P->>A: Initialize core engine
-    A->>S: Run Nmap / Port Scan
-    S-->>A: Hosts, ports, and service versions found
-    A->>V: Search CVEs for discovered services
-    V-->>A: Return vulnerability matches
-    A->>E: Fetch related exploit data
-    E-->>A: Return exploit information
-    A->>R: Generate and export reports
-    R-->>P: Save outputs (HTML / JSON / TXT)
-    P-->>U: Display summary and output path
+    User->>AutoPWN: Run autopwn-suite -t &lt;target&gt; -y
+    AutoPWN->>API: Create AutoScanner instance
+    API->>Nmap: Launch TCP SYN scan
+    Nmap-->>API: Return hosts, ports, and service info
+    API->>Parser: Normalize results into Host objects
+    Parser-->>API: Return structured HostInfo list
+
+    loop For each host/service
+        API->>Vuln: Generate keywords (service + version)
+        Vuln-->>API: Return CVE matches and summaries
+        API->>Exploit: Fetch related exploit references
+        Exploit-->>API: Return exploit metadata
+    end
+
+    API->>Report: Aggregate and format results
+    Report-->>AutoPWN: Save JSON, HTML, TXT output
+    AutoPWN-->>User: Display summary and report path
 </div>
 
 ---
