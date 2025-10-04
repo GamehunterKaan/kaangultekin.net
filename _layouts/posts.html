@@ -28,3 +28,24 @@ layout: archive
     <a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
   </section>
 {% endfor %}
+
+
+{% comment %}
+  Mobile-hide logic for TOC and Author Profile.
+  Controlled via front matter: mobile_hide_toc and mobile_hide_author
+{% endcomment %}
+
+{% assign hide_toc = page.mobile_hide_toc | default: false %}
+{% assign hide_author = page.mobile_hide_author | default: false %}
+
+{% if page.toc and not hide_toc %}
+  <nav id="toc" class="toc-wrapper">
+    {{ content | toc }}
+  </nav>
+{% endif %}
+
+{% if page.author_profile and not hide_author %}
+  <div class="author">
+    {% include author.html %}
+  </div>
+{% endif %}

@@ -6,6 +6,8 @@ toc: true
 toc_label: "Table of Contents"
 toc_icon: "cog"
 author_profile: true
+mobile_hide_toc: true
+mobile_hide_author: true
 ---
 
 # 👋 About Me — Kaan Gültekin
