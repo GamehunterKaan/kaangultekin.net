@@ -1,5 +1,5 @@
 ---
-Title: AutoPWN Suite
+title: AutoPWN Suite
 layout: splash
 permalink: /projects/autopwn-suite/
 toc: true
@@ -10,6 +10,7 @@ author_profile: true
 use_mermaid: true
 classes: wide
 header:
+  title: AutoPWN Suite
   overlay_color: "#242730ff"
   overlay_image: /assets/images/autopwn-suite.jpg
   overlay_filter: 0.3
