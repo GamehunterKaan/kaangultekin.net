@@ -12,7 +12,7 @@ hidden: true
       <p>A comprehensive offensive automation framework that streamlines post-exploitation and red-team workflows.</p>
       <div class="buttons">
         <a href="https://github.com/GamehunterKaan/AutoPWN-Suite" class="btn">GitHub</a>
-        <a href="/projects/autopwn-suite" class="btn btn-secondary">Details</a>
+        <a href="/projects/autopwn-suite/" class="btn btn-secondary">Learn More</a>
       </div>
     </div>
   </div>
@@ -24,7 +24,7 @@ hidden: true
       <p>Collection of BadUSB proof-of-concepts showcasing peripheral-based attack vectors — built for research and awareness.</p>
       <div class="buttons">
         <a href="https://github.com/GamehunterKaan/BadUSB-Browser" class="btn">GitHub</a>
-        <a href="/projects/badusb" class="btn btn-secondary">Details</a>
+        <a href="/projects/badusb/" class="btn btn-secondary">Learn More</a>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@ hidden: true
       <p>A set of PowerShell utilities and a public research-oriented fileless PoC focused on automation and defense testing.</p>
       <div class="buttons">
         <a href="https://github.com/GamehunterKaan/PowerShell-File-Search" class="btn">GitHub</a>
-        <a href="/projects/powershell" class="btn btn-secondary">Details</a>
+        <a href="/projects/powershell-projects/" class="btn btn-secondary">Learn More</a>
       </div>
     </div>
   </div>
@@ -48,7 +48,7 @@ hidden: true
       <p>An OSINT tool for gathering and visualizing public company data through an interactive Web UI.</p>
       <div class="buttons">
         <a href="https://github.com/GamehunterKaan/CompanyEnum" class="btn">GitHub</a>
-        <a href="/projects/companyenum" class="btn btn-secondary">Quickstart</a>
+        <a href="/projects/company-enum/" class="btn btn-secondary">Learn More</a>
       </div>
     </div>
   </div>
