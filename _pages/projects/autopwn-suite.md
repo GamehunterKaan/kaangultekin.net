@@ -59,33 +59,29 @@ Below is a combined textual + visual explanation of the runtime architecture and
 ### Sequence diagram (runtime interaction)
 
 <div class="mermaid">
+%% AutoPWN-Suite Vertical Sequence Diagram
 sequenceDiagram
-    participant User as "User / CLI"
-    participant AutoPWN as "autopwn.py"
-    participant API as "AutoScanner (Core Engine)"
-    participant Nmap as "nmap (python-nmap)"
-    participant Parser as "InitHostInfo"
-    participant Vuln as "searchvuln + nist_search"
-    participant Exploit as "exploit_fetcher"
-    participant Report as "Reporter / Exporter"
-
-    User->>AutoPWN: Run autopwn-suite -t &lt;target&gt; -y
-    AutoPWN->>API: Create AutoScanner instance
-    API->>Nmap: Launch TCP SYN scan
-    Nmap-->>API: Return hosts, ports, and service info
-    API->>Parser: Normalize results into Host objects
-    Parser-->>API: Return structured HostInfo list
-
-    loop For each host/service
-        API->>Vuln: Generate keywords (service + version)
-        Vuln-->>API: Return CVE matches and summaries
-        API->>Exploit: Fetch related exploit references
-        Exploit-->>API: Return exploit metadata
+    box "AutoPWN-Suite Execution Flow" #002244
+        participant U as "User / CLI"
+        participant P as "autopwn.py"
+        participant A as "AutoScanner API"
+        participant S as "Scan Modules"
+        participant V as "Vulnerability Lookup"
+        participant E as "Exploit Fetcher"
+        participant R as "Reporter"
     end
 
-    API->>Report: Aggregate and format results
-    Report-->>AutoPWN: Save JSON, HTML, TXT output
-    AutoPWN-->>User: Display summary and report path
+    U->>P: Start scan (autopwn-suite -t <target> -y)
+    P->>A: Initialize engine and configuration
+    A->>S: Run Nmap / Port scan
+    S-->>A: Return hosts, ports, service versions
+    A->>V: Search CVEs by service/version
+    V-->>A: Return matched vulnerabilities
+    A->>E: Fetch PoC / exploit data
+    E-->>A: Return exploit metadata
+    A->>R: Generate structured report
+    R-->>P: Save output (HTML, JSON, TXT)
+    P-->>U: Display summary and report location
 </div>
 
 ---
