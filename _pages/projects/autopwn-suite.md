@@ -2,11 +2,6 @@
 title: AutoPWN Suite
 layout: splash
 permalink: /projects/autopwn-suite/
-toc: true
-toc_label: "Table of Contents"
-toc_icon: "cog"
-toc_sticky: true
-author_profile: true
 use_mermaid: true
 classes: wide
 header:
@@ -29,7 +24,7 @@ Built in Python and intended to run cross-platform (Linux/macOS/Windows), AutoPW
 
 ---
 
-# 📖 Features
+# ⚙️ Features
 
 * Fully automatic mode (`-y`) for minimal interaction.
 * Automatic network range detection and host discovery.
@@ -42,7 +37,7 @@ Built in Python and intended to run cross-platform (Linux/macOS/Windows), AutoPW
 
 ---
 
-# Demo
+# 🎞️ Demo
 
 AutoPWN Suite has a very user friendly easy to read output.
 
@@ -226,7 +221,7 @@ This section explains runtime internals, responsibilities of main files, data st
 
 ---
 
-# 🛠 Installation & Quick Usage
+# 🛠️ Installation & Quick Usage
 
 Clone & install:
 
@@ -293,17 +288,17 @@ scanner.save_to_file("autopwn.json")
 
 ---
 
-# Development and Testing
+# 💻 Development and Testing
 
 You can use poetry to install dependencies and run tests.
 
 ## Installing dependencies
-```console
+```bash
 poetry install
 ```
 
 ## Running Tests
-```console
+```bash
 # Run all tests with coverage
 poetry run test
 
@@ -331,11 +326,11 @@ poetry run test -m "not slow"
 I would be glad if you are willing to contribute this project. I am looking forward to merge your pull request unless its something that is not needed or just a personal preference. Also minor changes and bug fixes will not be merged. Please create an issue for those and I will do it myself. [Click here for more info!](https://github.com/GamehunterKaan/AutoPWN-Suite/blob/main/.github/CONTRIBUTING.md)
 
 
-# Legal
+# 📖 Legal
 
 You may not rent or lease, distribute, modify, sell or transfer the software to a third party. AutoPWN Suite is free for distribution, and modification with the condition that credit is provided to the creator and not used for commercial use. You may not use software for illegal or nefarious purposes. No liability for consequential damages to the maximum extent permitted by all applicable laws.
 
 
-# Support or Contact
+# 📧 Support or Contact
 
 Having trouble using this tool? You can [create an issue](https://github.com/GamehunterKaan/AutoPWN-Suite/issues/new/choose) or [create a discussion!](https://github.com/GamehunterKaan/AutoPWN-Suite/discussions)
