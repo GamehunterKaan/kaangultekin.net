@@ -1,7 +1,8 @@
 ---
-layout: single
+layout: splash
 permalink: /projects/
 hidden: true
+classes: wide
 ---
 
 <section class="projects">
