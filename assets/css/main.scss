@@ -10,15 +10,15 @@ search: false
 
 .projects {
   display: grid;
-  grid-template-columns: 1fr; /* default: 1 column */
+  grid-template-columns: 1fr; /* 1 column on small screens */
   gap: 2rem;
   margin-top: 2rem;
-  justify-content: center; /* center cards when only 1 column */
+  justify-content: center; /* center cards when 1 column */
 }
 
 @media (min-width: 720px) {
   .projects {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns fill available space */
     gap: 2.5rem;
     justify-content: center;
   }
@@ -32,9 +32,9 @@ search: false
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   width: 100%;
-  max-width: 500px;       /* max width for larger screens */
-  aspect-ratio: 16 / 9;   /* maintain 16:9 ratio */
-  margin: 0 auto;         /* center on small screens */
+  max-width: 500px;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
 }
 
 .project-card:hover {
@@ -59,25 +59,26 @@ search: false
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 1rem;
+  padding: 5%; /* scales with card size */
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1));
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  box-sizing: border-box;
 }
 
 .project-overlay h3 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.2rem;   /* fixed font size */
+  margin: 0 0 0.3rem 0;
+  font-size: 1.2rem;  /* fixed font size */
   font-weight: 600;
 }
 
 .project-overlay p {
-  font-size: 0.95rem;  /* fixed font size */
+  font-size: 0.95rem; /* fixed font size */
   color: #ccc;
   line-height: 1.4;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem; /* consistent spacing */
 }
 
 .project-card .buttons {
