@@ -97,3 +97,35 @@ feature_row:
     <span>Zapier</span>
   </a>
 </div>
+
+---
+
+## 🔬 Current Research & Interests
+
+<div class="research-grid">
+  <div class="research-card">
+    <div class="research-card__icon"><i class="fas fa-terminal"></i></div>
+    <h3 class="research-card__title">Advanced Post-Exploitation</h3>
+    <p class="research-card__description">Exploring novel post-exploitation techniques in Windows environments using PowerShell and .NET to better understand and defend against in-memory threats.</p>
+  </div>
+  <div class="research-card">
+    <div class="research-card__icon"><i class="fas fa-cogs"></i></div>
+    <h3 class="research-card__title">Framework Development</h3>
+    <p class="research-card__description">Actively developing new modules for AutoPWN-Suite to improve its web application scanning capabilities and overall detection accuracy.</p>
+  </div>
+  <div class="research-card">
+    <div class="research-card__icon"><i class="fas fa-shield-alt"></i></div>
+    <h3 class="research-card__title">Evasion Techniques</h3>
+    <p class="research-card__description">Researching and simulating modern AV/EDR evasion tactics to help blue teams build more resilient detection and response strategies.</p>
+  </div>
+  <div class="research-card">
+    <div class="research-card__icon"><i class="fas fa-robot"></i></div>
+    <h3 class="research-card__title">AI in Automation</h3>
+    <p class="research-card__description">Investigating how AI can be integrated into security automation, from intelligent vulnerability prioritization to adaptive response systems.</p>
+  </div>
+  <div class="research-card">
+    <div class="research-card__icon"><i class="fas fa-users"></i></div>
+    <h3 class="research-card__title">Active Directory Security</h3>
+    <p class="research-card__description">Focusing on common AD misconfigurations, attack paths like Kerberoasting, and defensive hardening for enterprise environments.</p>
+  </div>
+</div>

@@ -161,3 +161,44 @@ search: false
   width: 28px;
   height: 28px;
 }
+
+/* --- Current Research Grid --- */
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem auto;
+  max-width: 1300px;
+}
+
+.research-card {
+  background: #28283C;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.research-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+.research-card__icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #007bff; /* A vibrant blue to match other elements */
+}
+
+.research-card__title {
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.research-card__description {
+  color: #ccc;
+  line-height: 1.6;
+  font-size: 1rem;
+}
