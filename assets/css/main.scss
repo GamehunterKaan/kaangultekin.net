@@ -10,16 +10,17 @@ search: false
 
 .projects {
   display: grid;
-  grid-template-columns: 1fr; /* 1 column by default for small screens */
-  gap: 2.2rem;
+  grid-template-columns: 1fr; /* default: 1 column */
+  gap: 2rem;
   margin-top: 2rem;
-  justify-content: center; /* center cards when less than 2 fit */
+  justify-content: center; /* center cards when only 1 column */
 }
 
 @media (min-width: 720px) {
   .projects {
-    grid-template-columns: repeat(2, 340px); /* 2 columns of fixed card width */
-    justify-content: center; /* keep cards centered */
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 2.5rem;
+    justify-content: center;
   }
 }
 
@@ -30,8 +31,10 @@ search: false
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  width: 340px;   /* FIXED WIDTH */
-  height: 260px;  /* FIXED HEIGHT */
+  width: 100%;
+  max-width: 500px;       /* max width for larger screens */
+  aspect-ratio: 16 / 9;   /* maintain 16:9 ratio */
+  margin: 0 auto;         /* center on small screens */
 }
 
 .project-card:hover {
@@ -41,7 +44,7 @@ search: false
 
 .project-image {
   width: 100%;
-  height: 100%;  /* fill card fully */
+  height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
@@ -56,7 +59,7 @@ search: false
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 1.2rem;
+  padding: 1rem;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1));
   color: white;
   display: flex;
@@ -66,12 +69,12 @@ search: false
 
 .project-overlay h3 {
   margin: 0 0 0.5rem 0;
-  font-size: 1.25rem;
+  font-size: 1.2rem;   /* fixed font size */
   font-weight: 600;
 }
 
 .project-overlay p {
-  font-size: 0.95rem;
+  font-size: 0.95rem;  /* fixed font size */
   color: #ccc;
   line-height: 1.4;
   margin-bottom: 1rem;
@@ -80,17 +83,17 @@ search: false
 .project-card .buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .project-card .btn {
   background: #007bff;
   color: white !important;
-  padding: 0.45rem 1rem;
+  padding: 0.4rem 0.9rem;
   border-radius: 0.5rem;
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.9rem; /* fixed size */
   transition: background 0.2s ease, transform 0.1s ease;
   white-space: nowrap;
 }
