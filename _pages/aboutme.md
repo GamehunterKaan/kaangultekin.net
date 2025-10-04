@@ -55,11 +55,18 @@ I specialize in automation-first tooling, offensive security research, and open-
 ---
 
 ## 🔹 PowerShell Tools & Research
-### **PowerShell-File-Search**  
+### **PowerShell File Search**  
   A **PowerShell utility** for fast file discovery across systems.  
   - Locates files based on **patterns and parameters**.  
   - Simplifies **data discovery in Windows environments**.  
   - Lightweight, efficient, and open-source.
+
+### 🔹 PowerShell Network Scanner  
+A **PowerShell utility** for scanning networks to discover online devices and enumerate open ports.  
+- Searches the entire network to identify **active hosts**.  
+- Scans discovered hosts for the **top 1000 ports**.  
+- Fast, scriptable, and **easy to use** for quick reconnaissance.
+
 
 ### **PowerShell Fileless Malware (Research Project)** *(not public)*  
   A **private proof-of-concept** exploring **fileless PowerShell techniques** to study in-memory execution and evasion strategies. This work is **not publicly released** and is used for controlled defensive and academic research.  

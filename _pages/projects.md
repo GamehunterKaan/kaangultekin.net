@@ -23,7 +23,7 @@ hidden: true
       <h3>BadUSB Attacks (PoCs)</h3>
       <p>Collection of BadUSB proof-of-concepts showcasing peripheral-based attack vectors — built for research and awareness.</p>
       <div class="buttons">
-        <a href="https://github.com/GamehunterKaan/BadUSB-Browser" class="btn">GitHub</a>
+        <a href="https://github.com/stars/GamehunterKaan/lists/badusb-pocs" class="btn">GitHub</a>
         <a href="/projects/badusb/" class="btn btn-secondary">Learn More</a>
       </div>
     </div>
@@ -35,7 +35,7 @@ hidden: true
       <h3>PowerShell Projects</h3>
       <p>A set of PowerShell utilities and a public research-oriented fileless PoC focused on automation and defense testing.</p>
       <div class="buttons">
-        <a href="https://github.com/GamehunterKaan/PowerShell-File-Search" class="btn">GitHub</a>
+        <a href="https://github.com/stars/GamehunterKaan/lists/powershell-projects" class="btn">GitHub</a>
         <a href="/projects/powershell-projects/" class="btn btn-secondary">Learn More</a>
       </div>
     </div>
