@@ -10,16 +10,24 @@ search: false
 
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: 1fr; /* default: 1 column for small screens */
   gap: 2.2rem;
   margin-top: 2rem;
   justify-content: center;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
   .projects {
-    grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
     gap: 2.4rem;
+    padding: 0 1rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .projects {
+    grid-template-columns: repeat(2, 1fr); /* keep 2 columns on wide screens */
+    gap: 2.6rem;
     padding: 0 2rem;
   }
 }

@@ -32,7 +32,7 @@ hidden: true
   <div class="project-card">
     <img src="/assets/images/powershell-tools.jpg" alt="PowerShell Tools" class="project-image">
     <div class="project-overlay">
-      <h3>PowerShell Tools & Fileless Research</h3>
+      <h3>PowerShell Projects</h3>
       <p>A set of PowerShell utilities and a public research-oriented fileless PoC focused on automation and defense testing.</p>
       <div class="buttons">
         <a href="https://github.com/GamehunterKaan/PowerShell-File-Search" class="btn">GitHub</a>
@@ -44,7 +44,7 @@ hidden: true
   <div class="project-card">
     <img src="/assets/images/companyenum.jpg" alt="CompanyEnum" class="project-image">
     <div class="project-overlay">
-      <h3>CompanyEnum — OSINT Web UI</h3>
+      <h3>CompanyEnum</h3>
       <p>An OSINT tool for gathering and visualizing public company data through an interactive Web UI.</p>
       <div class="buttons">
         <a href="https://github.com/GamehunterKaan/CompanyEnum" class="btn">GitHub</a>
