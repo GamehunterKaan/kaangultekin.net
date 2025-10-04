@@ -125,7 +125,12 @@ feature_row:
   </div>
   <div class="research-card">
     <div class="research-card__icon"><i class="fas fa-users"></i></div>
-    <h3 class="research-card__title">Active Directory Security</h3>
+    <h3 class="research-card__title">Active Directory Security</h3>S
     <p class="research-card__description">Focusing on common AD misconfigurations, attack paths like Kerberoasting, and defensive hardening for enterprise environments.</p>
+  </div>
+  <div class="research-card">
+    <div class="research-card__icon"><i class="fas fa-sitemap"></i></div>
+    <h3 class="research-card__title">Threat Intelligence & OSINT</h3>
+    <p class="research-card__description">Automating the collection and correlation of open-source intelligence (OSINT) to map an organization's external attack surface and identify emerging threats.</p>
   </div>
 </div>
