@@ -61,7 +61,7 @@ I specialize in automation-first tooling, offensive security research, and open-
   - Simplifies **data discovery in Windows environments**.  
   - Lightweight, efficient, and open-source.
 
-### 🔹 PowerShell Network Scanner  
+### **PowerShell Network Scanner**
 A **PowerShell utility** for scanning networks to discover online devices and enumerate open ports.  
 - Searches the entire network to identify **active hosts**.  
 - Scans discovered hosts for the **top 1000 ports**.  
