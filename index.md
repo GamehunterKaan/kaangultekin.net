@@ -36,3 +36,17 @@ feature_row:
 ---
 
 {% include feature_row %}
+---
+
+## 🛠️ Skills & Technologies
+
+<div class="skills-grid">
+  <div class="skill-item">Python</div>
+  <div class="skill-item">PowerShell</div>
+  <div class="skill-item">Bash</div>
+  <div class="skill-item">Go</div>
+  <div class="skill-item">Docker</div>
+  <div class="skill-item">Git & GitHub</div>
+  <div class="skill-item">Linux</div>
+  <div class="skill-item">Network Security</div>
+</div>
