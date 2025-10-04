@@ -10,19 +10,10 @@ search: false
 
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* 2 columns if possible, else 1 */
+  grid-template-columns: repeat(auto-fit, minmax(340px, 340px)); /* fixed card width */
   gap: 2.2rem;
   margin-top: 2rem;
-  justify-content: center;
-}
-
-@media (min-width: 1200px) {
-  .projects {
-    grid-template-columns: repeat(2, 1fr); /* force 2 columns on wide screens */
-    gap: 2.4rem;
-    padding: 0 2rem;
-    justify-content: center;
-  }
+  justify-content: center; /* center cards when not filling full row */
 }
 
 .project-card {
@@ -32,8 +23,8 @@ search: false
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  max-width: 780px;
-  margin: 0 auto;
+  width: 340px; /* FIXED width */
+  height: 260px; /* FIXED height */
 }
 
 .project-card:hover {
@@ -43,7 +34,7 @@ search: false
 
 .project-image {
   width: 100%;
-  height: 260px;
+  height: 100%; /* fill the card */
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
