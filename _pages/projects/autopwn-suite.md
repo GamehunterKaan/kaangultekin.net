@@ -60,32 +60,32 @@ Below is a combined textual + visual explanation of the runtime architecture and
 
 <div class="mermaid">
 sequenceDiagram
-    participant User as User / CLI
-    participant AutoPWN as autopwn.py
-    participant API as api.AutoScanner
-    participant Nmap as nmap (python-nmap)
-    participant Parser as InitHostInfo
-    participant Vuln as modules.searchvuln + nist_search
-    participant Exploit as modules.exploit_fetcher
-    participant Report as Reporter / Exporter
+    participant User as "User / CLI"
+    participant AutoPWN as "autopwn.py"
+    participant API as "AutoScanner (Core Engine)"
+    participant Nmap as "nmap (python-nmap)"
+    participant Parser as "InitHostInfo"
+    participant Vuln as "searchvuln + nist_search"
+    participant Exploit as "exploit_fetcher"
+    participant Report as "Reporter / Exporter"
 
-    User->>AutoPWN: Run `autopwn-suite -t <target> -y`
-    AutoPWN->>API: Create AutoScanner() instance
-    API->>Nmap: Launch TCP SYN scan on targets
-    Nmap-->>API: Return hosts, ports, service/version info
-    API->>Parser: Normalize results → Host objects
+    User->>AutoPWN: Run autopwn-suite -t &lt;target&gt; -y
+    AutoPWN->>API: Create AutoScanner instance
+    API->>Nmap: Launch TCP SYN scan
+    Nmap-->>API: Return hosts, ports, and service info
+    API->>Parser: Normalize results into Host objects
     Parser-->>API: Return structured HostInfo list
 
     loop For each host/service
-        API->>Vuln: Generate keywords (service/version)
-        Vuln-->>API: Return CVE matches + summaries
-        API->>Exploit: Fetch related PoC/exploit links
+        API->>Vuln: Generate keywords (service + version)
+        Vuln-->>API: Return CVE matches and summaries
+        API->>Exploit: Fetch related exploit references
         Exploit-->>API: Return exploit metadata
     end
 
-    API->>Report: Aggregate results
-    Report-->>AutoPWN: Save as JSON / HTML / TXT
-    AutoPWN-->>User: Display summary + output path
+    API->>Report: Aggregate and format results
+    Report-->>AutoPWN: Save JSON, HTML, TXT output
+    AutoPWN-->>User: Display summary and report path
 </div>
 
 ---
@@ -94,18 +94,19 @@ sequenceDiagram
 
 <div class="mermaid">
 flowchart TD
-    A[CLI / User Input] --> B[autopwn.py<br>Parse args, config, mode]
-    B --> C[AutoScanner API<br>(Core Engine)]
-    C --> D[nmap Scan<br>Host & Port Discovery]
-    D --> E[InitHostInfo<br>Normalize Data]
-    E --> F[searchvuln<br>Generate Keywords]
-    F --> G[nist_search<br>Query CVE Databases]
-    G --> H[exploit_fetcher<br>Retrieve Exploit References]
-    H --> I[Web Modules<br>XSS/LFI/SQLi Checks (optional)]
-    I --> J[Reporter / Exporter<br>HTML, JSON, TXT]
-    J --> K[Webhook / Email / Console Output]
-    style A fill:#f3f4f6,stroke:#111,stroke-width:1px
-    style K fill:#f3f4f6,stroke:#111,stroke-width:1px
+    A["CLI / User Input"] --> B["autopwn.py - Parse args, config, mode"]
+    B --> C["AutoScanner API (Core Engine)"]
+    C --> D["nmap Scan: Host & Port Discovery"]
+    D --> E["InitHostInfo - Normalize Data"]
+    E --> F["searchvuln - Generate Keywords"]
+    F --> G["nist_search - Query CVE Databases"]
+    G --> H["exploit_fetcher - Retrieve Exploit References"]
+    H --> I["Web Modules (XSS, LFI, SQLi Checks)"]
+    I --> J["Reporter / Exporter (HTML, JSON, TXT)"]
+    J --> K["Webhook / Email / Console Output"]
+
+    style A fill:#0a0,stroke:#08f,stroke-width:2px,color:#fff
+    style K fill:#0a0,stroke:#08f,stroke-width:2px,color:#fff
 </div>
 
 ---
