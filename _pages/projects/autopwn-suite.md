@@ -62,21 +62,25 @@ Below is a combined textual + visual explanation of the runtime architecture and
 <div class="mermaid">
 sequenceDiagram
     participant U as "User / CLI"
-    participant Core as "autopwn.py / AutoScanner"
-    participant Scan as "Scan → Nmap"
-    participant Vuln as "CVE Lookup"
-    participant Exploit as "Exploit Fetcher"
-    participant Report as "Reporter / Exporter"
+    participant P as "autopwn.py"
+    participant A as "AutoScanner API"
+    participant S as "Scan Modules"
+    participant V as "Vulnerability Lookup"
+    participant E as "Exploit Fetcher"
+    participant R as "Reporter"
 
-    U->>Core: Start scan (autopwn-suite -t <target> -y)
-    Core->>Scan: Perform host and port discovery
-    Scan-->>Core: Return services and versions
-    Core->>Vuln: Match CVEs by service/version
-    Vuln-->>Core: CVE list with severity
-    Core->>Exploit: Fetch exploit references
-    Exploit-->>Core: Exploit metadata
-    Core->>Report: Export results to HTML / JSON
-    Report-->>U: Display summary and output
+    %% --- Flow of execution ---
+    U->>P: Start scan (autopwn-suite -t <target> -y)
+    P->>A: Initialize core engine
+    A->>S: Run Nmap / Port Scan
+    S-->>A: Hosts, ports, and service versions found
+    A->>V: Search CVEs for discovered services
+    V-->>A: Return vulnerability matches
+    A->>E: Fetch related exploit data
+    E-->>A: Return exploit information
+    A->>R: Generate and export reports
+    R-->>P: Save outputs (HTML / JSON / TXT)
+    P-->>U: Display summary and output path
 </div>
 
 ---
