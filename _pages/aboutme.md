@@ -10,6 +10,22 @@ mobile_hide_toc: true
 mobile_hide_author: true
 ---
 
+<!-- Table of Contents: desktop only -->
+<div class="hide-for-small-only">
+  {% if page.toc %}
+    <nav id="toc" class="toc-wrapper">
+      {{ content | toc }}
+    </nav>
+  {% endif %}
+</div>
+
+<!-- Author Profile: desktop only -->
+<div class="hide-for-small-only">
+  {% if page.author_profile %}
+    {% include author.html %}
+  {% endif %}
+</div>
+
 # 👋 About Me — Kaan Gültekin
 
 ![Profile Banner](/assets//images/splash-banner.png)
