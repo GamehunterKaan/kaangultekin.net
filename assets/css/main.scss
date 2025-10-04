@@ -202,3 +202,45 @@ search: false
   line-height: 1.6;
   font-size: 1rem;
 }
+
+/* --- My Toolkit Section --- */
+.toolkit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem auto;
+  max-width: 1300px;
+}
+
+.toolkit-category {
+  background: #28283C; /* Same as research cards */
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.toolkit-category h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #007bff; /* Same as research icons */
+  border-bottom: 2px solid #444;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.toolkit-category ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.toolkit-category li {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.toolkit-category li:last-child {
+  margin-bottom: 0;
+}

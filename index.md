@@ -134,3 +134,50 @@ feature_row:
     <p class="research-card__description">Automating the collection and correlation of open-source intelligence (OSINT) to map an organization's external attack surface and identify emerging threats.</p>
   </div>
 </div>
+
+---
+
+## 💻 My Toolkit
+
+<div class="toolkit-grid">
+  <div class="toolkit-category">
+    <h3><i class="fas fa-desktop"></i> Daily Drivers</h3>
+    <ul>
+      <li><strong>OS:</strong> Windows 11 / Kali Linux (Hyper-V)</li>
+      <li><strong>Editor:</strong> Visual Studio Code</li>
+      <li><strong>Terminal:</strong> Windows Terminal with PowerShell</li>
+    </ul>
+  </div>
+  <div class="toolkit-category">
+    <h3><i class="fas fa-bug"></i> Core Security Tools</h3>
+    <ul>
+      <li>Burp Suite</li>
+      <li>Nmap</li>
+      <li>Nuclei</li>
+    </ul>
+  </div>
+  <div class="toolkit-category">
+    <h3><i class="fas fa-tasks"></i> Productivity</h3>
+    <ul>
+      <li>Obsidian.md for notes</li>
+      <li>GitHub for version control</li>
+      <li>Docker for containerization</li>
+    </ul>
+  </div>
+  <div class="toolkit-category">
+    <h3><i class="fas fa-globe"></i> Web & Automation</h3>
+    <ul>
+      <li>Selenium for browser automation</li>
+      <li>Puppeteer for headless scripting</li>
+      <li>IFTTT & Zapier for integrations</li>
+    </ul>
+  </div>
+  <div class="toolkit-category">
+    <h3><i class="fas fa-server"></i> Virtualization & Labs</h3>
+    <ul>
+      <li>Hyper-V for Windows virtualization</li>
+      <li>VMware Workstation for labs</li>
+      <li>VirtualBox for vulnerable boxes</li>
+    </ul>
+  </div>
+</div>
