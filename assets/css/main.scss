@@ -10,24 +10,16 @@ search: false
 
 .projects {
   display: grid;
-  grid-template-columns: 1fr; /* default: 1 column for small screens */
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* 2 columns if possible, else 1 */
   gap: 2.2rem;
   margin-top: 2rem;
   justify-content: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .projects {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    grid-template-columns: repeat(2, 1fr); /* force 2 columns on wide screens */
     gap: 2.4rem;
-    padding: 0 1rem;
-  }
-}
-
-@media (min-width: 1400px) {
-  .projects {
-    grid-template-columns: repeat(2, minmax(0, 700px)); /* 2 columns, max width per card */
-    gap: 2.6rem;
     padding: 0 2rem;
     justify-content: center;
   }
@@ -40,7 +32,6 @@ search: false
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  width: 100%;
   max-width: 780px;
   margin: 0 auto;
 }
@@ -52,7 +43,7 @@ search: false
 
 .project-image {
   width: 100%;
-  height: 300px; /* slightly taller for wide layout */
+  height: 260px;
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
@@ -90,15 +81,8 @@ search: false
 
 .project-card .buttons {
   display: flex;
-  flex-wrap: wrap; /* default wrap for small screens */
+  flex-wrap: wrap;
   gap: 0.6rem;
-}
-
-@media (min-width: 768px) {
-  .project-card .buttons {
-    flex-wrap: nowrap; /* prevent wrapping on medium+ screens */
-    justify-content: flex-start; /* align buttons to left */
-  }
 }
 
 .project-card .btn {
@@ -110,7 +94,7 @@ search: false
   font-weight: 500;
   font-size: 0.9rem;
   transition: background 0.2s ease, transform 0.1s ease;
-  white-space: nowrap; /* prevent text from breaking */
+  white-space: nowrap;
 }
 
 .project-card .btn:hover {
