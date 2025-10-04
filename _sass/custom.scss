@@ -1,12 +1,16 @@
 /* Hide TOC and author profile on mobile */
 @media screen and (max-width: 768px) {
   /* Table of Contents */
+  #toc,
+  .toc,
   .toc-wrapper {
     display: none !important;
   }
 
   /* Author Profile */
-  .author {
+  .author,
+  .author-profile,
+  .page-author {
     display: none !important;
   }
 }
