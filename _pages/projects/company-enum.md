@@ -43,7 +43,7 @@ flowchart TB
 
 ---
 
-### What CompanyEnum Aims To Do (High-Level)
+# 🎯 What CompanyEnum Aims To Do (High-Level)
 
 CompanyEnum is built to **automate the aggregation** of open-source, public data about a target organization and present it via a **Web UI dashboard**. Its core goal is to reduce the manual overhead of crawlers, scripts, and spreadsheets into a unified interface for recon, triage, and reporting.
 
@@ -68,31 +68,21 @@ Here is a sample of the data CompanyEnum provides in its HTML report. This demon
 
 ---
 
-### Architecture & Module Breakdown (Conceptual)
 # 🧠 Data Explained
 
-- **Data Collection Modules**: Each serves a recon function (DNS, WHOIS, web scraping, social profiling).  
-- **Normalization & Filtering Layer**: Cleans raw data, deduplicates entries, enriches entities (e.g. IP → netblock, domain → ASN).  
-- **Web UI / Dashboard Layer**: Presents results in an interactive format — search, filter, visualizations (graphs, tables).  
-- **Report Export & API**: Possibly supports exporting findings (CSV, JSON) or integration into other tools.
 CompanyEnum organizes the collected intelligence into several key sections. Here’s a breakdown of what each section contains, based on the example output.
 
 ---
+
 ## Summary
 
-### Defensive / Blue-Team Implications & Uses
 This section provides a high-level overview of the company.
 
-While CompanyEnum is an OSINT tool (not an exploit), defenders can use it to:
 *   **Basic Information**: Company Name, Website, Headquarters, Founders, and Founding Date.
 *   **Business Domain**: Key sectors the company operates in.
 *   **Corporate Overview**: A brief description of the company's business.
 *   **Market Position**: A list of known competitors.
 
-- **Map internet-facing exposure** — discover domains, subdomains, public assets the org “forgot” about  
-- **Baseline external footprint** — know what the world sees about the organization  
-- **Identify weak metadata / disclosure** — e.g. WHOIS privacy not enabled, outdated SSL, public email addresses  
-- **Red team or internal audits** — simulate what an external adversary might see
 <pre>
 <strong>Query:</strong> microsoft
 <strong>Company Name:</strong> Microsoft
@@ -105,15 +95,14 @@ While CompanyEnum is an OSINT tool (not an exploit), defenders can use it to:
 <strong>Competitors:</strong> Apple, Google, Amazon, Oracle, Sony
 </pre>
 
-## Summary
+## Financials
 
-This section provides a high-level overview of the company.
+This section dives into the financial and investment activities of the company.
 
-*   **Basic Information**: Company Name, Website, Headquarters, Founders, and Founding Date.
-*   **Business Domain**: Key sectors the company operates in.
-*   **Corporate Overview**: A brief description of the company's business.
-*   **Market Position**: A list of known competitors.
-
+*   **Stock Information**: Ticker symbol and current stock price.
+*   **Financial Health**: Annual revenue.
+*   **Investment History**: Details on funding rounds, investors, and the number of investments made.
+*   **Corporate Actions**: Information on acquisitions and exits.
 <pre>
 <strong>Ticker:</strong> MSFT
 <strong>Stock Price:</strong> $305.22
@@ -123,14 +112,12 @@ This section provides a high-level overview of the company.
 <strong>Acquisitions Description:</strong> LinkedIn, GitHub, Activision Blizzard
 </pre>
 
-## Financials
+## People
 
-This section dives into the financial and investment activities of the company.
+Gain insights into the key individuals associated with the company.
 
-*   **Stock Information**: Ticker symbol and current stock price.
-*   **Financial Health**: Annual revenue.
-*   **Investment History**: Details on funding rounds, investors, and the number of investments made.
-*   **Corporate Actions**: Information on acquisitions and exits.
+*   **Founders**: The individuals who started the company.
+*   **Key Employees**: A list of top executives and their roles, sourced from platforms like Crunchbase and Craft.co.
 
 <pre>
 <strong>Founders:</strong>
@@ -139,13 +126,6 @@ Bill Gates, Paul Allen
 <strong>Satya Nadella:</strong> Chairman & Chief Executive Officer
 <strong>Brad Smith:</strong> Vice Chair & President
 </pre>
-
-## People
-
-Gain insights into the key individuals associated with the company.
-
-*   **Founders**: The individuals who started the company.
-*   **Key Employees**: A list of top executives and their roles, sourced from platforms like Crunchbase and Craft.co.
 
 ## Technology
 
