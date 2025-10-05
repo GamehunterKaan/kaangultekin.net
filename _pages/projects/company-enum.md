@@ -7,7 +7,7 @@ classes: wide
 header:
   title: CompanyEnum
   overlay_color: "#242730ff"
-  overlay_image: /assets/images/company-enum.jpg
+  overlay_image: /assets/images/companyenum.jpg
   overlay_filter: 0.3
   actions:
     - label: "<i class='fas fa-code'></i> View On GitHub"
