@@ -33,7 +33,10 @@ flowchart TB
   B --> D[Craft.co API];
   B --> E[Security Scanners <br/>(Headers, SSL, WHOIS)];
   B --> F[Review Platforms <br/>(TrustPilot, Careerbliss)];
-  C & D & E & F --> G[Data Aggregation & Normalization];
+  C --> G[Data Aggregation & Normalization];
+  D --> G;
+  E --> G;
+  F --> G;
   G --> H[Generate HTML Report];
   H --> I[View Report in Browser];
 </div>
