@@ -31,8 +31,8 @@ flowchart TB
   A[Input: Company Name] --> B{Data Collection Modules};
   B --> C[Crunchbase API];
   B --> D[Craft.co API];
-  B --> E[Security Scanners <br/>(Headers, SSL, WHOIS)];
-  B --> F[Review Platforms <br/>(TrustPilot, Careerbliss)];
+  B --> E["Security Scanners <br> (Headers, SSL, WHOIS)"];
+  B --> F["Review Platforms <br> (TrustPilot, Careerbliss)"];
   C --> G[Data Aggregation & Normalization];
   D --> G;
   E --> G;
