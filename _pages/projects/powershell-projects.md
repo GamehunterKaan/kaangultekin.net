@@ -42,11 +42,12 @@ flowchart TB
   A --> C[Network & Recon]
   A --> D[Research (internal/private)]
   A --> E[Automation & Orchestration]
-  B --> B1[PowerShell-File-Search]
-  C --> C1[PowerShell-Network-Scanner]
-  D --> D1[Fileless PowerShell Research (internal)]
-  E --> E1[Supporting automation scripts]
+  B --> B1["PowerShell-File-Search"]
+  C --> C1["PowerShell-Network-Scanner"]
+  D --> D1["Fileless PowerShell Research (internal)"]
+  E --> E1["Supporting automation scripts"]
 </div>
+
 
 - **Utilities:** File discovery, log helpers, and small admin aids used for incident triage.  
 - **Network & Recon:** Lightweight discovery and mapping tools for controlled lab recon.  
