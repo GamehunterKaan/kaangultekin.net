@@ -18,7 +18,6 @@ excerpt: >
 
 # BadUSB Attacks — Overview, Research & Defensive Guidance
 
-![BadUSB Concept Illustration](/assets//images/badusb-hero.jpg)
 
 > **Audience & intent:** This page explains the **concepts, architecture, and defensive implications** of BadUSB-style proof-of-concepts. It avoids step-by-step instructions and executable payloads. Always test only in isolated, authorized labs.
 
@@ -33,6 +32,7 @@ BadUSB attacks abuse the trust operating systems place in USB peripherals by pre
 ---
 
 ## What is a BadUSB attack? (high level)
+![BadUSB Concept Illustration](/assets//images/badusb-hero.jpg)
 
 - **Conceptual definition:** A BadUSB attack uses a USB device’s programmable interfaces to cause a host to perform unintended actions. Because USB devices are auto-enumerated and often trusted, a malicious peripheral can masquerade as normal hardware while performing harmful operations.  
 - **Why it matters:** USB is widely available and frequently physically accessible. Unmediated device capabilities (keyboard input, new network interfaces, mounted volumes) create an attack surface with real consequences for endpoints and networks.
@@ -63,7 +63,7 @@ Focus on **behavioral patterns** (attach → rapid UI automation, new interface 
 
 ## Conceptual flow (non-actionable)
 
-```mermaid
+<div class="mermaid">
 flowchart LR
   A[Device Attached] --> B[Host Enumerates Device]
   B --> C{Device Presents Class}
@@ -76,7 +76,7 @@ flowchart LR
   G --> J[Detection / Response]
   H --> J
   I --> J
-```
+</div>
 
 ---
 
