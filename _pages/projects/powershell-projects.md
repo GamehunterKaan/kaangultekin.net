@@ -38,16 +38,15 @@ PowerShell is a built-in automation platform widely used by administrators, defe
 
 <div class="mermaid">
 flowchart TB
-  A[PowerShell Projects] --> B[Utilities]
-  A --> C[Network & Recon]
-  A --> D[Research (internal/private)]
-  A --> E[Automation & Orchestration]
+  A[PowerShell Projects] --> B["Utilities"]
+  A --> C["Network &amp; Recon"]
+  A --> D["Research (internal/private)"]
+  A --> E["Automation & Orchestration"]
   B --> B1["PowerShell-File-Search"]
   C --> C1["PowerShell-Network-Scanner"]
   D --> D1["Fileless PowerShell Research (internal)"]
   E --> E1["Supporting automation scripts"]
 </div>
-
 
 - **Utilities:** File discovery, log helpers, and small admin aids used for incident triage.  
 - **Network & Recon:** Lightweight discovery and mapping tools for controlled lab recon.  
@@ -137,9 +136,3 @@ If desired, I can:
 - Export the Mermaid diagrams to SVG/PNG for slide decks and training materials.  
 - Draft an access-controlled README template for the internal research repo that includes safe-testing checklists and an access request process.  
 - Produce one-page defensive summaries (sanitized telemetry examples) for each public repo.
-
---- 
-
-## References
-
-- PowerShell project list: https://github.com/stars/GamehunterKaan/lists/powershell-projects  
