@@ -46,6 +46,7 @@ flowchart TB
 ### What CompanyEnum Aims To Do (High-Level)
 
 CompanyEnum is built to **automate the aggregation** of open-source, public data about a target organization and present it via a **Web UI dashboard**. Its core goal is to reduce the manual overhead of crawlers, scripts, and spreadsheets into a unified interface for recon, triage, and reporting.
+
 ---
 
 # ⚙️ Features
