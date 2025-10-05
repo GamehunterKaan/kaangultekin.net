@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CompanyEnum - Example</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="static/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <style>
+        /* Basic styles from output.html context */
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+        }
+
+        header {
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-proper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .topnav {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 24px;
+            margin-right: auto;
+        }
+
+        .logo .blue {
+            color: #0078d4;
+        }
+
+        .topnav a {
+            color: #333;
+            text-align: center;
+            padding: 20px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            border-bottom: 3px solid transparent;
+        }
+
+        .topnav a:hover {
+            border-bottom: 3px solid #0078d4;
+        }
+
+        .topnav a.active {
+            font-weight: bold;
+            border-bottom: 3px solid #0078d4;
+        }
+
+        .main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: #fdfdfd;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #eee;
+            line-height: 1.6;
+        }
+
+        h2, h4 {
+            color: #005a9e;
+        }
+
+        hr.rounded {
+            border-top: 2px solid #bbb;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-proper">
+            <div class="topnav">
+                <h1 class="logo">Company<span class="blue">Enum</span></h1>
+                <a class="active" href="#summary-section">Summary</a>
+                <a href="#financials-section">Financials</a>
+                <a href="#people-section">People</a>
+                <a href="#technology-section">Technology</a>
+                <a href="#ratings-section">Ratings</a>
+            </div>
+        </div>
+    </header>
+    <div class="main">
+        <div class="content">
+            <div id="summary-section" class="section">
+                <h2>Summary</h2>
+                <pre><strong>Query:</strong> microsoft
+<strong>Company Name:</strong> Microsoft
+<strong>Website:</strong> microsoft.com
+<strong>Headquarters:</strong> Redmond, Washington, U.S.
+<strong>Founders:</strong> Bill Gates, Paul Allen
+<strong>Founded Date:</strong> April 4, 1975
+<strong>Sectors:</strong> Software, Cloud Computing, Consumer Electronics, Video Games
+<strong>Description:</strong> Microsoft Corporation is an American multinational technology corporation which produces computer software, consumer electronics, personal computers, and related services.
+<strong>Competitors:</strong> Apple, Google, Amazon, Oracle, Sony</pre>
+            </div>
+            <div id="financials-section" class="section">
+                <h2>Financials</h2>
+                <pre><strong>Company Name:</strong> Microsoft
+<strong>Headquarters:</strong> Redmond, Washington, U.S.
+<strong>Sectors:</strong> Software, Cloud Computing, Consumer Electronics, Video Games
+<strong>Ticker:</strong> MSFT
+<strong>Stock Price:</strong> $305.22
+<strong>Revenue:</strong> $211.9B
+<strong>Fund Round:</strong> 1
+<strong>Fund Amount:</strong> $1M
+<strong>Fund Description:</strong> Microsoft's funding round in 1981.
+<strong>Lead Investors:</strong> 1
+<strong>Total Investors:</strong> 1
+<strong>Investors Description:</strong> Technology Crossover Ventures
+<strong>Investments:</strong> 138
+<strong>Investments Description:</strong> Facebook, Databricks, Insurify
+<strong>Lead Investments:</strong> 55
+<strong>Div Investments:</strong> 0
+<strong>Div Investments Description:</strong> 
+<strong>Exits:</strong> 23
+<strong>Exits Description:</strong> Facebook, Affirmed Networks, CloudSimple
+<strong>Acquisitions:</strong> 251
+<strong>Acquisitions Description:</strong> LinkedIn, GitHub, Activision Blizzard
+<strong>Competitors:</strong> Apple, Google, Amazon, Oracle, Sony</pre>
+            </div>
+            <div id="people-section" class="section">
+                <h2>People</h2>
+                <pre><h2>CrunchBase Results:</h2>
+<strong>Founders:</strong>
+Bill Gates, Paul Allen
+<h4>Employees:</h4>
+<strong>Satya Nadella:</strong> Chairman & Chief Executive Officer
+<strong>Brad Smith:</strong> Vice Chair & President
+<strong>Amy Hood:</strong> Executive Vice President & Chief Financial Officer
+<strong>Members:</strong>
+Satya Nadella, Reid Hoffman, Hugh Johnston
+<h2>CraftCo Results:</h2>
+<h4>Executives:</h4><strong>Name:</strong> Satya Nadella, <strong>Position:</strong> Chairman and Chief Executive Officer
+<strong>Name:</strong> Judson Althoff, <strong>Position:</strong> Executive Vice President and Chief Commercial Officer
+<strong>Name:</strong> Chris Capossela, <strong>Position:</strong> Executive Vice President and Chief Marketing Officer
+</pre>
+            </div>
+            <div id="technology-section" class="section">
+                <h2>Technology</h2>
+                <pre><h2>CrunchBase Results</h2><strong>Tech Stack :</strong>Microsoft Azure, Microsoft 365, Microsoft Dynamics 365
+<strong>Web Tech Stack :</strong>jQuery, React, ASP.NET
+<strong>Patents and Trademarsk :</strong>Microsoft has 84,123 patents and 22,190 trademarks.
+<strong>Web Traffic :</strong>Monthly Visits: 1.2B, Bounce Rate: 30.15%
+<strong>Interest Signals :</strong>Signals of buying interest in HR, IT, and Marketing software.
+<strong>IT Spend :</strong>Estimated IT spend of $10B+
+<h2>Security Headers Results</h2><strong>Scan Grade:</strong> A
+<strong>Site URL:</strong> https://www.microsoft.com/
+<strong>IP Address:</strong> 104.215.148.63
+<strong>Report Time:</strong> 2023-10-27 10:30:00
+<strong>Headers:</strong>
+- Strict-Transport-Security
+- Content-Security-Policy
+- X-Frame-Options
+- X-Content-Type-Options
+<strong>Missing Headers:</strong>
+- Permissions-Policy
+<h4>Raw Headers:</h4>
+- <strong>content-security-policy</strong>: frame-ancestors 'self'
+- <strong>strict-transport-security</strong>: max-age=31536000
+- <strong>x-frame-options</strong>: SAMEORIGIN
+<h2>SSL Hopper Results</h2><strong>Common Name:</strong> www.microsoft.com
+<strong>Subject Alternative Names (SANs):</strong>
+- www.microsoft.com
+- microsoft.com
+- *.microsoft.com
+<strong>Organization:</strong> Microsoft Corporation
+<strong>Valid Until:</strong> 2024-09-15
+<strong>Issuer:</strong> DigiCert Inc
+<h2>Sucuri Results</h2><strong>Cert Issuer:</strong> DigiCert
+<strong>Cert Expires:</strong> Sep 15 23:59:59 2024 GMT
+<strong>Cert Authority:</strong> Trusted
+<strong>Last Scan:</strong> 2023-10-27 10:31:05
+<strong>IP Addresses:</strong> 104.215.148.63
+<strong>Domain:</strong> microsoft.com
+<strong>Hosting:</strong> Microsoft Azure
+<strong>Running On:</strong> Kestrel
+<strong>TLS Rating:</strong> A+
+<strong>Total Rating:</strong> A+
+<strong>Security Rating:</strong> Passed
+<strong>CMS:</strong> 
+<strong>Proxy:</strong> 
+<strong>Needs WAF:</strong> Your website is not behind a firewall.
+<h2>WhoIS Results</h2>Domain Name: MICROSOFT.COM
+Registry Domain ID: 262573_DOMAIN_COM-VRSN
+Registrar WHOIS Server: whois.markmonitor.com
+Registrar: MarkMonitor Inc.
+Creation Date: 1991-05-02T04:00:00Z
+Registrant Organization: Microsoft Corporation
+Registrant State/Province: WA
+Registrant Country: US
+<h2>Active Scan Results</h2><h3>Server is offline.</h3></pre>
+            </div>
+            <div id="ratings-section" class="section">
+                <h2>Ratings</h2>
+                <pre><h1>TrustPilot Results: (Customer Reviews)</h1><h2>Total Reviews: 2,543       Reviews Value: 1.7</h2>
+<hr class="rounded"><h4>Rating: 1</h4>Microsoft is a terrible company. I have been trying to get a refund for a faulty product for months and they have been no help at all.
+<strong>Author:</strong> John Doe
+<hr class="rounded"><h4>Rating: 5</h4>I love Microsoft products! I use them every day for work and they are always reliable.
+<strong>Author:</strong> Jane Smith
+<hr class="rounded"><h1>Careerbliss Results: (Employee & Company Reviews)</h1><h2>Total Reviews: 21500       Reviews Value: 4.1</h2>
+<hr class="rounded"><h4>Rating: 5</h4>Great work-life balance and benefits. The culture is very collaborative and there are many opportunities for growth.
+<strong>Author Type: </strong> Employee
+<strong>Author Name: </strong> Software Engineer
+<hr class="rounded"><h4>Rating: 3</h4>Compensation is below market rate for the area. Management can be bureaucratic at times.
+<strong>Author Type: </strong> Employee
+<strong>Author Name: </strong> Former Program Manager
+<hr class="rounded"></pre>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
