@@ -125,7 +125,7 @@ feature_row:
   </div>
   <div class="research-card">
     <div class="research-card__icon"><i class="fas fa-users"></i></div>
-    <h3 class="research-card__title">Active Directory Security</h3>S
+    <h3 class="research-card__title">Active Directory Security</h3>
     <p class="research-card__description">Focusing on common AD misconfigurations, attack paths like Kerberoasting, and defensive hardening for enterprise environments.</p>
   </div>
   <div class="research-card">
