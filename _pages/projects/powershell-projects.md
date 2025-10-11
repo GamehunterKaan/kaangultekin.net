@@ -84,47 +84,8 @@ flowchart LR
   Tune --> Validate[Purple-Team Validation]
 </div>
 
-### Defensive guidance & constraints
-- Ensure EDR/endpoint tooling collects and retains sufficient process and memory-related telemetry to correlate transient behaviors.  
-- Correlate parent/child process chains, command-line context, and network activity with suspicious in-memory indicators.  
-- Use sanitized testcases from the internal research to validate detection precision and SOC playbooks in isolated environments.  
-- Access to raw artifacts or testcases is granted only under coordinated, written authorization and a defined scope.
-
----
-
-## Detection hypotheses & SOC playbook snippets (conceptual)
-
-> These are high-level hypotheses to be tested in authorized labs and converted into telemetry queries by your SOC/IR team.
-
-1. **Attach-to-Action Spike:** Correlate recent automation/device events with rapid, automated process or network activity within a brief time window.  
-2. **Transient In-memory Anomalies:** Memory-only indicators in otherwise common processes (with no corresponding disk artifacts) should trigger elevated review.  
-3. **Unexpected Egress after Automation:** Outbound connections initiated immediately after scripted automation events warrant containment and investigation.
-
-**SOC checklist (conceptual):**
-- Collect device attach events, process creation, parent/child relationships, and network flows.  
-- Enrich telemetry with host role, environment (lab/production), and user context.  
-- For high-confidence incidents, isolate the host (authorized process), preserve telemetry artifacts, and follow documented incident response steps.
-
----
-
-## Safe testing & ethical practice (short checklist)
-
-- Test **only** in isolated labs (air-gapped or strongly segmented).  
-- Obtain written authorization and document scope, objectives, and rollback steps.  
-- Sanitize any artifacts intended for external sharing and always include defensive guidance.  
-- Coordinate disclosure if research affects third-party products or services.
-
 ---
 
 ## Access & coordination
 
-Because the internal fileless research involves sensitive techniques, raw artifacts and testcases are available **only** under coordinated engagements with written authorization and defined scope. If you are a researcher, SOC team, or vendor seeking access for defensive validation, contact the project owner to arrange a controlled engagement.
-
----
-
-## Next steps & options
-
-If desired, I can:
-- Export the Mermaid diagrams to SVG/PNG for slide decks and training materials.  
-- Draft an access-controlled README template for the internal research repo that includes safe-testing checklists and an access request process.  
-- Produce one-page defensive summaries (sanitized telemetry examples) for each public repo.
+Because the internal fileless research involves sensitive techniques, raw artifacts and testcases are available **only** under coordinated engagements with written authorization and defined scope. If you are a researcher, SOC team, or vendor seeking access for defensive validation, contact me to arrange a controlled engagement.
