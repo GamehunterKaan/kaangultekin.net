@@ -17,16 +17,8 @@ excerpt: >
 ---
 
 # PowerShell Projects — Catalog, Research & Defensive Guidance
+A defender- and researcher-oriented summary of PowerShell projects I maintain. This page outlines project goals, conceptual architecture, defensive implications, and how teams can responsibly use the work for detection tuning and purple-team exercises.
 
-## PowerShell-focused tooling & research  
-A defender- and researcher-oriented summary of PowerShell projects I maintain or collect. This page outlines project goals, conceptual architecture, defensive implications, and how teams can responsibly use the work for detection tuning and purple-team exercises. No operational exploit code or instructions are provided.
-
-
----
-
-**Reference list:** https://github.com/stars/GamehunterKaan/lists/powershell-projects
-
----
 
 ## Executive summary
 

@@ -137,6 +137,9 @@ author:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       url: "https://www.instagram.com/kaan_gultekin0/"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/kaan-gultekin/"
 
 # Site Footer
 footer:
@@ -159,9 +162,12 @@ footer:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       url: "https://www.instagram.com/kaan_gultekin0/"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/kaan-gultekin/"
   since: "2025"
 
-
+ # https://www.linkedin.com/in/kaan-gultekin/
 # Reading Files
 include:
   - .htaccess
