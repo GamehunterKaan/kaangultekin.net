@@ -111,6 +111,8 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
 # <i class="fas fa-certificate"></i> Certifications
 {: .glow-text .pulse .fade-in }
 
+
+{::options parse_block_html="true"}
 <section class="glass fade-in fade-delay-1">
   
 ## **Google Cybersecurity Professional Certificate (v2)**  
