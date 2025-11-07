@@ -6,19 +6,20 @@ toc: true
 toc_label: "Table of Contents"
 toc_icon: "cog"
 toc_sticky: true
+author_profile: True
 ---
 
-![Profile Banner](/assets/images/splash-banner.png){:.parallax-banner .fade-in}
+![Profile Banner](/assets/images/splash-banner.png){:.fade-in}
 
 ---
 
 # <i class="fas fa-user"></i> About Me — Kaan Gültekin
-{: .glow-text .fade-in }
+{: .glow-text .pulse .fade-in }
 
 ---
 
 # <i class="fas fa-code"></i> Who I Am
-{: .glow-text .fade-in }
+{: .glow-text .pulse .fade-in }
 
 I’m **Kaan Gültekin** — a software engineering student, software developer, and cybersecurity researcher.  
 I specialize in automation-first tooling, offensive security research, and open-source projects that support both red-team testing and defensive security awareness.  
@@ -27,7 +28,7 @@ I specialize in automation-first tooling, offensive security research, and open-
 ---
 
 # <i class="fas fa-tools"></i> Projects
-{: .glow-text .fade-in }
+{: .glow-text .pulse .fade-in }
 
 ## 🔹 Offensive Frameworks & Red Team Automation
 {: .fade-in }
@@ -108,26 +109,22 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
 ---
 
 # <i class="fas fa-certificate"></i> Certifications
-{: .glow-text .fade-in }
+{: .glow-text .pulse .fade-in }
 
-::: {.glass .fade-in}
-
-## **Google Cybersecurity Professional Certificate (v2)**
-{: .fade-in }
+<section class="glass fade-in fade-delay-1">
+  
+## **Google Cybersecurity Professional Certificate (v2)**  
+{: .glow-text .pulse }
 
 <p align="center" class="badge-animated">
-  <a href="https://www.credly.com/earner/earned/badge/7ef85df1-eed5-4013-a004-f1fe3ac59a46" target="_blank">
+  <a href="https://www.credly.com/earner/earned/badge/7ef85df1-eed5-4013-a004-f1fe3ac59a46" target="_blank" rel="noopener">
     <img src="/assets/images/google-cybersecurity-professional-certificate-v2.png" 
-         alt="Google Cybersecurity Professional Certificate Badge" 
-         style="max-width: 240px; border-radius: 12px; margin-top: 12px; margin-bottom: 12px;">
+         alt="Google Cybersecurity Professional Certificate Badge">
   </a>
 </p>
 
 Earned through **Coursera**, this certification covers **nine professional courses** totaling **130+ hours of guided cybersecurity training**.  
-The curriculum encompasses hands-on labs and defensive practices, focusing on **incident response, network security, threat analysis, SIEM management, and Python automation**.  
-
-:::
-
+The curriculum encompasses hands-on labs and defensive practices, focusing on **incident response, network security, threat analysis, SIEM management, and Python automation**.
 
 **Courses Completed:**  
 1. Foundations of Cybersecurity  
@@ -138,18 +135,18 @@ The curriculum encompasses hands-on labs and defensive practices, focusing on **
 6. Sound the Alarm: Detection and Response  
 7. Automate Cybersecurity Tasks with Python  
 8. Put It to Work: Prepare for Cybersecurity Jobs  
-9. Google Cybersecurity Capstone: Analyzing and Mitigating Security Threats  
-{: .fade-in }
+9. Google Cybersecurity Capstone: Analyzing and Mitigating Security Threats
 
 - **Total Learning Time:** 130+ hours  
 - **Issuer:** Google / Coursera  
 - **Credential:** [View on Credly →](https://www.credly.com/earner/earned/badge/7ef85df1-eed5-4013-a004-f1fe3ac59a46)
-{: .fade-in }
+
+</section>
 
 ---
 
 # <i class="fas fa-flask"></i> Research
-{: .glow-text .fade-in }
+{: .glow-text .pulse .fade-in }
 
 My research focuses on bridging **offensive innovation** with **defensive application**.  
 Instead of building exploits for exploitation’s sake, I design projects that highlight blind spots in detection, help blue teams test defenses, and provide insights for security education.  
@@ -165,7 +162,7 @@ Instead of building exploits for exploitation’s sake, I design projects that h
 ---
 
 # <i class="fas fa-trophy"></i> Recognition & Achievements
-{: .glow-text .fade-in }
+{: .glow-text .pulse .fade-in }
 
 - **TryHackMe** — Ranked #1 in Turkey and Top 11 globally  
 - **Discord** — Recognized on their Security page for a reported vulnerability  
@@ -177,7 +174,7 @@ Instead of building exploits for exploitation’s sake, I design projects that h
 ---
 
 # <i class="fas fa-book-open"></i> Publications & Media
-{: .glow-text .fade-in }
+{: .glow-text .pulse .fade-in }
 
 - Invited contributor to [**Pentest Magazine**](https://pentestmag.com/download/pentest-open-source-pentesting-toolkit/)  
 - Authored multiple open-source research notes and PoCs on GitHub  
@@ -186,7 +183,7 @@ Instead of building exploits for exploitation’s sake, I design projects that h
 ---
 
 # <i class="fas fa-handshake"></i> Collaboration & Ethics
-{: .glow-text .fade-in }
+{: .glow-text .pulse .fade-in }
 
 I operate under a strict **ethics-first framework**:  
 - Controlled lab testing only  

@@ -265,83 +265,102 @@ search: false
   line-height: 1.6;
 }
 
-/* --- Fade-in on Scroll --- */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+/* ===== Parallax banner (responsive & not stretched) ===== */
+.parallax-banner {
+  background-image: url('/assets/images/splash-banner.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;      /* ensures the image covers area without distortion */
+  min-height: 320px;           /* base height, scales on larger screens */
+  height: auto;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Disable background-attachment:fixed on mobile (performance & behavior) */
+@media (max-width: 900px) {
+  .parallax-banner {
+    background-attachment: scroll; /* fixed can cause odd stretching on mobile */
+    min-height: 220px;
+  }
+}
+
+/* Optional small parallax movement on desktop (works with JS) */
+@media (min-width: 901px) {
+  .parallax-banner.parallax-animated {
+    background-attachment: fixed;
+  }
+}
+
+/* ===== Glow text (non-flickering, smooth subtle pulse) ===== */
+.glow-text {
+  color: inherit;
+  /* base soft glow */
+  text-shadow:
+    0 0 4px rgba(255,255,255,0.45),
+    0 0 10px rgba(255,255,255,0.28);
+}
+
+/* If you want a gentle animated pulse instead of static glow, use this */
+.glow-text.pulse {
+  animation: glowPulse 6s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%,100% {
+    text-shadow:
+      0 0 4px rgba(255,255,255,0.45),
+      0 0 10px rgba(255,255,255,0.28);
+  }
+  50% {
+    text-shadow:
+      0 0 8px rgba(255,255,255,0.65),
+      0 0 18px rgba(255,255,255,0.42);
+  }
+}
+
+/* ===== Glass card style ===== */
+.glass {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1.1rem;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.14);
+}
+
+/* ===== Badge animation ===== */
+.badge-animated img {
+  display: inline-block;
+  max-width: 240px;
+  border-radius: 12px;
+  transition: transform 0.32s cubic-bezier(.2,.9,.2,1), box-shadow 0.32s;
+}
+.badge-animated img:hover {
+  transform: translateY(-6px) scale(1.03) rotate(0.6deg);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+}
+
+/* ===== Fade-in helper classes (no JS included here) ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* --- Text Glow (Smooth Pulse) --- */
-.glow-text {
-  color: #fff;
-  text-shadow:
-    0 0 4px rgba(255, 255, 255, 0.5),
-    0 0 10px rgba(255, 255, 255, 0.3),
-    0 0 20px rgba(255, 255, 255, 0.2);
-  animation: softPulse 6s ease-in-out infinite;
-}
+/* Small utility delays if you add them later */
+.fade-delay-1 { transition-delay: 0.12s; }
+.fade-delay-2 { transition-delay: 0.24s; }
+.fade-delay-3 { transition-delay: 0.36s; }
 
-@keyframes softPulse {
-  0%, 100% {
-    text-shadow:
-      0 0 4px rgba(255, 255, 255, 0.5),
-      0 0 10px rgba(255, 255, 255, 0.3),
-      0 0 20px rgba(255, 255, 255, 0.2);
-  }
-  50% {
-    text-shadow:
-      0 0 8px rgba(255, 255, 255, 0.8),
-      0 0 20px rgba(255, 255, 255, 0.6),
-      0 0 30px rgba(255, 255, 255, 0.5);
-  }
-}
-
-
-/* --- Glassmorphism --- */
-.glass {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 16px;
-  padding: 1.25rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Optional: soft hover for glass panels */
-.glass:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-4px);
-  transition: all 0.3s ease;
-}
-
-/* ✅ Parallax Banner */
-.parallax-banner {
-  background-image: url('/assets/images/splash-banner.png');
-  height: 360px;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-  margin-bottom: 24px;
-}
-
-/* ✅ Animated Credly Badge */
-.badge-animated img {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.badge-animated img:hover {
-  transform: scale(1.07) rotate(1deg);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-}
 
 /* ✅ Contact Buttons */
 .contact-buttons {
