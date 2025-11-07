@@ -112,41 +112,42 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
 {: .glow-text .pulse .fade-in }
 
 
-{% raw %}
-<section class="glass fade-in fade-delay-1">
-{% endraw %}
+<section class="glass fade-in fade-delay-1" aria-labelledby="cert-google">
+  <h2 id="cert-google" class="glow-text">Google Cybersecurity Professional Certificate (v2)</h2>
 
-## **Google Cybersecurity Professional Certificate (v2)**
-{: .glow-text .pulse }
+  <div class="badge-animated" style="text-align:center; margin: 12px 0;">
+    <a href="https://www.credly.com/earner/earned/badge/7ef85df1-eed5-4013-a004-f1fe3ac59a46" target="_blank" rel="noopener">
+      <img src="/assets/images/google-cybersecurity-professional-certificate-v2.png"
+           alt="Google Cybersecurity Professional Certificate Badge"
+           style="max-width:240px; border-radius:12px; display:inline-block;">
+    </a>
+  </div>
 
-<p align="center" class="badge-animated">
-  <a href="https://www.credly.com/earner/earned/badge/7ef85df1-eed5-4013-a004-f1fe3ac59a46" target="_blank" rel="noopener">
-    <img src="/assets/images/google-cybersecurity-professional-certificate-v2.png"
-         alt="Google Cybersecurity Professional Certificate Badge">
-  </a>
-</p>
+  <p>
+    Earned through <strong>Coursera</strong>, this certification covers nine professional courses totaling
+    <strong>130+ hours</strong> of guided cybersecurity training. The curriculum includes hands-on labs and defensive practices,
+    focusing on incident response, network security, threat analysis, SIEM management, and Python automation.
+  </p>
 
-Earned through **Coursera**, this certification covers **nine professional courses** totaling **130+ hours of guided cybersecurity training**.  
-The curriculum encompasses hands-on labs and defensive practices, focusing on **incident response, network security, threat analysis, SIEM management, and Python automation**.
+  <h3>Courses Completed</h3>
+  <ol>
+    <li>Foundations of Cybersecurity</li>
+    <li>Play It Safe: Manage Security Risks</li>
+    <li>Connect and Protect: Networks and Network Security</li>
+    <li>Tools of the Trade: Linux and SQL</li>
+    <li>Assets, Threats, and Vulnerabilities</li>
+    <li>Sound the Alarm: Detection and Response</li>
+    <li>Automate Cybersecurity Tasks with Python</li>
+    <li>Put It to Work: Prepare for Cybersecurity Jobs</li>
+    <li>Google Cybersecurity Capstone: Analyzing and Mitigating Security Threats</li>
+  </ol>
 
-**Courses Completed:**
-1. Foundations of Cybersecurity  
-2. Play It Safe: Manage Security Risks  
-3. Connect and Protect: Networks and Network Security  
-4. Tools of the Trade: Linux and SQL  
-5. Assets, Threats, and Vulnerabilities  
-6. Sound the Alarm: Detection and Response  
-7. Automate Cybersecurity Tasks with Python  
-8. Put It to Work: Prepare for Cybersecurity Jobs  
-9. Google Cybersecurity Capstone: Analyzing and Mitigating Security Threats
-
-- **Total Learning Time:** 130+ hours  
-- **Issuer:** Google / Coursera  
-- **Credential:** [View on Credly →](https://www.credly.com/earner/earned/badge/7ef85df1-eed5-4013-a004-f1fe3ac59a46)
-
-{% raw %}
+  <ul>
+    <li><strong>Total Learning Time:</strong> 130+ hours</li>
+    <li><strong>Issuer:</strong> Google / Coursera</li>
+    <li><strong>Credential:</strong> <a href="https://www.credly.com/earner/earned/badge/7ef85df1-eed5-4013-a004-f1fe3ac59a46" target="_blank" rel="noopener">View on Credly</a></li>
+  </ul>
 </section>
-{% endraw %}
 
 ---
 
