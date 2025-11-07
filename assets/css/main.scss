@@ -264,3 +264,44 @@ search: false
   color: #ccc;
   line-height: 1.6;
 }
+
+/* --- Fade-in on Scroll --- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Text Glow --- */
+.glow-text {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+  animation: pulse 3s infinite alternate;
+}
+
+@keyframes pulse {
+  from { text-shadow: 0 0 4px rgba(255, 255, 255, 0.4); }
+  to { text-shadow: 0 0 16px rgba(255, 255, 255, 1); }
+}
+
+/* --- Glassmorphism --- */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Optional: soft hover for glass panels */
+.glass:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
+}

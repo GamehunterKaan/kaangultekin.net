@@ -20,7 +20,9 @@ author_profile: true
   "sameAs": [
     "https://github.com/GamehunterKaan",
     "https://www.credly.com/users/kaan-gultekln",
-    "https://tryhackme.com/p/GamehunterKaan"
+    "https://tryhackme.com/p/GamehunterKaan",
+    "https://twitter.com/kaangultekin01",
+    "https://www.linkedin.com/in/kaan-gultekin"
   ],
   "description": "Cybersecurity researcher, software developer, and automation-focused engineer building open-source offensive and defensive security tools."
 }
@@ -75,11 +77,11 @@ author_profile: true
 ---
 
 # <i class="fas fa-user"></i> About Me — Kaan Gültekin
-
+{: .glow-text }
 ---
 
 # <i class="fas fa-code"></i> Who I Am
-
+{: .glow-text }
 I’m **Kaan Gültekin** — a software engineering student, software developer, and cybersecurity researcher.  
 I specialize in automation-first tooling, offensive security research, and open-source projects that support both red-team testing and defensive security awareness.
 
@@ -163,7 +165,7 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
 
 Earned through **Coursera**, this certification covers **nine professional courses** totaling **130+ hours of guided cybersecurity training**.  
 The curriculum encompasses hands-on labs and defensive practices, focusing on **incident response, network security, threat analysis, SIEM management, and Python automation**.
-
+{: .glass .fade-in }
 **Courses Completed:**
 1. Foundations of Cybersecurity  
 2. Play It Safe: Manage Security Risks  
@@ -185,7 +187,7 @@ The curriculum encompasses hands-on labs and defensive practices, focusing on **
 
 My research focuses on bridging **offensive innovation** with **defensive application**.  
 Instead of building exploits for exploitation’s sake, I design projects that highlight blind spots in detection, help blue teams test defenses, and provide insights for security education.
-
+{: .fade-in }
 ## Key Research Areas
 - **Fileless & In-Memory Attacks**  
   Created a PowerShell fileless framework PoC, analyzing how adversaries abuse memory-only execution and providing defenders with guidance on detection strategies.  
@@ -226,8 +228,11 @@ I publish openly but operate within a strict **ethics-first framework**:
 - Responsible disclosure for vulnerabilities  
 - Commitment to transparency and educational value  
 
+
+
 <div class="contact-buttons">
   <a href="mailto:kaan@kaangultekin.net"><i class="fas fa-envelope"></i> Email</a>
   <a href="https://github.com/GamehunterKaan" target="_blank"><i class="fab fa-github"></i> GitHub</a>
   <a href="www.linkedin.com/in/kaan-gultekin" target="_blank"><i class="fas fa-terminal"></i> LinkedIn</a>
+  <a href="https://x.com/kaangultekin01" target="_blank"><i class="fas fa-terminal"></i> Twitter</a>
 </div>
