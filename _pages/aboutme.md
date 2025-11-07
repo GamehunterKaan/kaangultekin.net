@@ -112,15 +112,16 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
 {: .glow-text .pulse .fade-in }
 
 
-{::options parse_block_html="true"}
+{% raw %}
 <section class="glass fade-in fade-delay-1">
-  
-## **Google Cybersecurity Professional Certificate (v2)**  
+{% endraw %}
+
+## **Google Cybersecurity Professional Certificate (v2)**
 {: .glow-text .pulse }
 
 <p align="center" class="badge-animated">
   <a href="https://www.credly.com/earner/earned/badge/7ef85df1-eed5-4013-a004-f1fe3ac59a46" target="_blank" rel="noopener">
-    <img src="/assets/images/google-cybersecurity-professional-certificate-v2.png" 
+    <img src="/assets/images/google-cybersecurity-professional-certificate-v2.png"
          alt="Google Cybersecurity Professional Certificate Badge">
   </a>
 </p>
@@ -128,7 +129,7 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
 Earned through **Coursera**, this certification covers **nine professional courses** totaling **130+ hours of guided cybersecurity training**.  
 The curriculum encompasses hands-on labs and defensive practices, focusing on **incident response, network security, threat analysis, SIEM management, and Python automation**.
 
-**Courses Completed:**  
+**Courses Completed:**
 1. Foundations of Cybersecurity  
 2. Play It Safe: Manage Security Risks  
 3. Connect and Protect: Networks and Network Security  
@@ -143,7 +144,9 @@ The curriculum encompasses hands-on labs and defensive practices, focusing on **
 - **Issuer:** Google / Coursera  
 - **Credential:** [View on Credly →](https://www.credly.com/earner/earned/badge/7ef85df1-eed5-4013-a004-f1fe3ac59a46)
 
+{% raw %}
 </section>
+{% endraw %}
 
 ---
 
