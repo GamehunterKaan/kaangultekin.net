@@ -125,41 +125,119 @@ search: false
   }
 }
 
+/* ===== Skills Section ===== */
+#skills {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+#skills h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 12px rgba(0, 255, 200, 0.4);
+  animation: glowPulse 2.5s infinite alternate;
+}
+
+/* Category Container */
+.skills-category-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Category Titles */
+.skills-category h3 {
+  font-size: 1.4rem;
+  color: #00ffd5;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(0, 255, 200, 0.5);
+}
+
 /* Skills Grid */
 .skills-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 1.5rem;
-  list-style: none;
-  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
 }
 
+/* Skill Item */
 .skill-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background-color: #28283C; /* Darker background for the item */
-  color: #eee; /* Light text color */
-  padding: 0.6rem 1.2rem;
-  border-radius: 0.75rem; /* Slightly more rounded corners */
-  font-size: 1rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-.skill-item:hover {
-  transform: translateY(-4px);
-  background-color: #444; /* Lighter on hover */
-  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  backdrop-filter: blur(8px);
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.3s ease, border 0.3s ease;
+  width: 100%;
+  max-width: 140px;
 }
 
 .skill-item img {
-  width: 28px;
-  height: 28px;
+  height: 45px;
+  width: auto;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.skill-item span {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #e6f3f3;
+  letter-spacing: 0.5px;
+}
+
+/* Hover Glow Effect */
+.skill-item:hover {
+  transform: translateY(-6px) scale(1.05);
+  border-color: rgba(0, 255, 200, 0.6);
+  box-shadow: 0 0 18px rgba(0, 255, 200, 0.3);
+}
+
+.skill-item:hover img {
+  transform: scale(1.1);
+}
+
+/* Fade-in Visibility (works with your main.js scroll code) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Subtle Glow Animation */
+@keyframes glowPulse {
+  from {
+    text-shadow: 0 0 10px rgba(0, 255, 200, 0.2);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(0, 255, 200, 0.6);
+  }
+}
+
+/* Responsive Tweaks */
+@media (max-width: 600px) {
+  #skills h2 {
+    font-size: 1.6rem;
+  }
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+  }
+  .skill-item img {
+    height: 38px;
+  }
 }
 
 /* --- Current Research Grid --- */

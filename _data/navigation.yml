@@ -2,6 +2,8 @@
 main:
   - title: "GitHub"
     url: https://github.com/GamehunterKaan
+  - title: "About Me"
+    url: https://kaangultekin.net/aboutme/
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
