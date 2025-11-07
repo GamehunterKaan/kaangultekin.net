@@ -36,12 +36,8 @@ feature_row:
 ---
 
 {% include feature_row %}
-
-## 🛠️ Skills & Technologies
-
 <section id="skills" class="fade-in glass">
   <h2 class="glow-text">🧠 Skills &amp; Technologies</h2>
-
   <div class="skills-category-container">
     <!-- Programming & Scripting -->
     <div class="skills-category fade-in">
@@ -66,6 +62,10 @@ feature_row:
           <a href="https://www.arduino.cc/" target="_blank" rel="noreferrer" class="skill-item hover-glow">
           <img src="https://cdn.worldvectorlogo.com/logos/arduino-1.svg" alt="arduino"/>
           <span>Arduino</span>
+        </a>
+        <a href="https://isocpp.org/" target="_blank" rel="noreferrer" class="skill-item">
+          <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="cpp"/>
+          <span>C++</span>
         </a>
       </div>
     </div>
@@ -116,8 +116,6 @@ feature_row:
   </div>
 </section>
 
----
-
 ## 🔬 Current Research & Interests
 
 <div class="research-grid">
@@ -155,25 +153,6 @@ feature_row:
 
 ---
 
-## 🚀 On The Horizon
-
-<div class="horizon-list">
-  <div class="horizon-item">
-    <div class="horizon-item__icon"><i class="fas fa-award"></i></div>
-    <div class="horizon-item__text">
-      <p>Aiming to achieve the <strong>OSCP certification</strong> to validate my offensive security expertise and practical penetration testing skills.</p>
-    </div>
-  </div>
-  <div class="horizon-item">
-    <div class="horizon-item__icon"><i class="fas fa-user-secret"></i></div>
-    <div class="horizon-item__text">
-      <p>Targeting the <strong>OSEP certification</strong> to master advanced adversary simulation, evasion techniques, and Active Directory exploitation.</p>
-    </div>
-  </div>
-</div>
-
----
-
 ## 🧭 Guiding Principles
 
 <div class="principles-grid">
@@ -190,3 +169,33 @@ feature_row:
     <p>Sharing knowledge and tools with the community raises the bar for everyone. I am dedicated to contributing to open-source projects that make security more accessible and effective.</p>
   </div>
 </div>
+
+
+## 🚀 On The Horizon
+
+<div class="horizon-list">
+  <div class="horizon-item">
+    <div class="horizon-item__icon"><i class="fas fa-shield-alt"></i></div>
+    <div class="horizon-item__text">
+      <p>Targeting the <strong>CompTIA Security+ certification</strong> to fortify my cybersecurity expertise, ensuring I can anticipate, prevent, and respond to threats with precision.</p>
+    </div>
+  </div>
+  <div class="horizon-item">
+    <div class="horizon-item__icon"><i class="fas fa-robot"></i></div>
+    <div class="horizon-item__text">
+      <p>Engineering a <strong>custom home assistant</strong> with sophisticated voice commands, intelligent device control, and integrated computer vision — orchestrating my systems, IoT devices, and digital services efficiently, securely, and discreetly, much like a personal JARVIS.</p>
+    </div>
+  </div>
+</div>
+
+---
+
+<section class="contact fade-in">
+  <h2>🤝 Let’s Connect</h2>
+  <p>Interested in research collaboration or open-source contributions? Reach out below.</p>
+  <div class="contact-buttons">
+    <a href="mailto:kaan@kaangultekin.net">Email</a>
+    <a href="https://github.com/GamehunterKaan" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/kaan-gultekin" target="_blank">LinkedIn</a>
+  </div>
+</section>
