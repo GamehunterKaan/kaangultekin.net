@@ -6,7 +6,6 @@ toc: true
 toc_label: "Table of Contents"
 toc_icon: "cog"
 toc_sticky: true
-author_profile: true
 ---
 
 ![Profile Banner](/assets/images/splash-banner.png){:.parallax-banner .fade-in}
@@ -111,8 +110,10 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
 # <i class="fas fa-certificate"></i> Certifications
 {: .glow-text .fade-in }
 
+::: {.glass .fade-in}
+
 ## **Google Cybersecurity Professional Certificate (v2)**
-{: .glass .fade-in }
+{: .fade-in }
 
 <p align="center" class="badge-animated">
   <a href="https://www.credly.com/earner/earned/badge/7ef85df1-eed5-4013-a004-f1fe3ac59a46" target="_blank">
@@ -124,7 +125,9 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
 
 Earned through **Coursera**, this certification covers **nine professional courses** totaling **130+ hours of guided cybersecurity training**.  
 The curriculum encompasses hands-on labs and defensive practices, focusing on **incident response, network security, threat analysis, SIEM management, and Python automation**.  
-{: .fade-in }
+
+:::
+
 
 **Courses Completed:**  
 1. Foundations of Cybersecurity  
