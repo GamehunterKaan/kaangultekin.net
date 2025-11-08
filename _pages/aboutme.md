@@ -139,7 +139,6 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
     <li>Sound the Alarm: Detection and Response</li>
     <li>Automate Cybersecurity Tasks with Python</li>
     <li>Put It to Work: Prepare for Cybersecurity Jobs</li>
-    <li>Google Cybersecurity Capstone: Analyzing and Mitigating Security Threats</li>
   </ol>
 
   <ul>
