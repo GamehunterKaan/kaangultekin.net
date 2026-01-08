@@ -112,7 +112,7 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
 {: .glow-text .pulse .fade-in }
 
 
-<section class="glass fade-in fade-delay-1" aria-labelledby="cert-google">
+<section class="glass fade-in fade-delay-1" aria-labelledby="cert-google" style="margin-bottom: 2rem;">
   <h2 id="cert-google" class="glow-text">Google Cybersecurity Professional Certificate (v2)</h2>
 
   <div class="badge-animated" style="text-align:center; margin: 12px 0;">
