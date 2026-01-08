@@ -116,7 +116,7 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
   <h2 id="cert-google" class="glow-text">Google Cybersecurity Professional Certificate (v2)</h2>
 
   <div class="badge-animated" style="text-align:center; margin: 12px 0;">
-    <a href="https://www.credly.com/earner/earned/badge/7ef85df1-eed5-4013-a004-f1fe3ac59a46" target="_blank" rel="noopener">
+    <a href="https://www.credly.com/badges/7ef85df1-eed5-4013-a004-f1fe3ac59a46/public_url" target="_blank" rel="noopener">
       <img src="/assets/images/google-cybersecurity-professional-certificate-v2.png"
            alt="Google Cybersecurity Professional Certificate Badge"
            style="max-width:240px; border-radius:12px; display:inline-block;">
@@ -124,7 +124,7 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
   </div>
 
   <p>
-    Earned through <strong>Coursera</strong>, this certification covers nine professional courses totaling
+    Earned through <strong>Coursera</strong>, this certification covers eight professional courses totaling
     <strong>130+ hours</strong> of guided cybersecurity training. The curriculum includes hands-on labs and defensive practices,
     focusing on incident response, network security, threat analysis, SIEM management, and Python automation.
   </p>
@@ -144,7 +144,41 @@ An **OSINT reconnaissance tool** for gathering open-source information about org
   <ul>
     <li><strong>Total Learning Time:</strong> 130+ hours</li>
     <li><strong>Issuer:</strong> Google / Coursera</li>
-    <li><strong>Credential:</strong> <a href="https://www.credly.com/earner/earned/badge/7ef85df1-eed5-4013-a004-f1fe3ac59a46" target="_blank" rel="noopener">View on Credly</a></li>
+    <li><strong>Credential:</strong> <a href="https://www.credly.com/badges/7ef85df1-eed5-4013-a004-f1fe3ac59a46/public_url" target="_blank" rel="noopener">View on Credly</a></li>
+  </ul>
+</section>
+
+<section class="glass fade-in fade-delay-1" aria-labelledby="cert-google">
+  <h2 id="cert-google" class="glow-text">Google IT Automation with Python Professional Certificate(v.1)</h2>
+
+  <div class="badge-animated" style="text-align:center; margin: 12px 0;">
+    <a href="https://www.credly.com/badges/a1479042-d049-41ef-aec9-180ce42802f6/public_url" target="_blank" rel="noopener">
+      <img src="/assets/images/google-it-automation-with-python-professional-certi.2.png"
+           alt="Google IT Automation with Python Professional Certificate Badge"
+           style="max-width:240px; border-radius:12px; display:inline-block;">
+    </a>
+  </div>
+
+  <p>
+    Earned through <strong>Coursera</strong>, this certification covers six professional courses totaling
+    <strong>130+ hours</strong> of guided IT automation training. The curriculum includes hands-on labs and practical projects,
+    focusing on Python programming, version control with Git, troubleshooting, configuration management, and cloud automation.
+  </p>
+
+  <h3>Courses Completed</h3>
+  <ol>
+    <li>Crash Course on Python</li>
+    <li>Using Python to Interact with the Operating System</li>
+    <li>Introduction to Git and GitHub</li>
+    <li>Troubleshooting and Debugging Techniques</li>
+    <li>Configuration Management and the Cloud</li>
+    <li>Automating Real-World Tasks with Python</li>
+  </ol>
+
+  <ul>
+    <li><strong>Total Learning Time:</strong> 130+ hours</li>
+    <li><strong>Issuer:</strong> Google / Coursera</li>
+    <li><strong>Credential:</strong> <a href="https://www.credly.com/badges/a1479042-d049-41ef-aec9-180ce42802f6/public_url" target="_blank" rel="noopener">View on Credly</a></li>
   </ul>
 </section>
 
@@ -172,7 +206,8 @@ Instead of building exploits for exploitation’s sake, I design projects that h
 - **TryHackMe** — Ranked #1 in Turkey and Top 11 globally  
 - **Discord** — Recognized on their Security page for a reported vulnerability  
 - **AutoPWN-Suite** — Widely cited and adopted open-source offensive framework  
-- **Google Cybersecurity Certificate (v2)** — Completed 9-course professional program with 130+ hours of training  
+- **Google Cybersecurity Professional Certificate V2** — Completed 8-course professional program with 130+ hours of training
+- **Google IT Automation with Python Professional Certificate(v.1)** — Completed 6-course professional program with 130+ hours of training  
 - **Research Contributions** — Public PoCs and technical articles that support the security community  
 {: .fade-in }
 
