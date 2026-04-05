@@ -16,28 +16,47 @@ excerpt: >
   Automated vulnerability scanning & exploitation framework
 ---
 
-# 🚀 Introduction
+# Introduction
 
-Security testers, red teams, and bug bounty hunters spend a lot of time chaining reconnaissance, service/version detection, vulnerability lookup and exploit retrieval. **AutoPWN Suite** automates that pipeline — from discovery to exploit suggestion — reducing manual overhead and letting you focus on investigation and exploitation logic rather than plumbing.
+Security testers, red teams, and bug bounty hunters spend a lot of time chaining reconnaissance, service/version detection, vulnerability lookup and exploit retrieval. **AutoPWN Suite** automates that pipeline -- from discovery to exploit suggestion -- reducing manual overhead and letting you focus on investigation and exploitation logic rather than plumbing.
 
-Built in Python and intended to run cross-platform (Linux/macOS/Windows), AutoPWN Suite is modular, scriptable, and designed so you can either run it as a CLI or import the core scanner as an API inside other tooling. The sections below explain what it does, how to use it, and — for developers — exactly how the code flows at runtime.
+Built in Python and intended to run cross-platform (Linux/macOS/Windows), AutoPWN Suite is modular, scriptable, and designed so you can either run it as a CLI, use the built-in web dashboard, or import the core scanner as an API inside other tooling.
 
 ---
 
-# ⚙️ Features
+# Features
 
+## CLI
 * Fully automatic mode (`-y`) for minimal interaction.
-* Automatic network range detection and host discovery.
-* Version-based vulnerability detection and CVE lookup.
+* Automatic network range detection and host discovery (ARP or Ping).
+* Version-based vulnerability detection via NIST NVD CVE lookup.
 * Web app helpers: directory enumeration and basic XSS/LFI/SQLi probes.
-* Exploit retrieval: points to or downloads PoCs for matched vulnerabilities.
-* Multiple modes: `normal`, `evade`, `noise` to tune aggressiveness/noise.
+* Exploit retrieval from Exploit-DB: downloads PoCs for matched CVEs.
+* Multiple modes: `normal`, `evade`, `noise` to tune aggressiveness/stealth.
+* Configurable scan techniques: TCP SYN, TCP Connect, UDP, Window, ACK, FIN, Xmas, Null, Maimon, SCTP.
 * Programmatic API (`AutoScanner`) for integration and automation.
-* Multiple output formats: JSON, HTML, plain text (and visual SVGs where useful).
+* Multiple output formats: HTML, SVG, TXT.
+* Email and webhook reporting on scan completion.
+* Daemon mode for periodic background scanning.
+
+## Web UI
+
+![Web UI Dashboard](/assets/images/autopwn-suite-dashboard.png)
+
+* **Multiple concurrent scans** -- launch and monitor several scans simultaneously from the browser.
+* **Live terminal output** -- real-time nmap commands and results streamed via Server-Sent Events (SSE).
+* **Scan profiles** -- save and reuse scan configurations (technique, speed, timeout, ports, evasion, custom flags).
+* **Scheduled scans** -- set up recurring scans on interval, daily, or weekly schedules with automatic profile loading.
+* **Email notifications** -- HTML scan reports with inline result summaries sent on completion.
+* **Webhook notifications** -- POST scan results to any webhook endpoint.
+* **PDF and JSON export** -- download scan results directly from the dashboard.
+* **Persistent settings** -- all settings, profiles, and schedules saved to disk as JSON.
+* **Configurable via environment variables** -- `AUTOPWN_WEB_HOST`, `AUTOPWN_WEB_PORT`, `AUTOPWN_DATA_DIR`.
+* **Docker ready** -- single-command deployment via Docker Compose.
 
 ---
 
-# 🎞️ Demo
+# Demo
 
 AutoPWN Suite has a very user friendly easy to read output.
 
@@ -45,259 +64,624 @@ AutoPWN Suite has a very user friendly easy to read output.
 
 ---
 
-# 🧠 How It Works — Overview (developer-friendly)
+# How It Works
 
-Below is a combined textual + visual explanation of the runtime architecture and data flow. Paste the Mermaid diagrams directly into your docs (GitHub renders Mermaid).
+## High-level runtime flow
 
-## High-level runtime flow (short)
-
-1. CLI (`autopwn.py`) or API call starts a scan.
-2. `AutoScanner` launches an nmap discovery scan (via python-nmap).
-3. Results are normalized to host objects (`InitHostInfo`).
-4. Service/version strings → searchable keywords (`searchvuln`).
-5. Keywords → vulnerability lookups (NIST or other DBs).
-6. If CVEs/PoCs found → exploit references fetched/suggested.
-7. Web-specific checks run for HTTP services.
-8. Results compiled and exported (JSON/HTML/TXT) or posted to webhook/email.
+1. CLI (`autopwn.py`) or Web UI launches a scan.
+2. Host discovery via nmap ARP or Ping scan (`DiscoverHosts`).
+3. Port scanning via `PortScan` using python-nmap.
+4. Results analyzed via `AnalyseScanResults` into port arrays.
+5. Service/version strings converted to search keywords via `GenerateKeyword` (`searchvuln.py`).
+6. Keywords queried against NIST NVD 2.0 API via `searchCVE` (`nist_search.py`).
+7. Exploit references fetched from Exploit-DB via `GetExploitInfo` (`getexploits.py`).
+8. Web-specific checks run for HTTP services (`webvuln.py`).
+9. Results compiled and exported (HTML/SVG/TXT), or posted via webhook/email.
 
 ---
 
-## Sequence diagram (runtime interaction)
+## Sequence diagram (CLI mode)
 
 <div class="mermaid">
 sequenceDiagram
-    participant User as "User / CLI"
-    participant AutoPWN as "autopwn.py"
-    participant API as "AutoScanner (Core Engine)"
-    participant Nmap as "nmap (python-nmap)"
-    participant Parser as "InitHostInfo"
-    participant Vuln as "searchvuln + nist_search"
-    participant Exploit as "exploit_fetcher"
-    participant Report as "Reporter / Exporter"
+    participant User as User / CLI
+    participant Main as autopwn.py
+    participant Scanner as scanner.py
+    participant Nmap as nmap (python-nmap)
+    participant Vuln as searchvuln.py
+    participant NIST as nist_search.py
+    participant Exploit as getexploits.py
+    participant Web as webvuln.py
+    participant Report as report.py
 
-    User->>AutoPWN: Run autopwn-suite -t &lt;target&gt; -y
-    AutoPWN->>API: Create AutoScanner instance
-    API->>Nmap: Launch TCP SYN scan
-    Nmap-->>API: Return hosts, ports, and service info
-    API->>Parser: Normalize results into Host objects
-    Parser-->>API: Return structured HostInfo list
+    User->>Main: autopwn-suite -t target -y
+    Main->>Scanner: DiscoverHosts(target, scantype, mode)
+    Scanner->>Nmap: ARP or Ping scan (-sn)
+    Nmap-->>Scanner: Return online hosts
+    Scanner-->>Main: List of host IPs
 
-    loop For each host/service
-        API->>Vuln: Generate keywords (service + version)
-        Vuln-->>API: Return CVE matches and summaries
-        API->>Exploit: Fetch related exploit references
-        Exploit-->>API: Return exploit metadata
+    loop For each host
+        Main->>Scanner: PortScan(host, speed, timeout, mode, flags)
+        Scanner->>Nmap: TCP SYN scan (-sS -sV -O ...)
+        Nmap-->>Scanner: Return PortScanner object
+        Main->>Scanner: AnalyseScanResults(nm, host)
+        Scanner-->>Main: PortArray [[ip, port, service, product, version], ...]
+
+        Main->>Vuln: SearchSploits(PortArray, apiKey)
+        Vuln->>Vuln: GenerateKeyword(product, version)
+        Vuln->>NIST: searchCVE(keyword, apiKey)
+        NIST-->>Vuln: List of Vulnerability objects
+        Vuln-->>Main: List of VulnerableSoftware objects
+
+        Main->>Exploit: GetExploitsFromArray(VulnsArray)
+        Exploit-->>Main: Exploits saved to exploits/ directory
+
+        Main->>Web: webvuln(host) - LFI, SQLi, XSS, dirbust
     end
 
-    API->>Report: Aggregate and format results
-    Report-->>AutoPWN: Save JSON, HTML, TXT output
-    AutoPWN-->>User: Display summary and report path
+    Main->>Report: InitializeReport(method, reportObj)
+    Report-->>Main: Email sent or webhook posted
+    Main-->>User: Display summary and save output
 </div>
 
 ---
 
-## Flow diagram (data pipeline view)
+## Sequence diagram (Web UI mode)
+
+<div class="mermaid">
+sequenceDiagram
+    participant Browser
+    participant Flask as web_ui.py (Flask)
+    participant Scheduler as Scheduler Thread
+    participant ScanThread as Scan Thread
+    participant Scanner as scanner.py
+    participant NIST as nist_search.py
+
+    Browser->>Flask: POST /api/scan/start {target, config}
+    Flask->>Flask: Validate target and nmap flags
+    Flask->>ScanThread: _launch_scan(config)
+    Flask-->>Browser: {scan_id}
+
+    Browser->>Flask: GET /api/events (SSE)
+
+    loop Scan execution
+        ScanThread->>Scanner: DiscoverHosts(target)
+        ScanThread->>Scanner: PortScan(host, speed, timeout, mode, flags)
+        ScanThread->>Scanner: AnalyseScanResults(nm, host)
+        ScanThread->>NIST: searchCVE(keyword)
+        ScanThread->>Flask: _broadcast(log event)
+        Flask-->>Browser: SSE: data: {log event}
+    end
+
+    ScanThread->>Flask: _notify(job) - email/webhook
+
+    Note over Scheduler: Runs every 60 seconds
+    Scheduler->>Scheduler: _should_fire(schedule)
+    Scheduler->>ScanThread: _launch_scan(profile config)
+</div>
+
+---
+
+## Flow diagram (data pipeline)
 
 <div class="mermaid">
 flowchart TD
-    A["CLI / User Input"] --> B["autopwn.py - Parse args, config, mode"]
-    B --> C["AutoScanner API (Core Engine)"]
-    C --> D["nmap Scan: Host & Port Discovery"]
-    D --> E["InitHostInfo - Normalize Data"]
-    E --> F["searchvuln - Generate Keywords"]
-    F --> G["nist_search - Query CVE Databases"]
-    G --> H["exploit_fetcher - Retrieve Exploit References"]
-    H --> I["Web Modules (XSS, LFI, SQLi Checks)"]
-    I --> J["Reporter / Exporter (HTML, JSON, TXT)"]
-    J --> K["Webhook / Email / Console Output"]
+    A["CLI args or Web UI POST"] --> B["autopwn.py / web_ui.py"]
+    B --> C["DiscoverHosts - ARP or Ping scan"]
+    C --> D["PortScan - TCP SYN + version detection"]
+    D --> E["AnalyseScanResults - Extract open ports"]
+    E --> F["GenerateKeyword - Build search terms"]
+    F --> G["searchCVE - Query NIST NVD 2.0 API"]
+    G --> H["GetExploitInfo - Query Exploit-DB"]
+    H --> I["webvuln - LFI, SQLi, XSS, Dirbust"]
+    I --> J["Report - Email / Webhook / File Export"]
 
     style A fill:#0a0,stroke:#08f,stroke-width:2px,color:#fff
-    style K fill:#0a0,stroke:#08f,stroke-width:2px,color:#fff
+    style J fill:#0a0,stroke:#08f,stroke-width:2px,color:#fff
 </div>
 
 ---
 
-# 🧩 How the code works — detailed code workflow
-
-This section explains runtime internals, responsibilities of main files, data structures, and extension points.
+# Code Architecture
 
 ## Main components & responsibilities
 
-* **`autopwn.py` (CLI orchestrator)**
+| File | Responsibility |
+|------|---------------|
+| `autopwn.py` | CLI orchestrator. Parses args, runs scan pipeline or starts web server. |
+| `api.py` | `AutoScanner` class. Programmatic scan API for use as a Python module. |
+| `modules/scanner.py` | Nmap wrapper. Host discovery, port scanning, result parsing. |
+| `modules/searchvuln.py` | Converts service/version strings into keywords and searches for CVEs. |
+| `modules/nist_search.py` | Queries NIST NVD 2.0 API, returns `Vulnerability` dataclass objects. |
+| `modules/getexploits.py` | Queries Exploit-DB, downloads PoC exploits for matched CVEs. |
+| `modules/report.py` | Email (`SendEmail`) and webhook (`SendWebhook`) report delivery. |
+| `modules/utils.py` | CLI parsing, `ScanMode`/`ScanType` enums, `is_root()`, output saving. |
+| `modules/web_ui.py` | Flask web dashboard with REST API, SSE streaming, scheduler. |
+| `modules/web/webvuln.py` | Orchestrates web vulnerability checks (LFI, XSS, SQLi, dirbust). |
+| `modules/web/crawler.py` | `crawl()` -- discovers URLs on a target using BeautifulSoup. |
+| `modules/web/lfi.py` | `LFIScanner` -- tests 64 path traversal payloads. |
+| `modules/web/sqli.py` | `SQLIScanner` -- tests for SQL injection via error-based detection. |
+| `modules/web/xss.py` | `XSSScanner` -- tests 21 XSS payloads for reflection. |
+| `modules/web/dirbust.py` | `dirbust()` -- directory enumeration from a wordlist. |
+| `modules/logger.py` | `Logger` class for formatted console logging. |
+| `modules/banners.py` | ASCII art banner and version display. |
+| `modules/random_user_agent.py` | Random User-Agent string generator for HTTP requests. |
 
-  * Parses arguments, loads config, sets global mode (normal/evade/noise), instantiates `AutoScanner`, and prints summaries.
-* **`api.py` (`AutoScanner` class)**
+---
 
-  * Primary engine. Exposes `scan(target)`, result export functions, and lower-level helpers like `InitHostInfo`. Ideal for importing into other Python tools.
-* **`modules/`**
+## Key data structures
 
-  * `searchvuln.py` — convert version/service output into searchable keywords.
-  * `nist_search.py` — query NIST or other CVE sources and return normalized CVE objects.
-  * `exploit_fetcher.py` (or similar) — locate PoC/exploit references and optionally download for manual review.
-  * `web_helpers.py` — directory brute, XSS/LFI/SQLi quick checks and basic web probes.
-  * `utils.py` — logging, root checks, formatting, timing helpers.
+### Vulnerability (nist_search.py)
 
-## Step-by-step runtime sequence (expanded)
-
-1. **Argument parsing & config**
-
-   * CLI flags: target(s), speed, mode, output type, `-y` for auto-confirmation, custom nmap flags, webhook/email config.
-2. **Privilege & env checks**
-
-   * A `utils.is_root()` influences whether aggressive scans (OS detection, version probes) run. Logger setup for pretty CLI output and optionally JSON logging.
-3. **Discovery (nmap)**
-
-   * `AutoScanner` runs an nmap TCP-SYN (or user-specified) scan through `python-nmap` and receives XML/JSON results.
-4. **Normalization**
-
-   * `InitHostInfo` converts raw nmap data into `HostResult` objects: IP, MAC (if present), vendor, OS guess, and `ServiceResult` list.
-5. **Keyword generation**
-
-   * `searchvuln.GenerateKeyword(service.version_string)` produces normalized tokens (e.g., `apache 2.4.49`, `openssl 1.0.2u`) for DB queries.
-6. **CVE lookup**
-
-   * `nist_search.searchCVE(keyword)` fetches matching CVEs and returns structured records (`id`, `summary`, `published_date`, `references`).
-7. **Exploit retrieval**
-
-   * If references/PoCs exist, exploit-fetcher modules attempt to retrieve or link to exploit code and attach metadata to the service entry.
-8. **Web-specific checks**
-
-   * For HTTP services, optional directory brute force and lightweight injection probes are run and attached to results.
-9. **Modes impact**
-
-   * `evade`: slower timing, jitter, stealth nmap flags.
-   * `noise`: generate extra traffic patterns (for detection system testing).
-   * Mode selection adjusts nmap flags, timeouts, and whether aggressive checks run.
-10. **Reporting**
-
-    * Results collated into a `ScanResult` object and serialized: JSON for machine consumption, HTML for human reports (with links to PoC locations), TXT for quick summaries.
-11. **Return & error handling**
-
-    * API returns structured result; CLI prints summary and output location. Recoverable errors are logged; non-recoverable errors exit with clear messages.
-
-## Core data models (conceptual)
-
-* **ScanResult**
-
-```json
-{
-  "targets": [ HostResult, ... ],
-  "summary": { "hosts_scanned": 3, "cves_found": 7 },
-  "meta": { "scan_time": "2025-10-04T..." }
-}
+```python
+@dataclass
+class Vulnerability:
+    title: str
+    CVEID: str
+    description: str
+    severity: str          # CRITICAL, HIGH, MEDIUM, LOW
+    severity_score: float  # CVSS score
+    details_url: str       # Link to NVD page
+    exploitability: float
 ```
 
-* **HostResult**
+### VulnerableSoftware (searchvuln.py)
+
+```python
+@dataclass
+class VulnerableSoftware:
+    title: str        # keyword (e.g. "apache 2.4.49")
+    CVEs: list        # list of CVE ID strings
+```
+
+### ExploitInfo (getexploits.py)
+
+```python
+@dataclass
+class ExploitInfo:
+    Platform: str
+    PublishDate: str
+    Type: str
+    ExploitDBID: str
+    Author: str
+    Metasploit: str
+    Verified: str
+    Link: str
+```
+
+### TargetInfo (scanner.py)
+
+```python
+@dataclass
+class TargetInfo:
+    mac: str
+    vendor: str
+    os: str
+    os_accuracy: str
+    os_type: str
+```
+
+### ScanJob (web_ui.py)
+
+```python
+class ScanJob:
+    id: str              # UUID
+    target: str
+    config: dict         # scan configuration
+    status: str          # running, stopping, completed, error
+    started_at: str      # ISO 8601 UTC timestamp
+    finished_at: str
+    error: str
+    _hosts: dict         # {ip: host_dict}
+```
+
+Host dict structure within ScanJob:
 
 ```json
 {
   "ip": "192.168.1.10",
   "mac": "00:11:22:33:44:55",
-  "vendor": "Cisco",
-  "os": "Linux 4.x (guess)",
-  "services": [ ServiceResult, ... ]
+  "vendor": "Raspberry Pi",
+  "os": "Linux 5.x",
+  "ports": [
+    {"port": 80, "service": "http", "product": "nginx", "version": "1.18.0"}
+  ],
+  "vulns": [
+    {
+      "cve": "CVE-2021-23017",
+      "description": "1-byte memory overwrite in nginx resolver",
+      "severity": "high",
+      "cvss": 7.7,
+      "keyword": "nginx 1.18.0",
+      "port": 80
+    }
+  ],
+  "scan_status": "completed",
+  "scan_id": "abc-123"
 }
 ```
 
-* **ServiceResult**
+### AutoScanner result (api.py)
 
 ```json
 {
-  "port": 80,
-  "proto": "tcp",
-  "name": "http",
-  "version": "Apache httpd 2.4.49",
-  "keywords": ["apache 2.4.49","httpd 2.4"],
-  "cves": [
-    {
-      "id":"CVE-2021-41773",
-      "summary":"Path traversal vulnerability in Apache httpd",
-      "published_date":"2021-10-05",
-      "exploit_links":[ "https://example.com/poc" ]
+  "192.168.1.10": {
+    "ports": {
+      "80": {"state": "open", "name": "http", "product": "nginx", "version": "1.18.0", ...}
+    },
+    "os": {
+      "mac": "00:11:22:33:44:55",
+      "vendor": "Unknown",
+      "os_name": "Linux 5.x",
+      "os_accuracy": "95",
+      "os_type": "general purpose"
+    },
+    "vulns": {
+      "nginx": {
+        "CVE-2021-23017": {
+          "description": "...",
+          "severity": "HIGH",
+          "severity_score": 7.7,
+          "details_url": "https://nvd.nist.gov/vuln/detail/CVE-2021-23017",
+          "exploitability": 3.9
+        }
+      }
     }
-  ]
+  }
 }
 ```
 
 ---
 
-# 🛠️ Installation & Quick Usage
+## Scan modes
 
-Clone & install:
+| Mode | Behavior |
+|------|----------|
+| `normal` | Standard nmap scan with default timing. |
+| `evade` | Requires root. Adds packet fragmentation (`-f`), spoofed source port (`-g 53`), and data padding (`--data-length 10`). User speed and timeout settings are respected. |
+| `noise` | Launches multiple aggressive nmap processes (`-A -T 5`) against targets to generate network traffic. Not available in web UI. |
+
+## Scan types
+
+| Type | Method |
+|------|--------|
+| `arp` | ARP scan (`-sn -PR`). Requires root. Fastest for local network. |
+| `ping` | Ping scan (`-sn`). Works without root. Default fallback. |
+
+---
+
+# Web UI
+
+![Web UI Dashboard](/assets/images/autopwn-suite-scan-running.png)
+
+## Starting the web UI
+
+### Standalone
+
+```bash
+autopwn-suite --web
+autopwn-suite --web --web-host 0.0.0.0 --web-port 3000
+```
+
+### Docker
+
+```bash
+docker compose up -d
+```
+
+The web UI will be available at `http://localhost:8080`.
+
+### Environment variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `AUTOPWN_WEB_HOST` | `0.0.0.0` | Listen address |
+| `AUTOPWN_WEB_PORT` | `8080` | Listen port |
+| `AUTOPWN_DATA_DIR` | `modules/` | Directory for settings, profiles, and schedule JSON files |
+
+---
+
+## REST API Reference
+
+All endpoints accept and return JSON. The web dashboard is a single-page app that consumes this API.
+
+### Scans
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/scans` | List all scan jobs (summary) |
+| `GET` | `/api/scans/<scan_id>` | Get a single scan summary |
+| `GET` | `/api/scans/<scan_id>/download` | Download full scan results as JSON |
+| `POST` | `/api/scan/start` | Start a new scan |
+| `POST` | `/api/scan/stop` | Stop a running scan |
+
+**POST /api/scan/start** body:
+
+```json
+{
+  "target": "192.168.1.0/24",
+  "mode": "normal",
+  "speed": 3,
+  "host_timeout": 240,
+  "scan_type": "arp",
+  "nmap_flags": "-p 1-1000 --version-intensity 3",
+  "scan_ports": true,
+  "scan_vulns": true,
+  "skip_discovery": false,
+  "api_key": ""
+}
+```
+
+**POST /api/scan/stop** body:
+
+```json
+{
+  "scan_id": "uuid-here"
+}
+```
+
+Input validation: targets and nmap flags are checked against shell metacharacter blocklists and regex patterns to prevent command injection.
+
+### Hosts / Log / Events
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/hosts` | All discovered hosts (merged across all scans) |
+| `GET` | `/api/log` | Log history (up to 5000 entries) |
+| `GET` | `/api/events` | SSE event stream for real-time updates |
+
+The SSE stream at `/api/events` pushes log entries as they happen. Each event is a JSON object:
+
+```json
+{
+  "scan_id": "abc-123",
+  "ts": "14:30:45",
+  "level": "info",
+  "msg": "[*] Scanning 192.168.1.1"
+}
+```
+
+Levels: `info`, `warning`, `error`, `success`, `__scan_done__` (internal).
+
+
+### Settings
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/settings` | Get all settings (password masked) |
+| `PUT` | `/api/settings` | Update settings (deep merge) |
+| `POST` | `/api/settings/test_email` | Send a test email |
+| `POST` | `/api/settings/test_webhook` | Send a test webhook ping |
+
+Settings structure:
+
+```json
+{
+  "nist_api_key": "",
+  "email": {
+    "enabled": false,
+    "smtp_host": "",
+    "smtp_port": 587,
+    "username": "",
+    "password": "",
+    "from_addr": "",
+    "to_addr": "",
+    "on_complete": true,
+    "on_error": true,
+    "on_vuln_found": true
+  },
+  "webhook": {
+    "enabled": false,
+    "url": "",
+    "on_complete": true,
+    "on_error": true,
+    "on_vuln_found": true
+  }
+}
+```
+
+### Profiles
+
+![Scan Profiles](/assets/images/autopwn-suite-profiles.png)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/profiles` | List all scan profiles |
+| `POST` | `/api/profiles` | Create a profile |
+| `PUT` | `/api/profiles/<id>` | Update a profile |
+| `DELETE` | `/api/profiles/<id>` | Delete a profile |
+
+**POST /api/profiles** body:
+
+```json
+{
+  "name": "Stealth Scan",
+  "description": "Low and slow evasion profile",
+  "mode": "evade",
+  "speed": 1,
+  "scan_type": "arp",
+  "scan_technique": "-sW",
+  "ports": "1-1000",
+  "version_intensity": 2,
+  "os_detection": true,
+  "nmap_flags": "",
+  "host_timeout": 300,
+  "scan_ports": true,
+  "scan_vulns": true,
+  "skip_discovery": false
+}
+```
+
+### Schedules
+
+![Scheduled Scans](/assets/images/autopwn-suite-schedules.png)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/schedules` | List all scheduled scans |
+| `POST` | `/api/schedules` | Create a schedule (requires `profile_id`) |
+| `PUT` | `/api/schedules/<id>` | Update a schedule |
+| `DELETE` | `/api/schedules/<id>` | Delete a schedule |
+
+**POST /api/schedules** body:
+
+```json
+{
+  "name": "Nightly Scan",
+  "target": "192.168.1.0/24",
+  "profile_id": "uuid-of-profile",
+  "enabled": true,
+  "type": "daily",
+  "time_utc": "02:00",
+  "interval_value": 24,
+  "interval_unit": "hours",
+  "weekday": 0
+}
+```
+
+Schedule types:
+- `interval` -- fires every N minutes/hours/days.
+- `daily` -- fires once per day at `time_utc` (HH:MM).
+- `weekly` -- fires once per week on `weekday` (0=Monday) at `time_utc`.
+
+### Other
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/version` | Returns `{"version": "..."}` |
+| `GET` | `/` | Serves the dashboard (index.html) |
+
+---
+
+## Notifications
+
+### Email
+
+When enabled, scan completion triggers an HTML email containing:
+- Scan metadata (target, scan ID, status, nmap command, timing)
+- Per-host open ports table
+- Per-host vulnerability table with CVE ID, severity, CVSS score, and description
+- AutoPWN Suite icon as an inline CID attachment
+
+### Webhook
+
+When enabled, scan completion POSTs a JSON payload:
+
+```json
+{
+  "event": "scan_completed",
+  "scan_id": "abc-123",
+  "target": "192.168.1.0/24",
+  "host_count": 3,
+  "vuln_count": 12,
+  "started_at": "2025-01-15T14:30:00Z",
+  "finished_at": "2025-01-15T14:35:22Z",
+  "error": "",
+  "timestamp": "2025-01-15T14:35:22Z"
+}
+```
+
+Both email and webhook support conditional triggers: `on_complete`, `on_error`, `on_vuln_found`.
+
+---
+
+# Installation & Quick Usage
+
+## Clone & install
 
 ```bash
 git clone https://github.com/GamehunterKaan/AutoPWN-Suite.git
 cd AutoPWN-Suite
-sudo pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
-Run automatic scan:
+## Run automatic scan
 
 ```bash
 autopwn-suite -y
 ```
 
-Scan a specific target:
+## Scan a specific target
 
 ```bash
 autopwn-suite -t 192.168.1.100
 ```
 
-Set scanning speed
+## Set scanning speed (0-5)
 
 ```bash
 autopwn-suite -s 5
 ```
 
-Choose mode (normal / evade / noise):
+## Choose mode (normal / evade / noise)
 
 ```bash
 autopwn-suite -m evade
 ```
 
-Custom Nmap flags:
+## Custom nmap flags
 
 ```bash
-autopwn-suite -nf "-O -sV"
+autopwn-suite -nf "-p 1-1000 --version-intensity 3"
 ```
 
-Output file and format:
+## Output file and format
 
 ```bash
 autopwn-suite -o result.html -ot html
+autopwn-suite -o result.svg -ot svg
+autopwn-suite -o result.txt -ot txt
 ```
 
-Webhook / Email reporting:
+## Reporting
 
 ```bash
+# Webhook
 autopwn-suite --report webhook --report-webhook <URL>
-autopwn-suite --report email --report-email-to you@example.com ...
+
+# Email
+autopwn-suite --report email --report-email-to you@example.com \
+  --report-email-from sender@example.com \
+  --report-email-server smtp.example.com \
+  --report-email-port 587 \
+  --report-email user@example.com \
+  --report-email-password yourpassword
 ```
 
 Use `-h` or `--help` to see all options.
 
-
-## Use as a module:
+## Use as a module
 
 ```python
 from autopwn_suite.api import AutoScanner
+
 scanner = AutoScanner()
 json_results = scanner.scan("192.168.0.1")
 scanner.save_to_file("autopwn.json")
 ```
 
+## Docker
+
+```bash
+# Web UI via Docker Compose
+docker compose up -d
+
+# CLI via Docker
+docker run -it --net=host gamehunterkaan/autopwn-suite -t 192.168.1.0/24 -y
+```
+
 ---
 
-# 💻 Development and Testing
-
-You can use poetry to install dependencies and run tests.
+# Development and Testing
 
 ## Installing dependencies
+
 ```bash
 poetry install
 ```
 
-## Running Tests
+## Running tests
+
 ```bash
 # Run all tests with coverage
 poetry run test
@@ -314,23 +698,22 @@ poetry run test -m integration
 # Run tests excluding slow tests
 poetry run test -m "not slow"
 ```
+
 ---
 
-# 🤝 Contributing & Developer Notes
+# Contributing & Developer Notes
 
 * Add new feature modules under `modules/`. Import or register them with `api.py` or the CLI where appropriate.
-* To add a new CVE source, implement a normalizer that returns the same CVE object shape used by `nist_search`.
-* Implement new output formats by adding an exporter and registering its flag in `autopwn.py`.
-* For contributors, a `docs/DEVELOPER.md` with the sequence/flow diagrams and minimal plug-in example is recommended.
+* To add a new CVE source, implement a function that returns `Vulnerability` dataclass objects matching the shape used by `nist_search.searchCVE`.
+* Implement new output formats by adding an exporter and registering its flag in `utils.py` `SaveOutput()`.
+* Web UI API endpoints are defined in `_build_app()` inside `modules/web_ui.py`.
 
 I would be glad if you are willing to contribute this project. I am looking forward to merge your pull request unless its something that is not needed or just a personal preference. Also minor changes and bug fixes will not be merged. Please create an issue for those and I will do it myself. [Click here for more info!](https://github.com/GamehunterKaan/AutoPWN-Suite/blob/main/.github/CONTRIBUTING.md)
 
-
-# 📖 Legal
+# Legal
 
 You may not rent or lease, distribute, modify, sell or transfer the software to a third party. AutoPWN Suite is free for distribution, and modification with the condition that credit is provided to the creator and not used for commercial use. You may not use software for illegal or nefarious purposes. No liability for consequential damages to the maximum extent permitted by all applicable laws.
 
-
-# 📧 Support or Contact
+# Support or Contact
 
 Having trouble using this tool? You can [create an issue](https://github.com/GamehunterKaan/AutoPWN-Suite/issues/new/choose) or [create a discussion!](https://github.com/GamehunterKaan/AutoPWN-Suite/discussions)
