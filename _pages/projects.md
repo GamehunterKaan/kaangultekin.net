@@ -52,4 +52,16 @@ hidden: true
       </div>
     </div>
   </div>
+
+  <div class="project-card">
+    <img src="/assets/images/canakkale-hat-sefer.png" alt="Çanakkale Hat & Sefer" class="project-image">
+    <div class="project-overlay">
+      <h3>Çanakkale Hat & Sefer</h3>
+      <p>Mobile-first PWA for Çanakkale's public bus network — live tracking, trip planning, schedules, and push notifications. No app store, no backend, no frameworks.</p>
+      <div class="buttons">
+        <a href="/projects/canakkale-hat-sefer/" class="btn">Learn More</a>
+        <a href="https://github.com/GamehunterKaan/canakkale-hat-sefer/" class="btn btn-secondary">GitHub</a>
+      </div>
+    </div>
+  </div>
 </section>
