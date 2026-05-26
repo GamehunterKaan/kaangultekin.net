@@ -30,9 +30,9 @@ No app store, no native install, no backend server. Everything runs in the brows
 
 ## Seferler — Live Schedule
 
-Automatically fetches the municipality's PDF timetables and parses them into structured schedules. Shows all routes with departure times split by direction, highlights the next upcoming departure, and greys out past times. Separate weekday and weekend tabs.
+Automatically fetches every PDF timetable the municipality publishes and parses each one into structured schedules. A dynamic tab row exposes them all — regular weekday and weekend timetables alongside special-day PDFs the city posts such as Kurban Bayramı, Arefe, and dated one-offs. The tab matching today's date is preselected.
 
-Each route card shows the kentkart route color badge and a **🚌 Canlı** button that launches the live tracker for that line.
+Each tab shows all routes with departure times split by direction. On today's tab the next upcoming departure is highlighted and past times are greyed out; other tabs show their times plain for previewing future or past days. Each route card carries the kentkart route color badge and a **🚌 Canlı** button that launches the live tracker for that line.
 
 ![Schedule tab](/assets/images/17hatsefer-seferler.png)
 
@@ -44,7 +44,7 @@ Tap the map (or use GPS) to pick a start and destination. The planner finds all 
 
 - **Plan ahead** — time offset buttons (+30 dk, +1 sa, +2 sa) plan for departures later in the day
 - **Live bus data** — shows buses approaching your boarding stop right now with stop-level ETAs
-- **Schedule fallback** — when kentkart returns no live data, the next scheduled departure is used instead
+- **Schedule fallback** — when kentkart returns no live data, the next scheduled departure is used instead. On Bayram, Arefe, or any dated special day, the planner consults the matching schedule instead of the regular weekday one
 - **Stop browser** — tap any stop on the map to see which routes serve it and when the next bus comes
 
 ![Trip planner](/assets/images/17hatsefer-planner.png)
@@ -53,7 +53,7 @@ Tap the map (or use GPS) to pick a start and destination. The planner finds all 
 
 ## Live Bus Tracker
 
-Draws the full route polyline on the map and shows all active buses as animated markers. Direction buttons switch between outbound and inbound. Auto-refreshes every 15 seconds.
+Draws the full route polyline on the map and shows all active buses with a route-colored marker, a heading arrow pointing toward the next stop, and the plate number on a colored pill below. Direction buttons switch between outbound and inbound. Auto-refreshes every 15 seconds.
 
 Accessible from the **🚌 Canlı** button on any route card in the Seferler tab, or from a trip detail in the planner.
 
@@ -67,9 +67,28 @@ Subscribe to arrival alerts from any trip detail. Notifications fire at **10, 5,
 
 ---
 
-## Saved Locations
+## Saved Locations & Quick Re-Pick
 
 Bookmark home, work, or any frequent spot. Saved locations appear in a dropdown next to the app title — tap 📍 or 🏁 to instantly set one as your origin or destination without touching the map.
+
+The planner also remembers your last 5 destinations as a chip row, and a **⇄ Yön değiştir** button swaps origin and destination in place when both are set.
+
+---
+
+## Offline Mode
+
+After a one-time tile download from Settings, the app keeps working without internet inside the Çanakkale region:
+
+- App shell, schedule data, and stop data are served from the service worker cache
+- Every OSM tile in the Çanakkale bounding box at zoom 13–16 is precached, so the map renders fully offline
+- Trip planning against the cached schedule, stop browsing, and route exploration all work without network
+- Live kentkart bus positions still require network — a "Çevrimdışı" badge appears in the header when the API is unreachable
+
+---
+
+## Settings
+
+A gear icon in the header opens a settings screen with theme (dark / light / follow system), walking radius and walking speed sliders that drive the ETA math, the offline map download button with live progress, and data-management controls for saved locations, recent destinations, and the onboarding card.
 
 ---
 
@@ -77,11 +96,11 @@ Bookmark home, work, or any frequent spot. Saved locations appear in a dropdown 
 
 ## High-level runtime flow
 
-1. **GitHub Actions** runs daily at midnight Turkey time, downloading both weekday and weekend PDF timetables from the municipality website.
+1. **GitHub Actions** runs hourly, downloading every PDF timetable the municipality publishes — regular weekday and weekend plus any special-day PDFs. The workflow fast-skips when the source hasn't changed since the last run.
 2. A Node.js script parses the PDFs with pdf.js (server-side), extracts departure times per route and direction using column-based coordinate matching, and writes `data/schedule.json`.
 3. A second script fetches all kentkart route, stop, and path data and writes `data/stops.json`, stripping the live bus positions (which change every minute) so the file stays cacheable.
 4. Both JSON files are committed to the repository and served as static assets via GitHub Pages.
-5. **The browser app** fetches these two files on first load and caches them in localStorage until the next midnight.
+5. **The browser app** fetches these two files on first load. A service worker caches the app shell, the JSON data, and OSM tiles so the app keeps working without network.
 6. Live bus positions are fetched directly from the kentkart API by the browser on demand (trip planner, live tracker, stop panel) — no proxy needed.
 7. **The Cloudflare Worker** polls kentkart every minute for subscribed routes and sends Web Push notifications when the target bus is approaching.
 
@@ -98,7 +117,7 @@ sequenceDiagram
 
     User->>Browser: Open app
     Browser->>GHPages: GET data/schedule.json
-    GHPages-->>Browser: Weekday/weekend schedules + route colors
+    GHPages-->>Browser: All published schedules + route colors
     Browser->>GHPages: GET data/stops.json
     GHPages-->>Browser: Routes, stop coords, path polylines
 
@@ -144,16 +163,16 @@ sequenceDiagram
 
 <div class="mermaid">
 flowchart TD
-    A["Schedule: daily at 00:00 Turkey time"] --> B["fetch-schedule.mjs"]
+    A["Hourly cron (fast-skip if unchanged)"] --> B["fetch-schedule.mjs"]
     B --> C["Fetch municipality HTML page"]
-    C --> D["Extract weekday + weekend PDF URLs"]
-    D --> E["Download PDFs via fetch()"]
+    C --> D["Classify every PDF link by date + kind"]
+    D --> E["Download every non-ignored PDF"]
     E --> F["pdf.js: extract text items with X/Y coordinates"]
     F --> G["Group items into Y-band rows per route table"]
     G --> H["Detect KALKIŞ columns by X position"]
     H --> I["Assign times by column (±20pt tolerance)"]
     I --> J["Filter ÖĞRENCI / DOSYA routes"]
-    J --> K["data/schedule.json"]
+    J --> K["data/schedule.json — schedules[] array"]
 
     A --> L["fetch-stops.mjs"]
     L --> M["GET kentkart /nearest/find — route list"]
@@ -179,9 +198,9 @@ flowchart TD
 | Component | Where it runs | Purpose |
 |-----------|--------------|---------|
 | `index.html` | Browser | Entire app — schedule display, trip planner, live map, notifications UI |
-| `sw.js` | Browser (Service Worker) | Web Push subscription, background notification receipt |
-| `data/schedule.json` | GitHub Pages (static) | Parsed timetables + kentkart route colors, rebuilt daily |
-| `data/stops.json` | GitHub Pages (static) | All stops, route paths, kentkart route metadata, rebuilt daily |
+| `sw.js` | Browser (Service Worker) | Web Push delivery + offline cache (app shell, JSON, OSM tiles) |
+| `data/schedule.json` | GitHub Pages (static) | Parsed timetables + kentkart route colors, rebuilt hourly |
+| `data/stops.json` | GitHub Pages (static) | All stops, route paths, kentkart route metadata, rebuilt hourly |
 | `scripts/fetch-schedule.mjs` | GitHub Actions (Node.js) | PDF download + parsing → schedule.json |
 | `scripts/fetch-stops.mjs` | GitHub Actions (Node.js) | Kentkart bulk fetch → stops.json |
 | `worker/index.js` | Cloudflare Workers | Push notification delivery — cron trigger, KV subscription storage |
@@ -206,20 +225,40 @@ The municipality publishes timetables as PDFs with multi-column tables. The pars
 
 ```json
 {
-  "weekday": {
-    "Ç2 ESENLER": {
-      "name": "Ç2 ESENLER ÜNİVERSİTE",
-      "dir0": { "label": "ÜNİVERSİTE KALKIŞ", "times": ["06:30", "07:00", "..."] },
-      "dir1": { "label": "ESENLER KALKIŞ",    "times": ["06:45", "07:15", "..."] }
+  "schedules": [
+    {
+      "id": "weekday",
+      "label": "Hafta İçi",
+      "kind": "weekday",
+      "dates": ["05-20"],
+      "year": null,
+      "effectiveFrom": null,
+      "url": "https://ulasim.canakkale.bel.tr/...",
+      "routes": {
+        "Ç2 ESENLER": {
+          "name": "Ç2 ESENLER ÜNİVERSİTE",
+          "dir0": { "label": "ÜNİVERSİTE KALKIŞ", "times": ["06:30", "07:00", "..."] },
+          "dir1": { "label": "ESENLER KALKIŞ",    "times": ["06:45", "07:15", "..."] }
+        }
+      }
+    },
+    {
+      "id": "arefe-05-26",
+      "label": "26 Mayıs Arefe",
+      "kind": "special",
+      "dates": ["05-26"],
+      "year": null,
+      "effectiveFrom": null,
+      "url": "https://ulasim.canakkale.bel.tr/...",
+      "routes": { "...": "same shape as weekday.routes" }
     }
-  },
-  "weekend": { "...": "same shape" },
+  ],
   "routes": [ { "displayRouteCode": "Ç2", "routeColor": "e63946", "name": "..." } ],
-  "fetchedAt": 1747612800000,
-  "wdUrl": "https://ulasim.canakkale.bel.tr/...",
-  "weUrl": "https://ulasim.canakkale.bel.tr/..."
+  "fetchedAt": 1747612800000
 }
 ```
+
+The `kind` is one of `weekday`, `weekend`, `special`, `effective-weekday`, `effective-weekend`. The browser picks the active schedule from this array based on today's Istanbul-local date: dated specials win over the weekday/weekend fallback, and `effective-*` entries take over from their `effectiveFrom` date onward.
 
 ### stops.json
 
@@ -270,7 +309,8 @@ Results are sorted ascending. The blue highlight in the Seferler tab marks the e
 | PDF parsing | [pdf.js](https://mozilla.github.io/pdf.js/) (Node.js, server-side in CI) |
 | Live bus data | [Kentkart](https://kentkart.com) public API |
 | Push notifications | Web Push (RFC 8030 / 8291 / 8292) via [Cloudflare Workers](https://workers.cloudflare.com/) |
-| CI/CD | GitHub Actions — daily cron, commits JSON to repo |
+| Offline | Service worker — precached app shell, stale-while-revalidate JSON, cache-first OSM tiles |
+| CI/CD | GitHub Actions — hourly cron, commits JSON to repo |
 | Hosting | GitHub Pages |
 | Runtime dependencies | **None** — no frameworks, no build step |
 
@@ -281,7 +321,7 @@ Results are sorted ascending. The blue highlight in the Seferler tab marks the e
 The app runs entirely on free tiers:
 
 - **GitHub Pages** — hosts the static files including the pre-built JSON data
-- **GitHub Actions** — rebuilds schedule and stop data daily (2 minutes of compute)
+- **GitHub Actions** — rebuilds schedule and stop data hourly with fast-skip when nothing has changed (a few minutes of compute per day)
 - **Cloudflare Workers** — push notification delivery (free tier: 100k requests/day, 1k KV ops/day)
 
 To deploy your own instance:
@@ -291,4 +331,4 @@ To deploy your own instance:
 3. Create a Cloudflare Worker, set `VAPID_PUBLIC`, `VAPID_PRIVATE`, `VAPID_SUBJECT` secrets and a KV namespace bound as `BUS_SUBS`
 4. Update `WORKER_URL` in `index.html` to your Worker's URL and `VAPID_PUBLIC_KEY` to match
 
-The GitHub Actions workflow triggers automatically at midnight Turkey time and commits updated JSON files.
+The GitHub Actions workflow triggers automatically every hour and commits updated JSON files when the source has changed.
