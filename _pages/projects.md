@@ -18,6 +18,18 @@ hidden: true
   </div>
 
   <div class="project-card">
+    <img src="/assets/images/canakkale-hat-sefer.png" alt="Çanakkale Hat & Sefer" class="project-image">
+    <div class="project-overlay">
+      <h3>Çanakkale Hat & Sefer</h3>
+      <p>Mobile-first PWA for Çanakkale's public bus network — live tracking, trip planning, schedules, and push notifications. No app store, no backend, no frameworks.</p>
+      <div class="buttons">
+        <a href="/projects/canakkale-hat-sefer/" class="btn">Learn More</a>
+        <a href="https://github.com/GamehunterKaan/canakkale-hat-sefer/" class="btn btn-secondary">GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card">
     <img src="/assets/images/badusb.jpg" alt="BadUSB Attacks" class="project-image">
     <div class="project-overlay">
       <h3>BadUSB Attacks (PoCs)</h3>
@@ -49,18 +61,6 @@ hidden: true
       <div class="buttons">
         <a href="/projects/company-enum/" class="btn">Learn More</a>
         <a href="https://github.com/GamehunterKaan/CompanyEnum" class="btn btn-secondary">GitHub</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="project-card">
-    <img src="/assets/images/canakkale-hat-sefer.png" alt="Çanakkale Hat & Sefer" class="project-image">
-    <div class="project-overlay">
-      <h3>Çanakkale Hat & Sefer</h3>
-      <p>Mobile-first PWA for Çanakkale's public bus network — live tracking, trip planning, schedules, and push notifications. No app store, no backend, no frameworks.</p>
-      <div class="buttons">
-        <a href="/projects/canakkale-hat-sefer/" class="btn">Learn More</a>
-        <a href="https://github.com/GamehunterKaan/canakkale-hat-sefer/" class="btn btn-secondary">GitHub</a>
       </div>
     </div>
   </div>
