@@ -30,7 +30,7 @@ hidden: true
   </div>
 
   <div class="project-card">
-    <img src="/assets/images/pulsemap.jpg" alt="Pulsemap" class="project-image">
+    <img src="/assets/images/pulsemap-default.png" alt="Pulsemap" class="project-image">
     <div class="project-overlay">
       <h3>Pulsemap</h3>
       <p>Real-time network packet flow visualizer with animated comet trails, anomaly detection, and deep traffic analysis.</p>
