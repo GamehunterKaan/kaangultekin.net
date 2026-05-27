@@ -7,7 +7,7 @@ classes: wide
 header:
   title: Pulsemap
   overlay_color: "#0d1117"
-  overlay_image: /assets/images/pulsemap.jpg
+  overlay_image: /assets/images/pulsemap-default.png
   overlay_filter: 0.3
   actions:
     - label: "<i class='fas fa-code'></i> View On GitHub"
