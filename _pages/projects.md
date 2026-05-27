@@ -30,6 +30,18 @@ hidden: true
   </div>
 
   <div class="project-card">
+    <img src="/assets/images/pulsemap.jpg" alt="Pulsemap" class="project-image">
+    <div class="project-overlay">
+      <h3>Pulsemap</h3>
+      <p>Real-time network packet flow visualizer with animated comet trails, anomaly detection, and deep traffic analysis.</p>
+      <div class="buttons">
+        <a href="/projects/pulsemap/" class="btn">Learn More</a>
+        <a href="https://github.com/GamehunterKaan/pulsemap/" class="btn btn-secondary">GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card">
     <img src="/assets/images/badusb.jpg" alt="BadUSB Attacks" class="project-image">
     <div class="project-overlay">
       <h3>BadUSB Attacks (PoCs)</h3>
