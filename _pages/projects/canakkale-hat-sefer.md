@@ -38,16 +38,22 @@ Each tab shows all routes with departure times split by direction. On today's ta
 
 ---
 
-## Rota & Durak — Trip Planner & Live Map
+## Rota & Harita — Trip Planner & Live Map
 
-Tap the map (or use GPS) to pick a start and destination. The planner finds all direct routes connecting them and ranks results by **total ETA** — walk to stop + wait for next bus + ride + walk to destination.
+Tap the map (or use GPS) to pick a start and destination. The planner finds all direct routes **and one-transfer trips** connecting them and ranks results by **total ETA** — walk to stop + wait for next bus + ride + walk to destination.
 
+- **One-transfer trips** — when no single bus connects the two points, or a transfer is faster, the planner assembles a two-leg trip with a walking transfer between lines. A transfer only outranks a direct bus when it genuinely saves time
+- **Real walking distances** — walking segments use Valhalla pedestrian routing, so reachability and ETAs reflect actual on-foot distances that cross roads and follow footpaths, batched through Valhalla's distance-matrix API
+- **Taxi alternative** — each result list ends with a 🚕 taxi card showing driving distance, time, and an approximate fare from the Çanakkale tariff; tap it to draw the cab's route on the map
 - **Plan ahead** — time offset buttons (+30 dk, +1 sa, +2 sa) plan for departures later in the day
 - **Live bus data** — shows buses approaching your boarding stop right now with stop-level ETAs
 - **Schedule fallback** — when kentkart returns no live data, the next scheduled departure is used instead. On Bayram, Arefe, or any dated special day, the planner consults the matching schedule instead of the regular weekday one
 - **Stop browser** — tap any stop on the map to see which routes serve it and when the next bus comes
 
-![Trip planner](/assets/images/17hatsefer-planner.png)
+<p>
+  <img src="/assets/images/17hatsefer-planner.png" width="49%" alt="Trip planner showing route options sorted by ETA">
+  <img src="/assets/images/17hatsefer-one-transfer.png" width="49%" alt="One transfer trip map view">
+</p>
 
 ---
 
@@ -72,6 +78,22 @@ Subscribe to arrival alerts from any trip detail. Notifications fire at **10, 5,
 Bookmark home, work, or any frequent spot. Saved locations appear in a dropdown next to the app title — tap 📍 or 🏁 to instantly set one as your origin or destination without touching the map.
 
 The planner also remembers your last 5 destinations as a chip row, and a **⇄ Yön değiştir** button swaps origin and destination in place when both are set.
+
+---
+
+## Duraklar — Stop Hub
+
+A dedicated tab for finding and managing stops without touching the map.
+
+- **Search** by stop name with Turkish-folded matching, so `kepez` finds *Kepez* and `iskele` finds *İskele* regardless of dotted/dotless I and other Turkish letters
+- **Favoriler** — star any stop to pin it to the top of the list, persisted across reloads
+- **Son açılanlar** — the last 5 stops you opened
+- **Yakındaki duraklar** — the 8 nearest stops when GPS is granted, each row showing its distance, with a graceful fallback when location is denied
+- **Route chips** — every stop row carries the kentkart route color badges that serve it, so you can pick the right stop at a glance
+- **Detail view** — tap a stop to see its routes with live status per direction (*durağa geldi*, *N durak uzaklıkta*, *aktif araç yok*, or a scheduled fallback), sorted with the closest approaching bus first
+- **📍 Haritada göster** drops a labelled pin for that exact stop on the planner map, and **🔗 Paylaş** generates a `?stop=<id>` deep-link via the native share sheet or clipboard so others can open the same stop directly
+
+![Duraklar tab](/assets/images/17hatsefer-stops.png)
 
 ---
 
@@ -113,6 +135,7 @@ sequenceDiagram
     participant User
     participant Browser as Browser (index.html)
     participant GHPages as GitHub Pages
+    participant Valhalla as Valhalla
     participant Kentkart as Kentkart API
 
     User->>Browser: Open app
@@ -122,11 +145,14 @@ sequenceDiagram
     GHPages-->>Browser: Routes, stop coords, path polylines
 
     User->>Browser: Tap map origin + destination
-    Browser->>Browser: Find routes connecting stops
+    Browser->>Valhalla: Pedestrian distance matrix (origin/dest ↔ nearby stops)
+    Valhalla-->>Browser: Real on-foot walk distances
+    Browser->>Browser: Build direct + 1-transfer trips, rank by ETA
     Browser->>Kentkart: GET /pathInfo for each candidate route
     Kentkart-->>Browser: Live bus positions
-    Browser->>Browser: Compute ETA = walk + wait + ride + walk
-    Browser-->>User: Ranked trip list
+    Browser->>Valhalla: Car route (taxi estimate)
+    Valhalla-->>Browser: Distance + time
+    Browser-->>User: Ranked trip list + taxi card
 </div>
 
 ---
@@ -288,16 +314,17 @@ The `kind` is one of `weekday`, `weekend`, `special`, `effective-weekday`, `effe
 ## ETA calculation
 
 ```
-totalETA = walkToStop + waitForBus + rideTime + walkToDestination
+direct   ETA = walkToBoard + wait + ride + walkToDest
+transfer ETA = walkToBoard + wait1 + ride1 + transferWalk + wait2 + ride2 + walkToDest
 
-walkToStop       = haversine(userLat, userLng, stopLat, stopLng) / walkingSpeedMs
-waitForBus       = live: stopsAway × avgSecondsPerStop
-                   schedule: secondsUntilNextDeparture + stopsToBoard × avgSecondsPerStop
-rideTime         = stopsFromBoardToAlight × avgSecondsPerStop
-walkToDestination= haversine(alightLat, alightLng, destLat, destLng) / walkingSpeedMs
+walkToBoard / walkToDest = Valhalla pedestrian distance / walkingSpeed
+wait                     = live: stopsAway × minsPerStop
+                           schedule: minsUntilNextDeparture (evaluated at your arrival at the stop)
+ride                     = stopsFromBoardToAlight × minsPerStop
+transferWalk             = straight-line distance between the two transfer stops / walkingSpeed
 ```
 
-Results are sorted ascending. The blue highlight in the Seferler tab marks the earliest upcoming departure using the same schedule data.
+Walking distances come from Valhalla pedestrian routing — a stop counts as reachable only if its real on-foot distance fits your walking radius, computed in a couple of distance-matrix calls per plan. Direct and transfer trips are ranked together by ETA, with a small penalty on transfers so a change of bus has to genuinely save time to outrank a single bus. When nothing fits the walking radius, the planner falls back to longer-walk options, flagged as such. Each result list also carries a taxi estimate from Valhalla's shortest-path car route priced against the Çanakkale tariff.
 
 ---
 
@@ -306,6 +333,7 @@ Results are sorted ascending. The blue highlight in the Seferler tab marks the e
 | Layer | Library / Service |
 |-------|------------------|
 | Maps | [Leaflet 1.9](https://leafletjs.com/) + OpenStreetMap tiles, canvas renderer |
+| Routing | [Valhalla](https://valhalla.openstreetmap.org/) — pedestrian distance-matrix for trip walks, shortest-path car route for the taxi estimate |
 | PDF parsing | [pdf.js](https://mozilla.github.io/pdf.js/) (Node.js, server-side in CI) |
 | Live bus data | [Kentkart](https://kentkart.com) public API |
 | Push notifications | Web Push (RFC 8030 / 8291 / 8292) via [Cloudflare Workers](https://workers.cloudflare.com/) |
