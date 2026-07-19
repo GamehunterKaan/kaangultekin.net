@@ -5,20 +5,39 @@
 
 // --- Project body: prose + sticky TOC ---------------------------------------
 
+// Project pages read as one cohesive centred document rather than a wide hero
+// over a narrow article. Constraining the shared container keeps the header
+// (copy + screenshot) and the body (prose + TOC) the same width and aligned,
+// so there's neither a dead gap down the middle nor a lopsided right margin.
+// 70rem container ≈ 64rem of content = 46rem prose + gap + 15rem TOC.
+.layout--project .container {
+  max-width: 70rem;
+}
+
+// Flex, not grid: the prose is capped at a readable measure and the TOC is a
+// fixed width, so they sit next to each other instead of a 1fr column
+// stretching between them and leaving a dead gap down the middle.
 .project-body {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: var(--space-7);
 
-  // TOC rides alongside the prose only when there's room for it.
   @media (min-width: 64rem) {
-    grid-template-columns: minmax(0, 1fr) 15rem;
+    flex-direction: row;
+    align-items: flex-start;
   }
 
-  // Keep the reading measure comfortable even though the container is now wide.
+  // Keep the reading measure comfortable even though the container is wide.
+  // min-width: 0 lets code blocks and tables shrink and scroll instead of
+  // forcing the flex row wider.
   .prose {
+    min-width: 0;
     max-width: 46rem;
     width: 100%;
+
+    @media (min-width: 64rem) {
+      flex: 1 1 auto;
+    }
   }
 }
 
@@ -27,7 +46,8 @@
 
   @media (min-width: 64rem) {
     display: block;
-    align-self: start;
+    flex: 0 0 15rem;
+    align-self: flex-start;
     position: sticky;
     top: calc(var(--nav-height) + var(--space-5));
     max-height: calc(100vh - var(--nav-height) - var(--space-7));
