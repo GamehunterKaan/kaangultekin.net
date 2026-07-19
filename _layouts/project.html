@@ -1,0 +1,71 @@
+---
+layout: default
+---
+
+{%- comment -%}
+  Project write-up. Reads the same front matter the old splash layout used
+  (header.overlay_image, header.actions, excerpt) so project pages didn't need
+  their metadata rewritten.
+{%- endcomment -%}
+
+<div class="project-header">
+  <div class="container">
+    <div class="project-header__grid">
+      <div class="project-header__copy">
+        <a class="back-link" href="{{ '/projects/' | relative_url }}">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> All projects
+        </a>
+
+        <h1 class="project-header__title">{{ page.title }}</h1>
+
+        {%- if page.excerpt -%}
+          <p class="project-header__lead">{{ page.excerpt | markdownify | strip_html | strip }}</p>
+        {%- endif -%}
+
+        {%- if page.header.actions -%}
+          <div class="btn-row project-header__actions">
+            {%- for action in page.header.actions -%}
+              <a
+                class="btn {% if forloop.first %}btn--primary{% else %}btn--secondary{% endif %}"
+                href="{{ action.url }}"
+                {%- if action.url contains "://" %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                {{ action.label }}
+              </a>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if page.header.overlay_image -%}
+        <div class="project-header__media">
+          <img
+            src="{{ page.header.overlay_image | relative_url }}"
+            alt="{{ page.title }} screenshot"
+            width="1200" height="750">
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container">
+    <div class="project-body">
+      <article class="prose" id="project-content">
+        {{ content }}
+      </article>
+
+      {%- comment -%}
+        Populated from the rendered headings by site.js, and revealed only once
+        it has entries — so a page with too few headings simply shows nothing
+        rather than an empty rail.
+      {%- endcomment -%}
+      <aside class="toc" id="toc" hidden>
+        <p class="toc__label">On this page</p>
+        <nav aria-label="Table of contents">
+          <ul class="toc__list"></ul>
+        </nav>
+      </aside>
+    </div>
+  </div>
+</div>

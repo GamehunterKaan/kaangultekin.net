@@ -1,0 +1,39 @@
+<header class="nav" id="site-nav">
+  <nav class="nav__inner" aria-label="Primary">
+    <a class="nav__brand" href="{{ '/' | relative_url }}">
+      <span class="nav__brand-mark">~/</span><span>{{ site.author.name }}</span>
+    </a>
+
+    <button
+      class="nav__toggle"
+      id="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="nav-links"
+      aria-label="Toggle navigation">
+      <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <ul class="nav__links" id="nav-links">
+      {%- for item in site.data.navigation.main -%}
+        {%- comment -%}
+          Mark the current page. Compare against the resolved URL so both
+          "/projects/" and "/projects" match.
+        {%- endcomment -%}
+        {%- assign item_url = item.url | relative_url -%}
+        {%- assign is_external = false -%}
+        {%- if item.url contains "://" -%}{%- assign is_external = true -%}{%- endif -%}
+        <li>
+          <a
+            class="nav__link{% if is_external %} nav__link--external{% endif %}"
+            href="{{ item.url }}"
+            {%- if is_external %} target="_blank" rel="noopener noreferrer"{% endif %}
+            {%- if page.url == item.url %} aria-current="page"{% endif %}>
+            {{ item.title }}
+            {%- if is_external %}<i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>{% endif -%}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+</header>
