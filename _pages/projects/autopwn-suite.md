@@ -1,14 +1,14 @@
 ---
 title: AutoPWN Suite
-layout: splash
+layout: project
 permalink: /projects/autopwn-suite/
 use_mermaid: true
-classes: wide
+order: 1
+card_description: >
+  A comprehensive offensive automation framework that streamlines
+  post-exploitation and red-team workflows.
 header:
-  title: AutoPWN Suite
-  overlay_color: "#242730ff"
-  overlay_image: /assets/images/autopwn-suite.jpg
-  overlay_filter: 0.3
+  overlay_image: /assets/images/autopwn-suite.webp
   actions:
     - label: "<i class='fas fa-code'></i> View On GitHub"
       url: "https://github.com/GamehunterKaan/AutoPWN-Suite/"
@@ -16,17 +16,15 @@ excerpt: >
   Automated vulnerability scanning & exploitation framework
 ---
 
-# Introduction
+## Introduction
 
 Security testers, red teams, and bug bounty hunters spend a lot of time chaining reconnaissance, service/version detection, vulnerability lookup and exploit retrieval. **AutoPWN Suite** automates that pipeline -- from discovery to exploit suggestion -- reducing manual overhead and letting you focus on investigation and exploitation logic rather than plumbing.
 
 Built in Python and intended to run cross-platform (Linux/macOS/Windows), AutoPWN Suite is modular, scriptable, and designed so you can either run it as a CLI, use the built-in web dashboard, or import the core scanner as an API inside other tooling.
 
----
+## Features
 
-# Features
-
-## CLI
+### CLI
 * Fully automatic mode (`-y`) for minimal interaction.
 * Automatic network range detection and host discovery (ARP or Ping).
 * Version-based vulnerability detection via NIST NVD CVE lookup.
@@ -39,9 +37,9 @@ Built in Python and intended to run cross-platform (Linux/macOS/Windows), AutoPW
 * Email and webhook reporting on scan completion.
 * Daemon mode for periodic background scanning.
 
-## Web UI
+### Web UI
 
-![Web UI Dashboard](/assets/images/autopwn-suite-dashboard.png)
+![Web UI Dashboard](/assets/images/autopwn-suite-dashboard.webp)
 
 * **Multiple concurrent scans** -- launch and monitor several scans simultaneously from the browser.
 * **Live terminal output** -- real-time nmap commands and results streamed via Server-Sent Events (SSE).
@@ -54,19 +52,15 @@ Built in Python and intended to run cross-platform (Linux/macOS/Windows), AutoPW
 * **Configurable via environment variables** -- `AUTOPWN_WEB_HOST`, `AUTOPWN_WEB_PORT`, `AUTOPWN_DATA_DIR`.
 * **Docker ready** -- single-command deployment via Docker Compose.
 
----
-
-# Demo
+## Demo
 
 AutoPWN Suite has a very user friendly easy to read output.
 
 [![asciicast](https://asciinema.org/a/509345.svg)](https://asciinema.org/a/509345)
 
----
+## How It Works
 
-# How It Works
-
-## High-level runtime flow
+### High-level runtime flow
 
 1. CLI (`autopwn.py`) or Web UI launches a scan.
 2. Host discovery via nmap ARP or Ping scan (`DiscoverHosts`).
@@ -78,9 +72,7 @@ AutoPWN Suite has a very user friendly easy to read output.
 8. Web-specific checks run for HTTP services (`webvuln.py`).
 9. Results compiled and exported (HTML/SVG/TXT), or posted via webhook/email.
 
----
-
-## Sequence diagram (CLI mode)
+### Sequence diagram (CLI mode)
 
 <div class="mermaid">
 sequenceDiagram
@@ -124,9 +116,7 @@ sequenceDiagram
     Main-->>User: Display summary and save output
 </div>
 
----
-
-## Sequence diagram (Web UI mode)
+### Sequence diagram (Web UI mode)
 
 <div class="mermaid">
 sequenceDiagram
@@ -160,9 +150,7 @@ sequenceDiagram
     Scheduler->>ScanThread: _launch_scan(profile config)
 </div>
 
----
-
-## Flow diagram (data pipeline)
+### Flow diagram (data pipeline)
 
 <div class="mermaid">
 flowchart TD
@@ -180,11 +168,9 @@ flowchart TD
     style J fill:#0a0,stroke:#08f,stroke-width:2px,color:#fff
 </div>
 
----
+## Code Architecture
 
-# Code Architecture
-
-## Main components & responsibilities
+### Main components & responsibilities
 
 | File | Responsibility |
 |------|---------------|
@@ -209,9 +195,9 @@ flowchart TD
 
 ---
 
-## Key data structures
+### Key data structures
 
-### Vulnerability (nist_search.py)
+#### Vulnerability (nist_search.py)
 
 ```python
 @dataclass
@@ -225,7 +211,7 @@ class Vulnerability:
     exploitability: float
 ```
 
-### VulnerableSoftware (searchvuln.py)
+#### VulnerableSoftware (searchvuln.py)
 
 ```python
 @dataclass
@@ -234,7 +220,7 @@ class VulnerableSoftware:
     CVEs: list        # list of CVE ID strings
 ```
 
-### ExploitInfo (getexploits.py)
+#### ExploitInfo (getexploits.py)
 
 ```python
 @dataclass
@@ -249,7 +235,7 @@ class ExploitInfo:
     Link: str
 ```
 
-### TargetInfo (scanner.py)
+#### TargetInfo (scanner.py)
 
 ```python
 @dataclass
@@ -261,7 +247,7 @@ class TargetInfo:
     os_type: str
 ```
 
-### ScanJob (web_ui.py)
+#### ScanJob (web_ui.py)
 
 ```python
 class ScanJob:
@@ -301,7 +287,7 @@ Host dict structure within ScanJob:
 }
 ```
 
-### AutoScanner result (api.py)
+#### AutoScanner result (api.py)
 
 ```json
 {
@@ -331,9 +317,7 @@ Host dict structure within ScanJob:
 }
 ```
 
----
-
-## Scan modes
+### Scan modes
 
 | Mode | Behavior |
 |------|----------|
@@ -341,7 +325,7 @@ Host dict structure within ScanJob:
 | `evade` | Requires root. Adds packet fragmentation (`-f`), spoofed source port (`-g 53`), and data padding (`--data-length 10`). User speed and timeout settings are respected. |
 | `noise` | Launches multiple aggressive nmap processes (`-A -T 5`) against targets to generate network traffic. Not available in web UI. |
 
-## Scan types
+### Scan types
 
 | Type | Method |
 |------|--------|
@@ -350,20 +334,20 @@ Host dict structure within ScanJob:
 
 ---
 
-# Web UI
+## Web UI
 
-![Web UI Dashboard](/assets/images/autopwn-suite-scan-running.png)
+![Web UI Dashboard](/assets/images/autopwn-suite-scan-running.webp)
 
-## Starting the web UI
+### Starting the web UI
 
-### Standalone
+#### Standalone
 
 ```bash
 autopwn-suite --web
 autopwn-suite --web --web-host 0.0.0.0 --web-port 3000
 ```
 
-### Docker
+#### Docker
 
 ```bash
 docker compose up -d
@@ -371,7 +355,7 @@ docker compose up -d
 
 The web UI will be available at `http://localhost:8080`.
 
-### Environment variables
+#### Environment variables
 
 | Variable | Default | Description |
 |----------|---------|-------------|
@@ -381,11 +365,11 @@ The web UI will be available at `http://localhost:8080`.
 
 ---
 
-## REST API Reference
+### REST API Reference
 
 All endpoints accept and return JSON. The web dashboard is a single-page app that consumes this API.
 
-### Scans
+#### Scans
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -422,7 +406,7 @@ All endpoints accept and return JSON. The web dashboard is a single-page app tha
 
 Input validation: targets and nmap flags are checked against shell metacharacter blocklists and regex patterns to prevent command injection.
 
-### Hosts / Log / Events
+#### Hosts / Log / Events
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -444,7 +428,7 @@ The SSE stream at `/api/events` pushes log entries as they happen. Each event is
 Levels: `info`, `warning`, `error`, `success`, `__scan_done__` (internal).
 
 
-### Settings
+#### Settings
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -480,9 +464,9 @@ Settings structure:
 }
 ```
 
-### Profiles
+#### Profiles
 
-![Scan Profiles](/assets/images/autopwn-suite-profiles.png)
+![Scan Profiles](/assets/images/autopwn-suite-profiles.webp)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -512,9 +496,9 @@ Settings structure:
 }
 ```
 
-### Schedules
+#### Schedules
 
-![Scheduled Scans](/assets/images/autopwn-suite-schedules.png)
+![Scheduled Scans](/assets/images/autopwn-suite-schedules.webp)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -544,7 +528,7 @@ Schedule types:
 - `daily` -- fires once per day at `time_utc` (HH:MM).
 - `weekly` -- fires once per week on `weekday` (0=Monday) at `time_utc`.
 
-### Other
+#### Other
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -553,9 +537,9 @@ Schedule types:
 
 ---
 
-## Notifications
+### Notifications
 
-### Email
+#### Email
 
 When enabled, scan completion triggers an HTML email containing:
 - Scan metadata (target, scan ID, status, nmap command, timing)
@@ -563,7 +547,7 @@ When enabled, scan completion triggers an HTML email containing:
 - Per-host vulnerability table with CVE ID, severity, CVSS score, and description
 - AutoPWN Suite icon as an inline CID attachment
 
-### Webhook
+#### Webhook
 
 When enabled, scan completion POSTs a JSON payload:
 
@@ -585,9 +569,9 @@ Both email and webhook support conditional triggers: `on_complete`, `on_error`, 
 
 ---
 
-# Installation & Quick Usage
+## Installation & Quick Usage
 
-## Clone & install
+### Clone & install
 
 ```bash
 git clone https://github.com/GamehunterKaan/AutoPWN-Suite.git
@@ -595,37 +579,37 @@ cd AutoPWN-Suite
 pip install -r requirements.txt
 ```
 
-## Run automatic scan
+### Run automatic scan
 
 ```bash
 autopwn-suite -y
 ```
 
-## Scan a specific target
+### Scan a specific target
 
 ```bash
 autopwn-suite -t 192.168.1.100
 ```
 
-## Set scanning speed (0-5)
+### Set scanning speed (0-5)
 
 ```bash
 autopwn-suite -s 5
 ```
 
-## Choose mode (normal / evade / noise)
+### Choose mode (normal / evade / noise)
 
 ```bash
 autopwn-suite -m evade
 ```
 
-## Custom nmap flags
+### Custom nmap flags
 
 ```bash
 autopwn-suite -nf "-p 1-1000 --version-intensity 3"
 ```
 
-## Output file and format
+### Output file and format
 
 ```bash
 autopwn-suite -o result.html -ot html
@@ -633,7 +617,7 @@ autopwn-suite -o result.svg -ot svg
 autopwn-suite -o result.txt -ot txt
 ```
 
-## Reporting
+### Reporting
 
 ```bash
 # Webhook
@@ -650,7 +634,7 @@ autopwn-suite --report email --report-email-to you@example.com \
 
 Use `-h` or `--help` to see all options.
 
-## Use as a module
+### Use as a module
 
 ```python
 from autopwn_suite.api import AutoScanner
@@ -660,7 +644,7 @@ json_results = scanner.scan("192.168.0.1")
 scanner.save_to_file("autopwn.json")
 ```
 
-## Docker
+### Docker
 
 ```bash
 # Web UI via Docker Compose
@@ -670,17 +654,15 @@ docker compose up -d
 docker run -it --net=host gamehunterkaan/autopwn-suite -t 192.168.1.0/24 -y
 ```
 
----
+## Development and Testing
 
-# Development and Testing
-
-## Installing dependencies
+### Installing dependencies
 
 ```bash
 poetry install
 ```
 
-## Running tests
+### Running tests
 
 ```bash
 # Run all tests with coverage
@@ -701,7 +683,7 @@ poetry run test -m "not slow"
 
 ---
 
-# Contributing & Developer Notes
+## Contributing & Developer Notes
 
 * Add new feature modules under `modules/`. Import or register them with `api.py` or the CLI where appropriate.
 * To add a new CVE source, implement a function that returns `Vulnerability` dataclass objects matching the shape used by `nist_search.searchCVE`.
@@ -710,10 +692,10 @@ poetry run test -m "not slow"
 
 I would be glad if you are willing to contribute this project. I am looking forward to merge your pull request unless its something that is not needed or just a personal preference. Also minor changes and bug fixes will not be merged. Please create an issue for those and I will do it myself. [Click here for more info!](https://github.com/GamehunterKaan/AutoPWN-Suite/blob/main/.github/CONTRIBUTING.md)
 
-# Legal
+## Legal
 
 You may not rent or lease, distribute, modify, sell or transfer the software to a third party. AutoPWN Suite is free for distribution, and modification with the condition that credit is provided to the creator and not used for commercial use. You may not use software for illegal or nefarious purposes. No liability for consequential damages to the maximum extent permitted by all applicable laws.
 
-# Support or Contact
+## Support or Contact
 
 Having trouble using this tool? You can [create an issue](https://github.com/GamehunterKaan/AutoPWN-Suite/issues/new/choose) or [create a discussion!](https://github.com/GamehunterKaan/AutoPWN-Suite/discussions)

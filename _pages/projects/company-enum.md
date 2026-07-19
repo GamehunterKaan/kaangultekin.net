@@ -1,14 +1,14 @@
 ---
 title: CompanyEnum
 use_mermaid: true
-layout: splash
+layout: project
 permalink: /projects/company-enum/
-classes: wide
+order: 6
+card_description: >
+  An OSINT tool for gathering and visualizing public company data through an
+  interactive web UI.
 header:
-  title: CompanyEnum
-  overlay_color: "#242730ff"
-  overlay_image: /assets/images/companyenum.jpg
-  overlay_filter: 0.3
+  overlay_image: /assets/images/companyenum.webp
   actions:
     - label: "<i class='fas fa-code'></i> View On GitHub"
       url: "https://github.com/GamehunterKaan/CompanyEnum/"
@@ -16,7 +16,7 @@ excerpt: >
   Comprehensive OSINT tool for company profiling and intelligence gathering.
 ---
 
-# 🚀 Introduction
+## 🚀 Introduction
 
 **CompanyEnum** is a powerful Open Source Intelligence (OSINT) framework designed to aggregate comprehensive data about companies from a multitude of public sources. For security researchers, corporate investigators, and market analysts, it automates the tedious process of data collection, providing a unified view of a company's profile.
 
@@ -24,7 +24,7 @@ From corporate structure and financials to the technology stack and security pos
 
 ---
 
-# 🧠 How It Works
+## 🧠 How It Works
 
 <div class="mermaid">
 flowchart TB
@@ -43,13 +43,13 @@ flowchart TB
 
 ---
 
-# 🎯 What CompanyEnum Aims To Do (High-Level)
+## 🎯 What CompanyEnum Aims To Do (High-Level)
 
 CompanyEnum is built to **automate the aggregation** of open-source, public data about a target organization and present it via a **Web UI dashboard**. Its core goal is to reduce the manual overhead of crawlers, scripts, and spreadsheets into a unified interface for recon, triage, and reporting.
 
 ---
 
-# ⚙️ Features
+## ⚙️ Features
 
 *   **Comprehensive Data Aggregation**: Gathers information from sources like Crunchbase, Craft.co, and various security tools.
 *   **Multi-Faceted Profiling**: Builds a complete picture covering financials, people, technology, and public ratings.
@@ -60,7 +60,7 @@ CompanyEnum is built to **automate the aggregation** of open-source, public data
 
 ---
 
-# 🖼️ Example Output
+## 🖼️ Example Output
 
 Here is a sample of the data CompanyEnum provides in its HTML report. This demonstrates the breadth of information collected for a target company like "Microsoft."
 
@@ -68,13 +68,13 @@ Here is a sample of the data CompanyEnum provides in its HTML report. This demon
 
 ---
 
-# 🧠 Data Explained
+## 🧠 Data Explained
 
 CompanyEnum organizes the collected intelligence into several key sections. Here’s a breakdown of what each section contains, based on the example output.
 
 ---
 
-## Summary
+### Summary
 
 This section provides a high-level overview of the company.
 
@@ -95,7 +95,7 @@ This section provides a high-level overview of the company.
 <strong>Competitors:</strong> Apple, Google, Amazon, Oracle, Sony
 </pre>
 
-## Financials
+### Financials
 
 This section dives into the financial and investment activities of the company.
 
@@ -112,7 +112,7 @@ This section dives into the financial and investment activities of the company.
 <strong>Acquisitions Description:</strong> LinkedIn, GitHub, Activision Blizzard
 </pre>
 
-## People
+### People
 
 Gain insights into the key individuals associated with the company.
 
@@ -127,7 +127,7 @@ Bill Gates, Paul Allen
 <strong>Brad Smith:</strong> Vice Chair & President
 </pre>
 
-## Technology
+### Technology
 
 Understand the company's technology footprint and security posture.
 
@@ -143,7 +143,7 @@ Understand the company's technology footprint and security posture.
 <strong>SSL Issuer:</strong> DigiCert Inc
 </pre>
 
-## Ratings
+### Ratings
 
 This section provides a view of the company's public perception from both customers and employees.
 
@@ -152,7 +152,7 @@ This section provides a view of the company's public perception from both custom
 
 ---
 
-## 🛡️ Defensive Use Cases
+### 🛡️ Defensive Use Cases
 
 While CompanyEnum is an OSINT tool, defenders can use it to:
 

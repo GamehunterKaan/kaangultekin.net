@@ -1,14 +1,14 @@
 ---
 title: Çanakkale Hat & Sefer
-layout: splash
+layout: project
 permalink: /projects/canakkale-hat-sefer/
 use_mermaid: true
-classes: wide
+order: 2
+card_description: >
+  Mobile-first PWA for Çanakkale's public bus network — live tracking, trip
+  planning, schedules, and push notifications. No app store, no backend.
 header:
-  title: Çanakkale Hat & Sefer
-  overlay_color: "#1a3a5cff"
-  overlay_image: /assets/images/canakkale-hat-sefer.png
-  overlay_filter: 0.35
+  overlay_image: /assets/images/canakkale-hat-sefer.webp
   actions:
     - label: "<i class='fas fa-code'></i> View On GitHub"
       url: "https://github.com/GamehunterKaan/canakkale-hat-sefer/"
@@ -16,7 +16,7 @@ excerpt: >
   Mobile-first PWA for Çanakkale's public bus network — live tracking, trip planning, schedules, and push notifications. No app store, no backend, no frameworks.
 ---
 
-# Introduction
+## Introduction
 
 Çanakkale's municipal bus system has no official app. Passengers rely on a seasonal PDF timetable buried on the municipality website, with no way to know where a bus actually is, which bus to take between two points, or when to expect the next one.
 
@@ -26,19 +26,19 @@ No app store, no native install, no backend server. Everything runs in the brows
 
 ---
 
-# Features
+## Features
 
-## Seferler — Live Schedule
+### Seferler — Live Schedule
 
 Automatically fetches every PDF timetable the municipality publishes and parses each one into structured schedules. A dynamic tab row exposes them all — regular weekday and weekend timetables alongside special-day PDFs the city posts such as Kurban Bayramı, Arefe, and dated one-offs. The tab matching today's date is preselected.
 
 Each tab shows all routes with departure times split by direction. On today's tab the next upcoming departure is highlighted and past times are greyed out; other tabs show their times plain for previewing future or past days. Each route card carries the kentkart route color badge and a **🚌 Canlı** button that launches the live tracker for that line.
 
-![Schedule tab](/assets/images/17hatsefer-seferler.png)
+![Schedule tab](/assets/images/17hatsefer-seferler.webp)
 
 ---
 
-## Rota & Harita — Trip Planner & Live Map
+### Rota & Harita — Trip Planner & Live Map
 
 Tap the map (or use GPS) to pick a start and destination. The planner finds all direct routes **and one-transfer trips** connecting them and ranks results by **total ETA** — walk to stop + wait for next bus + ride + walk to destination.
 
@@ -51,29 +51,29 @@ Tap the map (or use GPS) to pick a start and destination. The planner finds all 
 - **Stop browser** — tap any stop on the map to see which routes serve it and when the next bus comes
 
 <p>
-  <img src="/assets/images/17hatsefer-planner.png" width="49%" alt="Trip planner showing route options sorted by ETA">
-  <img src="/assets/images/17hatsefer-one-transfer.png" width="49%" alt="One transfer trip map view">
+  <img src="/assets/images/17hatsefer-planner.webp" width="49%" alt="Trip planner showing route options sorted by ETA">
+  <img src="/assets/images/17hatsefer-one-transfer.webp" width="49%" alt="One transfer trip map view">
 </p>
 
 ---
 
-## Live Bus Tracker
+### Live Bus Tracker
 
 Draws the full route polyline on the map and shows all active buses with a route-colored marker, a heading arrow pointing toward the next stop, and the plate number on a colored pill below. Direction buttons switch between outbound and inbound. Auto-refreshes every 15 seconds.
 
 Accessible from the **🚌 Canlı** button on any route card in the Seferler tab, or from a trip detail in the planner.
 
-![Live tracker](/assets/images/17hatsefer-tracker.png)
+![Live tracker](/assets/images/17hatsefer-tracker.webp)
 
 ---
 
-## Push Notifications
+### Push Notifications
 
 Subscribe to arrival alerts from any trip detail. Notifications fire at **10, 5, and 2 stops away** — delivered through Google FCM / Apple APNs by a Cloudflare Worker, so they arrive even when the browser tab is backgrounded or the screen is off.
 
 ---
 
-## Saved Locations & Quick Re-Pick
+### Saved Locations & Quick Re-Pick
 
 Bookmark home, work, or any frequent spot. Saved locations appear in a dropdown next to the app title — tap 📍 or 🏁 to instantly set one as your origin or destination without touching the map.
 
@@ -81,7 +81,7 @@ The planner also remembers your last 5 destinations as a chip row, and a **⇄ Y
 
 ---
 
-## Duraklar — Stop Hub
+### Duraklar — Stop Hub
 
 A dedicated tab for finding and managing stops without touching the map.
 
@@ -93,11 +93,11 @@ A dedicated tab for finding and managing stops without touching the map.
 - **Detail view** — tap a stop to see its routes with live status per direction (*durağa geldi*, *N durak uzaklıkta*, *aktif araç yok*, or a scheduled fallback), sorted with the closest approaching bus first
 - **📍 Haritada göster** drops a labelled pin for that exact stop on the planner map, and **🔗 Paylaş** generates a `?stop=<id>` deep-link via the native share sheet or clipboard so others can open the same stop directly
 
-![Duraklar tab](/assets/images/17hatsefer-stops.png)
+![Duraklar tab](/assets/images/17hatsefer-stops.webp)
 
 ---
 
-## Offline Mode
+### Offline Mode
 
 After a one-time tile download from Settings, the app keeps working without internet inside the Çanakkale region:
 
@@ -108,15 +108,15 @@ After a one-time tile download from Settings, the app keeps working without inte
 
 ---
 
-## Settings
+### Settings
 
 A gear icon in the header opens a settings screen with theme (dark / light / follow system), walking radius and walking speed sliders that drive the ETA math, the offline map download button with live progress, and data-management controls for saved locations, recent destinations, and the onboarding card.
 
 ---
 
-# How It Works
+## How It Works
 
-## High-level runtime flow
+### High-level runtime flow
 
 1. **GitHub Actions** runs hourly, downloading every PDF timetable the municipality publishes — regular weekday and weekend plus any special-day PDFs. The workflow fast-skips when the source hasn't changed since the last run.
 2. A Node.js script parses the PDFs with pdf.js (server-side), extracts departure times per route and direction using column-based coordinate matching, and writes `data/schedule.json`.
@@ -128,7 +128,7 @@ A gear icon in the header opens a settings screen with theme (dark / light / fol
 
 ---
 
-## Sequence diagram — trip planning
+### Sequence diagram — trip planning
 
 <div class="mermaid">
 sequenceDiagram
@@ -157,7 +157,7 @@ sequenceDiagram
 
 ---
 
-## Sequence diagram — push notifications
+### Sequence diagram — push notifications
 
 <div class="mermaid">
 sequenceDiagram
@@ -185,7 +185,7 @@ sequenceDiagram
 
 ---
 
-## Flow diagram — data pipeline (GitHub Actions)
+### Flow diagram — data pipeline (GitHub Actions)
 
 <div class="mermaid">
 flowchart TD
@@ -217,9 +217,9 @@ flowchart TD
 
 ---
 
-# Architecture
+## Architecture
 
-## Component overview
+### Component overview
 
 | Component | Where it runs | Purpose |
 |-----------|--------------|---------|
@@ -233,7 +233,7 @@ flowchart TD
 
 ---
 
-## PDF parsing detail
+### PDF parsing detail
 
 The municipality publishes timetables as PDFs with multi-column tables. The parser uses pdf.js in Node to extract all text items with their X/Y pixel coordinates, then:
 
@@ -245,9 +245,9 @@ The municipality publishes timetables as PDFs with multi-column tables. The pars
 
 ---
 
-## Key data structures
+### Key data structures
 
-### schedule.json
+#### schedule.json
 
 ```json
 {
@@ -286,7 +286,7 @@ The municipality publishes timetables as PDFs with multi-column tables. The pars
 
 The `kind` is one of `weekday`, `weekend`, `special`, `effective-weekday`, `effective-weekend`. The browser picks the active schedule from this array based on today's Istanbul-local date: dated specials win over the weekday/weekend fallback, and `effective-*` entries take over from their `effectiveFrom` date onward.
 
-### stops.json
+#### stops.json
 
 ```json
 {
@@ -311,7 +311,7 @@ The `kind` is one of `weekday`, `weekend`, `special`, `effective-weekday`, `effe
 
 ---
 
-## ETA calculation
+### ETA calculation
 
 ```
 direct   ETA = walkToBoard + wait + ride + walkToDest
@@ -328,7 +328,7 @@ Walking distances come from Valhalla pedestrian routing — a stop counts as rea
 
 ---
 
-# Tech
+## Tech
 
 | Layer | Library / Service |
 |-------|------------------|
@@ -344,7 +344,7 @@ Walking distances come from Valhalla pedestrian routing — a stop counts as rea
 
 ---
 
-# Deployment
+## Deployment
 
 The app runs entirely on free tiers:
 

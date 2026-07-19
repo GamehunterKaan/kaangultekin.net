@@ -1,14 +1,14 @@
 ---
 title: Pulsemap
-layout: splash
+layout: project
 permalink: /projects/pulsemap/
 use_mermaid: true
-classes: wide
+order: 3
+card_description: >
+  Real-time network packet flow visualizer with animated comet trails, anomaly
+  detection, and deep traffic analysis.
 header:
-  title: Pulsemap
-  overlay_color: "#0d1117"
-  overlay_image: /assets/images/pulsemap-default.png
-  overlay_filter: 0.3
+  overlay_image: /assets/images/pulsemap-default.webp
   actions:
     - label: "<i class='fas fa-code'></i> View On GitHub"
       url: "https://github.com/GamehunterKaan/pulsemap/"
@@ -16,7 +16,7 @@ excerpt: >
   Real-time network packet flow visualizer with animated comet trails, anomaly detection, and deep traffic analysis
 ---
 
-# Introduction
+## Introduction
 
 Network traffic is invisible by default — hundreds of connections happening simultaneously, anomalies buried in noise, and no intuitive way to understand what is talking to what. **Pulsemap** makes it visible.
 
@@ -24,56 +24,54 @@ Packets become animated dots traveling along the edges of a live force-directed 
 
 Built on Flask + SocketIO (threading mode), Scapy, and D3.js v7. Supports both `.pcap` file replay and live interface capture.
 
-![Pulsemap default view](/assets/images/pulsemap-default.png)
+![Pulsemap default view](/assets/images/pulsemap-default.webp)
 
----
+## Features
 
-# Features
-
-## PCAP Replay
+### PCAP Replay
 
 * Drag & drop, browse, or paste an absolute path to load any `.pcap` or `.pcapng` file.
 * Autoplay begins immediately. Pause, seek, and step one packet at a time with keyboard shortcuts.
 * **Sparkline** above the timeline shows packets-per-second shape across the entire capture — spot bursts before you seek into them.
 * Speed slider from 0.5× to 10× with real-time adjustment.
 
-## Live Capture
+### Live Capture
 
 * Interface dropdown auto-populated on connect with friendly adapter names.
 * One-click start/stop. Works with any Scapy-compatible interface.
 * On Windows, requires Npcap installed in WinPcap-compatible mode.
 
-## Animated Force Graph
+### Animated Force Graph
 
 * Nodes represent IP addresses, sized by traffic volume.
 * Edges carry animated comet-trail dots in protocol colors as packets flow.
 * Edge stroke width and opacity scale with cumulative byte volume — the heaviest flows are immediately obvious.
 * Force simulation with adjustable repulsion, drag, and link distance. Fit-to-screen with one key.
 
-## Flows (Connection Table)
+### Flows (Connection Table)
 
-![Flows tab](/assets/images/pulsemap-flows.png)
+![Flows tab](/assets/images/pulsemap-flows.webp)
 
 * Full sortable table of all observed flows: source, destination, protocols, packet count, bytes, first seen, last seen, duration.
 * Click any row to open the inspector for that IP.
 * **Export PCAP** — downloads a `.pcap` filtered to the current IP/protocol filter and scrubber time window.
 
-## Extracted Files
+### Extracted Files
 
-![Files tab](/assets/images/pulsemap-files.png)
+![Files tab](/assets/images/pulsemap-files.webp)
 
 * HTTP objects (images, documents, binaries) are automatically extracted from pcap TCP streams in the background.
 * The **📄 Files** button appears once extraction is complete, badged with the object count.
 * Click any file to download it directly from the captured data.
 
-## TCP Stream Viewer
+### TCP Stream Viewer
 
 * Click any TCP edge in the graph or a row in the Flows table to open the raw stream.
 * Direction toggle: A→B / B→A / interleaved.
 * Format toggle: Text (UTF-8) / Hex dump.
 * Large streams load in 64 KB chunks with on-scroll fetching.
 
-## Anomaly Detection
+### Anomaly Detection
 
 Pulsemap continuously watches for four threat patterns in real time:
 
@@ -84,30 +82,28 @@ Pulsemap continuously watches for four threat patterns in real time:
 
 When a rule fires, the offending node pulses red and the event is logged in the **🔔 Alerts** panel with timestamp, rule type, and IP. Click any alert to open the inspector.
 
-![Alerts panel and device inspector](/assets/images/pulsemap-alerts-inspector.png)
+![Alerts panel and device inspector](/assets/images/pulsemap-alerts-inspector.webp)
 
-## GeoIP Map
+### GeoIP Map
 
 * Toggle a world map panel rendered via D3 geoNaturalEarth1 + TopoJSON.
 * External IPs are resolved via `geoip2fast` (bundled database, no account required) and plotted as dots.
 * Dots fade over time. No performance cost when the panel is closed.
 
-## Inspector
+### Inspector
 
 * Click any node to open a side panel showing: IP, hostname (DNS), GeoIP location, packets sent/received, total bytes, protocol breakdown color bar, and peer list.
 * **Pin** the node in place so the simulation no longer moves it. Unpin with the same button.
 
-## Filtering
+### Filtering
 
 * Type any IP fragment to fade non-matching nodes and animations.
 * Protocol dropdown: All / TCP / UDP / ICMP / OTHER.
 * Filters apply live to the graph, stats overlay, and flying dots.
 
----
+## How It Works
 
-# How It Works
-
-## High-level runtime flow
+### High-level runtime flow
 
 1. Browser connects via SocketIO. Server emits available interfaces and restores any in-progress state.
 2. **PCAP path:** `parser.py` streams the file with Scapy, builds packet records and PPS buckets, returns summary. `extractor.py` reassembles TCP streams and extracts HTTP objects in a background thread. DNS and GeoIP workers resolve IPs asynchronously.
@@ -117,7 +113,7 @@ When a rule fires, the offending node pulses red and the event is logged in the 
 
 ---
 
-## Sequence diagram — PCAP replay
+### Sequence diagram — PCAP replay
 
 <div class="mermaid">
 sequenceDiagram
@@ -151,9 +147,8 @@ sequenceDiagram
     Flask-->>User: playback_ended
 </div>
 
----
 
-## Sequence diagram — Live capture
+### Sequence diagram — Live capture
 
 <div class="mermaid">
 sequenceDiagram
@@ -181,9 +176,7 @@ sequenceDiagram
     Flask-->>User: live_stopped
 </div>
 
----
-
-## Flow diagram — data pipeline
+### Flow diagram — data pipeline
 
 <div class="mermaid">
 flowchart TD
@@ -205,11 +198,9 @@ flowchart TD
     style F fill:#7f1d1d,stroke:#ef4444,stroke-width:2px,color:#fff
 </div>
 
----
+## Code Architecture
 
-# Code Architecture
-
-## Components & responsibilities
+### Components & responsibilities
 
 | File | Responsibility |
 |------|---------------|
@@ -221,9 +212,9 @@ flowchart TD
 
 ---
 
-## Key data structures
+### Key data structures
 
-### Packet record (`parser.py`)
+#### Packet record (`parser.py`)
 
 ```python
 {
@@ -238,7 +229,7 @@ flowchart TD
 }
 ```
 
-### Link record (frontend `links` Map)
+#### Link record (frontend `links` Map)
 
 ```javascript
 {
@@ -252,7 +243,7 @@ flowchart TD
 }
 ```
 
-### Talker record (frontend `talkers` Map)
+#### Talker record (frontend `talkers` Map)
 
 ```javascript
 {
@@ -263,7 +254,7 @@ flowchart TD
 }
 ```
 
-### Alert entry (frontend `alerts` array)
+#### Alert entry (frontend `alerts` array)
 
 ```javascript
 {
@@ -276,9 +267,9 @@ flowchart TD
 
 ---
 
-## Socket events reference
+### Socket events reference
 
-### Server → Browser
+#### Server → Browser
 
 | Event | Payload | Description |
 |-------|---------|-------------|
@@ -297,7 +288,7 @@ flowchart TD
 | `interfaces` | `[{id, label}]` | Available network interfaces |
 | `error` | `{message}` | Error (e.g. Npcap not installed) |
 
-### Browser → Server
+#### Browser → Server
 
 | Event | Payload | Description |
 |-------|---------|-------------|
@@ -311,7 +302,7 @@ flowchart TD
 
 ---
 
-## Anomaly detection
+### Anomaly detection
 
 All detection runs client-side inside `trackPacket()` using rolling time windows — no server round-trip required.
 
@@ -326,7 +317,7 @@ Each rule throttles per-(rule, ip) for 5 s to prevent alert storms. Cap of 200 a
 
 ---
 
-## Protocol colors
+### Protocol colors
 
 | Color | Protocol |
 |-------|----------|
@@ -337,9 +328,9 @@ Each rule throttles per-(rule, ip) for 5 s to prevent alert storms. Cap of 200 a
 
 ---
 
-# Installation & Usage
+## Installation & Usage
 
-## Install
+### Install
 
 ```bash
 git clone https://github.com/GamehunterKaan/pulsemap.git
@@ -347,7 +338,7 @@ cd pulsemap
 pip install -r requirements.txt
 ```
 
-## Run
+### Run
 
 ```bash
 python main.py              # default port 5000
@@ -356,12 +347,12 @@ python main.py --port 8080  # custom port
 
 The browser opens automatically. If it doesn't, navigate to **http://127.0.0.1:5000**.
 
-## Windows notes
+### Windows notes
 
 * Live capture requires [Npcap](https://npcap.com/). During install, check **"Install Npcap in WinPcap API-compatible Mode"**.
 * Run the terminal as **Administrator** if you get permission errors on live capture.
 
-## Keyboard shortcuts
+### Keyboard shortcuts
 
 | Key | Action |
 |-----|--------|
@@ -375,6 +366,6 @@ The browser opens automatically. If it doesn't, navigate to **http://127.0.0.1:5
 
 ---
 
-## Sample pcap files
+### Sample pcap files
 
 [Wireshark sample captures](https://wiki.wireshark.org/SampleCaptures) are a good source of test data covering HTTP, DNS, ICMP, and various anomaly patterns.

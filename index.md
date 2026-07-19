@@ -1,201 +1,345 @@
 ---
-layout: splash
+layout: home
 permalink: /
-hidden: true
-header:
-  overlay_color: "#242730ff"
-  overlay_image: /assets/images/splash-banner.png
-  overlay_filter: 0.3
-  actions:
-    - label: "<i class='fas fa-code'></i> View Projects"
-      url: "/projects/"
-excerpt: >
-  Software Engineer & Cybersecurity Researcher - From full-stack tooling to offensive security: building reliable, usable security tools and finding real-world bugs.
-feature_row:
-  - image_path: /assets/images/trophy-achievements.png
-    alt: "achievements"
-    title: "Recognition & Achievements"
-    excerpt: "Ranked #1 in Turkey and Top 11 worldwide on TryHackMe. Featured on Discord’s Security Hall of Fame for responsible disclosure. Creator of AutoPWN-Suite, a widely recognized open-source offensive security framework."
-    url: "/aboutme/"
-    btn_class: "btn--primary"
-    btn_label: "Learn more"
-  - image_path: /assets/images/hands-on-security.png
-    alt: "hands-on"
-    title: "Hands-On Security"
-    excerpt: "Exploring, automating, securing. I work across USB exploits, network scanning, and post-exploitation, turning creative ideas into practical tools and repeatable tests."
-    url: "/projects/"
-    btn_class: "btn--primary"
-    btn_label: "Learn more"
-  - image_path: /assets/images/pentest-mag.png
-    alt: "Pentest Mag"
-    title: "Featured in Pentest Mag"
-    excerpt: "Invited by Pentest Magazine to write about my project, AutoPWN-Suite, showcasing its impact on the security community."
-    url: "https://pentestmag.com/download/pentest-open-source-pentesting-toolkit/"
-    btn_class: "btn--primary"
-    btn_label: "Read Article"
+description: >
+  Kaan Gültekin — Software Engineer & Cybersecurity Researcher. Offensive security
+  tooling, automation-first engineering, and open-source projects.
 ---
 
-{% include feature_row %}
-<section id="skills" class="fade-in glass">
-  <h2 class="glow-text">🧠 Skills &amp; Technologies</h2>
-  <div class="skills-category-container">
-    <!-- Programming & Scripting -->
-    <div class="skills-category fade-in">
-      <h3>Programming &amp; Scripting</h3>
-      <div class="skills-grid">
-        <a href="https://www.python.org" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python"/>
-          <span>Python</span>
+<section class="hero">
+  <div class="container">
+    <div class="hero__inner">
+      <span class="badge badge--accent hero__eyebrow">
+        <span class="status-dot" aria-hidden="true"></span>
+        Available for collaboration
+      </span>
+
+      <h1 class="hero__title">
+        Software engineer &amp;<br>
+        <span class="hero__title-accent">cybersecurity researcher</span>
+      </h1>
+
+      <p class="hero__lead">
+        I build offensive security tooling and automation that people actually use —
+        from network scanning and post-exploitation frameworks to real-world
+        vulnerability research.
+      </p>
+
+      <div class="btn-row hero__actions">
+        <a class="btn btn--primary" href="{{ '/projects/' | relative_url }}">
+          View projects
         </a>
-        <a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash"/>
-          <span>Bash</span>
-        </a>
-        <a href="https://apps.microsoft.com/detail/9mz1snwt0n5d" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://raw.githubusercontent.com/actions/starter-workflows/refs/heads/main/icons/powershell.svg" alt="powershell"/>
-          <span>PowerShell</span>
-        </a>
-        <a href="https://www.w3schools.com/cs/" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp"/>
-          <span>C#</span>
-        </a>
-          <a href="https://www.arduino.cc/" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://cdn.worldvectorlogo.com/logos/arduino-1.svg" alt="arduino"/>
-          <span>Arduino</span>
-        </a>
-        <a href="https://isocpp.org/" target="_blank" rel="noreferrer" class="skill-item">
-          <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="cpp"/>
-          <span>C++</span>
-        </a>
-      </div>
-    </div>
-    <!-- Frameworks & Tools -->
-    <div class="skills-category fade-in">
-      <h3>Frameworks &amp; Tools</h3>
-      <div class="skills-grid">
-        <a href="https://www.docker.com/" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker"/>
-          <span>Docker</span>
-        </a>
-        <a href="https://git-scm.com/" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git"/>
-          <span>Git</span>
-        </a>
-        <a href="https://www.linux.org/" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux"/>
-          <span>Linux</span>
-        </a>
-        <a href="https://jekyllrb.com/" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://www.vectorlogo.zone/logos/jekyllrb/jekyllrb-icon.svg" alt="jekyll"/>
-          <span>Jekyll</span>
-        </a>
-      </div>
-    </div>
-    <!-- Automation & Integration -->
-    <div class="skills-category fade-in">
-      <h3>Automation &amp; Integration</h3>
-      <div class="skills-grid">
-        <a href="https://github.com/puppeteer/puppeteer" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://www.vectorlogo.zone/logos/pptrdev/pptrdev-official.svg" alt="puppeteer"/>
-          <span>Puppeteer</span>
-        </a>
-        <a href="https://www.selenium.dev" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://raw.githubusercontent.com/detain/svg-logos/780f25886640cef088af994181646db2f6b1a3f8/svg/selenium-logo.svg" alt="selenium"/>
-          <span>Selenium</span>
-        </a>
-        <a href="https://ifttt.com/" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://www.vectorlogo.zone/logos/ifttt/ifttt-ar21.svg" alt="ifttt"/>
-          <span>IFTTT</span>
-        </a>
-        <a href="https://zapier.com" target="_blank" rel="noreferrer" class="skill-item hover-glow">
-          <img src="https://www.vectorlogo.zone/logos/zapier/zapier-icon.svg" alt="zapier"/>
-          <span>Zapier</span>
+        <a class="btn btn--secondary" href="{{ '/aboutme/' | relative_url }}">
+          About me
         </a>
       </div>
     </div>
   </div>
 </section>
 
-## 🔬 Current Research & Interests
+<section class="section--tight">
+  <div class="container">
+    <ul class="fact-row reveal">
+      <li>
+        <a class="fact" href="https://tryhackme.com/p/TheKG" target="_blank" rel="noopener noreferrer">
+          <span class="fact__icon"><i class="fas fa-ranking-star" aria-hidden="true"></i></span>
+          <span>
+            <strong class="fact__claim">
+              #1 in Turkey, top 11 worldwide
+              <i class="fas fa-arrow-up-right-from-square fact__arrow" aria-hidden="true"></i>
+            </strong>
+            <span class="fact__detail">was placed in TryHackMe monthly global ranking</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="fact" href="https://web.archive.org/web/20221107033704/https://discord.com/security" target="_blank" rel="noopener noreferrer">
+          <span class="fact__icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></span>
+          <span>
+            <strong class="fact__claim">
+              Discord Security Hall of Fame
+              <i class="fas fa-arrow-up-right-from-square fact__arrow" aria-hidden="true"></i>
+            </strong>
+            <span class="fact__detail">Responsible disclosure</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="fact" href="https://pentestmag.com/download/pentest-open-source-pentesting-toolkit/" target="_blank" rel="noopener noreferrer">
+          <span class="fact__icon"><i class="fas fa-newspaper" aria-hidden="true"></i></span>
+          <span>
+            <strong class="fact__claim">
+              Published in Pentest Magazine
+              <i class="fas fa-arrow-up-right-from-square fact__arrow" aria-hidden="true"></i>
+            </strong>
+            <span class="fact__detail">Invited contributor</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="fact" href="https://github.com/GamehunterKaan/AutoPWN-Suite" target="_blank" rel="noopener noreferrer">
+          <span class="fact__icon"><i class="fab fa-github" aria-hidden="true"></i></span>
+          <span>
+            <strong class="fact__claim">
+              AutoPWN-Suite
+              <i class="fas fa-arrow-up-right-from-square fact__arrow" aria-hidden="true"></i>
+            </strong>
+            <span class="fact__detail">Widely adopted open-source framework</span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
 
-<div class="research-grid">
-  <div class="research-card">
-    <div class="research-card__icon"><i class="fas fa-terminal"></i></div>
-    <h3 class="research-card__title">Advanced Post-Exploitation</h3>
-    <p class="research-card__description">Exploring novel post-exploitation techniques in Windows environments using PowerShell and .NET to better understand and defend against in-memory threats.</p>
-  </div>
-  <div class="research-card">
-    <div class="research-card__icon"><i class="fas fa-cogs"></i></div>
-    <h3 class="research-card__title">Framework Development</h3>
-    <p class="research-card__description">Actively developing new modules for AutoPWN-Suite to improve its web application scanning capabilities and overall detection accuracy.</p>
-  </div>
-  <div class="research-card">
-    <div class="research-card__icon"><i class="fas fa-shield-alt"></i></div>
-    <h3 class="research-card__title">Evasion Techniques</h3>
-    <p class="research-card__description">Researching and simulating modern AV/EDR evasion tactics to help blue teams build more resilient detection and response strategies.</p>
-  </div>
-  <div class="research-card">
-    <div class="research-card__icon"><i class="fas fa-robot"></i></div>
-    <h3 class="research-card__title">AI in Automation</h3>
-    <p class="research-card__description">Investigating how AI can be integrated into security automation, from intelligent vulnerability prioritization to adaptive response systems.</p>
-  </div>
-  <div class="research-card">
-    <div class="research-card__icon"><i class="fas fa-users"></i></div>
-    <h3 class="research-card__title">Active Directory Security</h3>
-    <p class="research-card__description">Focusing on common AD misconfigurations, attack paths like Kerberoasting, and defensive hardening for enterprise environments.</p>
-  </div>
-  <div class="research-card">
-    <div class="research-card__icon"><i class="fas fa-sitemap"></i></div>
-    <h3 class="research-card__title">Threat Intelligence & OSINT</h3>
-    <p class="research-card__description">Automating the collection and correlation of open-source intelligence (OSINT) to map an organization's external attack surface and identify emerging threats.</p>
-  </div>
-</div>
+<section class="section" id="work">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="section__eyebrow">Selected work</span>
+      <h2 class="section__title">Things I've built</h2>
+      <p class="section__lead">
+        Security tooling, automation, and a couple of things that just needed to exist.
+      </p>
+    </div>
 
----
+    {%- assign featured = site.pages
+          | where_exp: "p", "p.layout == 'project'"
+          | sort: "order" -%}
 
-## 🧭 Guiding Principles
+    <div class="grid grid--2 reveal">
+      {%- for project in featured limit: 4 -%}
+        {% include project-card.html project=project %}
+      {%- endfor -%}
+    </div>
 
-<div class="principles-grid">
-  <div class="principle-card">
-    <h3>Offense Informs Defense</h3>
-    <p>I believe the most effective way to build resilient defenses is to deeply understand and simulate modern attack vectors. My offensive research directly fuels defensive strategies.</p>
-  </div>
-  <div class="principle-card">
-    <h3>Automation for Impact</h3>
-    <p>My focus is on automating repetitive tasks to free up human expertise for creative problem-solving. Good tooling empowers security professionals to focus on what matters.</p>
-  </div>
-  <div class="principle-card">
-    <h3>Commitment to Open Source</h3>
-    <p>Sharing knowledge and tools with the community raises the bar for everyone. I am dedicated to contributing to open-source projects that make security more accessible and effective.</p>
-  </div>
-</div>
-
-
-## 🚀 On The Horizon
-
-<div class="horizon-list">
-  <div class="horizon-item">
-    <div class="horizon-item__icon"><i class="fas fa-shield-alt"></i></div>
-    <div class="horizon-item__text">
-      <p>Targeting the <strong>CompTIA Security+ certification</strong> to fortify my cybersecurity expertise, ensuring I can anticipate, prevent, and respond to threats with precision.</p>
+    <div class="btn-row reveal" style="margin-top: var(--space-6);">
+      <a class="btn btn--ghost" href="{{ '/projects/' | relative_url }}">
+        See all projects <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
     </div>
   </div>
-  <div class="horizon-item">
-    <div class="horizon-item__icon"><i class="fas fa-robot"></i></div>
-    <div class="horizon-item__text">
-      <p>Engineering a <strong>custom home assistant</strong> with sophisticated voice commands, intelligent device control, and integrated computer vision — orchestrating my systems, IoT devices, and digital services efficiently, securely, and discreetly, much like a personal JARVIS.</p>
+</section>
+
+<section class="section" id="focus">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="section__eyebrow">Research</span>
+      <h2 class="section__title">What I'm working on</h2>
+    </div>
+
+    <div class="grid grid--3 reveal">
+      <div class="card">
+        <div class="card__icon"><i class="fas fa-terminal" aria-hidden="true"></i></div>
+        <h3 class="card__title">Advanced post-exploitation</h3>
+        <p class="card__body">
+          Novel post-exploitation techniques in Windows environments using PowerShell
+          and .NET, to better understand and defend against in-memory threats.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card__icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></div>
+        <h3 class="card__title">Evasion techniques</h3>
+        <p class="card__body">
+          Researching and simulating modern AV/EDR evasion tactics so blue teams can
+          build more resilient detection and response.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card__icon"><i class="fas fa-sitemap" aria-hidden="true"></i></div>
+        <h3 class="card__title">Active Directory security</h3>
+        <p class="card__body">
+          Common AD misconfigurations, attack paths like Kerberoasting, and defensive
+          hardening for enterprise environments.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card__icon"><i class="fas fa-gears" aria-hidden="true"></i></div>
+        <h3 class="card__title">Framework development</h3>
+        <p class="card__body">
+          Building out AutoPWN-Suite's web application scanning and improving overall
+          detection accuracy.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card__icon"><i class="fas fa-robot" aria-hidden="true"></i></div>
+        <h3 class="card__title">AI in automation</h3>
+        <p class="card__body">
+          How AI fits into security automation — intelligent vulnerability
+          prioritisation through to adaptive response.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card__icon"><i class="fas fa-diagram-project" aria-hidden="true"></i></div>
+        <h3 class="card__title">Threat intel &amp; OSINT</h3>
+        <p class="card__body">
+          Automating OSINT collection and correlation to map external attack surface
+          and surface emerging threats.
+        </p>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
----
+<section class="section" id="skills">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="section__eyebrow">Toolkit</span>
+      <h2 class="section__title">Technologies I work with</h2>
+    </div>
 
-<section class="contact fade-in">
-  <h2>🤝 Let’s Connect</h2>
-  <p>Interested in research collaboration or open-source contributions? Reach out below.</p>
-  <div class="contact-buttons">
-    <a href="mailto:kaan@kaangultekin.net">Email</a>
-    <a href="https://github.com/GamehunterKaan" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/kaan-gultekin" target="_blank">LinkedIn</a>
+    {%- comment -%}
+      Logos degrade to a bare label if a CDN URL ever goes stale, so a dead
+      image never leaves a broken-image glyph behind.
+    {%- endcomment -%}
+    <div class="reveal">
+      <div class="skill-group">
+        <div class="skill-group__label">Languages</div>
+        <ul class="skill-list">
+          <li><a class="skill" href="https://www.python.org" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="" loading="lazy" onerror="this.style.display='none'"> Python</a></li>
+          <li><a class="skill" href="https://developer.mozilla.org/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="" loading="lazy" onerror="this.style.display='none'"> JavaScript</a></li>
+          <li><a class="skill" href="https://learn.microsoft.com/powershell/" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/actions/starter-workflows/main/icons/powershell.svg" alt="" loading="lazy" onerror="this.style.display='none'"> PowerShell</a></li>
+          <li><a class="skill" href="https://isocpp.org/" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="" loading="lazy" onerror="this.style.display='none'"> C++</a></li>
+          <li><a class="skill" href="https://www.sqlite.org/" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sqlite/sqlite-original.svg" alt="" loading="lazy" onerror="this.style.display='none'"> SQLite</a></li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group__label">Security &amp; network analysis</div>
+        <ul class="skill-list">
+          <li><a class="skill" href="https://nmap.org/" target="_blank" rel="noopener noreferrer"><i class="fas fa-network-wired" aria-hidden="true"></i> Nmap</a></li>
+          <li><a class="skill" href="https://www.metasploit.com/" target="_blank" rel="noopener noreferrer"><i class="fas fa-crosshairs" aria-hidden="true"></i> Metasploit</a></li>
+          <li><a class="skill" href="https://scapy.net/" target="_blank" rel="noopener noreferrer"><i class="fas fa-layer-group" aria-hidden="true"></i> Scapy</a></li>
+          <li><a class="skill" href="https://www.wireshark.org/" target="_blank" rel="noopener noreferrer"><i class="fas fa-wave-square" aria-hidden="true"></i> Wireshark</a></li>
+          <li><a class="skill" href="https://www.exploit-db.com/" target="_blank" rel="noopener noreferrer"><i class="fas fa-database" aria-hidden="true"></i> Exploit-DB</a></li>
+          <li><a class="skill" href="https://www.paramiko.org/" target="_blank" rel="noopener noreferrer"><i class="fas fa-terminal" aria-hidden="true"></i> Paramiko / SSH</a></li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group__label">Web &amp; backend</div>
+        <ul class="skill-list">
+          <li><a class="skill" href="https://flask.palletsprojects.com/" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flask/flask-original.svg" alt="" loading="lazy" onerror="this.style.display='none'"> Flask</a></li>
+          <li><a class="skill" href="https://socket.io/" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/socketio/socketio-original.svg" alt="" loading="lazy" onerror="this.style.display='none'"> Socket.IO</a></li>
+          <li><a class="skill" href="https://d3js.org/" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/d3js/d3js-original.svg" alt="" loading="lazy" onerror="this.style.display='none'"> D3.js</a></li>
+          <li><a class="skill" href="https://leafletjs.com/" target="_blank" rel="noopener noreferrer"><i class="fas fa-map-location-dot" aria-hidden="true"></i> Leaflet</a></li>
+          <li><a class="skill" href="https://developer.mozilla.org/docs/Web/Progressive_web_apps" target="_blank" rel="noopener noreferrer"><i class="fas fa-mobile-screen" aria-hidden="true"></i> PWA / Service Workers</a></li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group__label">Automation &amp; testing</div>
+        <ul class="skill-list">
+          <li><a class="skill" href="https://www.selenium.dev" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/detain/svg-logos/780f25886640cef088af994181646db2f6b1a3f8/svg/selenium-logo.svg" alt="" loading="lazy" onerror="this.style.display='none'"> Selenium</a></li>
+          <li><a class="skill" href="https://playwright.dev/" target="_blank" rel="noopener noreferrer"><i class="fas fa-robot" aria-hidden="true"></i> Playwright</a></li>
+          <li><a class="skill" href="https://github.com/puppeteer/puppeteer" target="_blank" rel="noopener noreferrer"><img src="https://www.vectorlogo.zone/logos/pptrdev/pptrdev-official.svg" alt="" loading="lazy" onerror="this.style.display='none'"> Puppeteer</a></li>
+          <li><a class="skill" href="https://docs.pytest.org/" target="_blank" rel="noopener noreferrer"><i class="fas fa-vial" aria-hidden="true"></i> pytest</a></li>
+          <li><a class="skill" href="https://www.crummy.com/software/BeautifulSoup/" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-code" aria-hidden="true"></i> BeautifulSoup</a></li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group__label">Embedded &amp; IoT</div>
+        <ul class="skill-list">
+          <li><a class="skill" href="https://www.espressif.com/en/products/socs/esp32" target="_blank" rel="noopener noreferrer"><i class="fas fa-microchip" aria-hidden="true"></i> ESP32 / ESP8266</a></li>
+          <li><a class="skill" href="https://www.arduino.cc/" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/arduino/arduino-original.svg" alt="" loading="lazy" onerror="this.style.display='none'"> Arduino</a></li>
+          <li><a class="skill" href="https://www.raspberrypi.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-raspberry-pi" aria-hidden="true"></i> Raspberry Pi</a></li>
+          <li><a class="skill" href="https://www.bluetooth.com/specifications/specs/" target="_blank" rel="noopener noreferrer"><i class="fab fa-bluetooth-b" aria-hidden="true"></i> BLE</a></li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group__label">Platform &amp; tooling</div>
+        <ul class="skill-list">
+          <li><a class="skill" href="https://www.linux.org/" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="" loading="lazy" onerror="this.style.display='none'"> Linux</a></li>
+          <li><a class="skill" href="https://www.docker.com/" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="" loading="lazy" onerror="this.style.display='none'"> Docker</a></li>
+          <li><a class="skill" href="https://git-scm.com/" target="_blank" rel="noopener noreferrer"><img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="" loading="lazy" onerror="this.style.display='none'"> Git</a></li>
+          <li><a class="skill" href="https://github.com/features/actions" target="_blank" rel="noopener noreferrer"><i class="fas fa-code-branch" aria-hidden="true"></i> GitHub Actions</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="principles">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="section__eyebrow">Approach</span>
+      <h2 class="section__title">How I work</h2>
+    </div>
+
+    <div class="grid grid--3 reveal">
+      <div class="card">
+        <h3 class="card__title">Offense informs defense</h3>
+        <p class="card__body">
+          The most effective way to build resilient defenses is to deeply understand
+          and simulate modern attack vectors. Offensive research directly fuels
+          defensive strategy.
+        </p>
+      </div>
+      <div class="card">
+        <h3 class="card__title">Automation for impact</h3>
+        <p class="card__body">
+          Automating repetitive work frees human expertise for creative
+          problem-solving. Good tooling lets security people focus on what matters.
+        </p>
+      </div>
+      <div class="card">
+        <h3 class="card__title">Open source by default</h3>
+        <p class="card__body">
+          Sharing knowledge and tools raises the bar for everyone. I contribute to
+          projects that make security more accessible and more effective.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="next">
+  <div class="container container--prose">
+    <div class="section__head reveal">
+      <span class="section__eyebrow">On the horizon</span>
+      <h2 class="section__title">What's next</h2>
+    </div>
+
+    <ul class="timeline reveal">
+      <li class="timeline__item">
+        <h3 class="timeline__title">CompTIA Security+</h3>
+        <p class="timeline__body">
+          Formalising the cybersecurity fundamentals — anticipating, preventing, and
+          responding to threats with more precision.
+        </p>
+      </li>
+      <li class="timeline__item">
+        <h3 class="timeline__title">A custom home assistant</h3>
+        <p class="timeline__body">
+          Voice commands, device control, and computer vision orchestrating my
+          systems, IoT devices, and services — efficiently, securely, and quietly.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="container container--prose">
+    <div class="section__head reveal">
+      <span class="section__eyebrow">Contact</span>
+      <h2 class="section__title">Let's connect</h2>
+      <p class="section__lead">
+        Interested in research collaboration or open-source contributions? Get in touch.
+      </p>
+    </div>
+
+    <div class="btn-row reveal">
+      <a class="btn btn--primary" href="mailto:{{ site.author.email }}">
+        <i class="fas fa-envelope" aria-hidden="true"></i> Email
+      </a>
+      <a class="btn btn--secondary" href="https://github.com/GamehunterKaan" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github" aria-hidden="true"></i> GitHub
+      </a>
+      <a class="btn btn--secondary" href="https://www.linkedin.com/in/kaan-gultekin/" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
+      </a>
+    </div>
   </div>
 </section>
