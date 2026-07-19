@@ -1,0 +1,122 @@
+// =============================================================================
+// Layout primitives
+// =============================================================================
+
+.page {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+// Standard centred container. Wide by default.
+.container {
+  width: 100%;
+  max-width: var(--wide-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--prose {
+  max-width: var(--content-width);
+}
+
+// Vertical rhythm between major page sections. One knob, used everywhere.
+.section {
+  padding-block: var(--space-9);
+
+  + .section {
+    padding-top: 0;
+  }
+}
+
+.section--tight {
+  padding-block: var(--space-7);
+}
+
+// Section heading: small mono eyebrow above a large title.
+.section__head {
+  margin-bottom: var(--space-6);
+  max-width: var(--content-width);
+}
+
+.section__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+
+.section__title {
+  font-size: var(--text-2xl);
+}
+
+.section__lead {
+  margin-top: var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+}
+
+// --- Grid helpers -----------------------------------------------------------
+
+.grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+// Explicit column counts rather than auto-fill: the container is wide enough now
+// that auto-fill would happily make five columns of research cards.
+.grid--2 {
+  grid-template-columns: 1fr;
+
+  @media (min-width: 48rem) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  // On ultrawide displays, a third column beats two oversized cards. Excluded
+  // on the landing page, whose container stays at the narrower 72rem — three
+  // columns in there would just cramp the featured cards.
+  @media (min-width: 100rem) {
+    body:not(.layout--home) & {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+}
+
+.grid--3 {
+  grid-template-columns: 1fr;
+
+  @media (min-width: 40rem) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 64rem) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+// --- Scroll reveal ----------------------------------------------------------
+// Progressive enhancement: only applies once JS marks the document, so content
+// is never stuck invisible if the script fails to load.
+
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--duration) var(--ease),
+    transform var(--duration) var(--ease);
+}
+
+.js-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

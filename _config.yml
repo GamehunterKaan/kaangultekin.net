@@ -7,12 +7,8 @@
 
 # Theme Settings
 #
-# Review documentation to determine if you should use `theme` or `remote_theme`
-# https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
-
-# theme                  : "minimal-mistakes-jekyll"
-remote_theme             : "GamehunterKaan/kaangultekin.net"
-minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+# No theme gem. Layouts, includes, and styles all live in this repo — see
+# _layouts/, _includes/, and _sass/ (design tokens in _sass/_tokens.scss).
 
 # Site Settings
 locale                   : "en-US"
@@ -22,11 +18,11 @@ title_separator          : "-"
 subtitle                 : "Software Engineer & Cybersecurity Researcher"
 name                     : "Kaan Gültekin"
 description              : "Personal website of Kaan Gültekin"
-url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : "https://kaangultekin.net" # needed for canonical + Open Graph absolute URLs
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "GamehunterKaan/kaangultekin.net"
-teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : "/assets/images/logo.png"
+teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.webp"
+logo                     : "/assets/images/logo.webp"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 breadcrumbs              : # true, false (default)
 words_per_minute         : 200
@@ -114,7 +110,7 @@ analytics:
 # Site Author
 author:
   name             : "Kaan Gültekin"
-  avatar           : "/assets/images/bio-photo.png"
+  avatar           : "/assets/images/bio-photo.webp"
   bio              : Sofware Engineering Student - Sofware Developer - Open Source Enthusiast - Cybersecurity Researcher
   location         : "Turkiye"
   email            : kaan@kaangultekin.net
@@ -178,30 +174,14 @@ exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
   - vendor
-  - .asset-cache
   - .bundle
-  - .jekyll-assets-cache
+  - .jekyll-cache
   - .sass-cache
-  - assets/js/plugins
-  - assets/js/_main.js
-  - assets/js/vendor
-  - Capfile
-  - CHANGELOG
-  - config
   - Gemfile
-  - Gruntfile.js
-  - gulpfile.js
+  - Gemfile.lock
   - LICENSE
-  - log
-  - minimal-mistakes-jekyll.gemspec
   - node_modules
-  - package.json
-  - package-lock.json
-  - Rakefile
   - README
-  - tmp
-  - /docs # ignore Minimal Mistakes /docs
-  - /test # ignore Minimal Mistakes /test
 keep_files:
   - .git
   - .svn
@@ -240,9 +220,7 @@ permalink: /:categories/:title/
 timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
-# Pagination with jekyll-paginate
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
+# Pagination is intentionally not configured — this site has no blog feed.
 
 # Pagination with jekyll-paginate-v2
 # See https://github.com/sverrirs/jekyll-paginate-v2/blob/master/README-GENERATOR.md#site-configuration
@@ -266,21 +244,11 @@ pagination:
     after: 2
 
 
-# Plugins (previously gems:)
+# Plugins. Trimmed to what the site actually uses — paginate, gist, and
+# include-cache went out with the Minimal Mistakes layouts.
 plugins:
-  - jekyll-paginate
   - jekyll-sitemap
-  - jekyll-gist
   - jekyll-feed
-  - jekyll-include-cache
-
-# mimic GitHub Pages with --safe
-whitelist:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jekyll-include-cache
 
 
 # Archives

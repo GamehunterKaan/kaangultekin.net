@@ -1,0 +1,106 @@
+// =============================================================================
+// Syntax highlighting (Rouge)
+//
+// Rouge emits: div.language-X.highlighter-rouge > div.highlight > pre > code
+// The outer div owns the frame; the inner elements are stripped flat so the
+// border and background are never drawn twice.
+// =============================================================================
+
+// A restrained five-hue set. Deliberately not a rainbow: strings reuse the
+// site accent, and everything else stays in the same cool family apart from
+// one warm tone for literals.
+:root {
+  --syn-comment:  #6b7684;
+  --syn-keyword:  #c4b5fd; // violet
+  --syn-string:   #5eead4; // accent teal
+  --syn-name:     #7dd3fc; // sky
+  --syn-literal:  #fcd34d; // amber
+  --syn-error:    #fda4af; // rose
+  --syn-punct:    #9aa5b4;
+}
+
+div.highlighter-rouge {
+  margin-block: var(--space-5);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+
+  .highlight {
+    background: none;
+    margin: 0;
+  }
+
+  pre {
+    background: none;
+    border: 0;
+    border-radius: 0;
+    margin: 0;
+    padding: var(--space-4);
+    overflow-x: auto;
+  }
+
+  code {
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+}
+
+.highlight {
+  color: var(--text);
+
+  // --- Comments -------------------------------------------------------------
+  .c, .ch, .cd, .cm, .cp, .cpf, .c1, .cs {
+    color: var(--syn-comment);
+    font-style: italic;
+  }
+
+  // --- Keywords -------------------------------------------------------------
+  .k, .kc, .kd, .kn, .kp, .kr, .kv { color: var(--syn-keyword); }
+  .kt { color: var(--syn-name); }
+  .o, .ow { color: var(--syn-keyword); }
+
+  // --- Names ----------------------------------------------------------------
+  .n, .nv, .vc, .vg, .vi, .nx { color: var(--text); }
+  .na, .nl, .py            { color: var(--syn-name); }
+  .nb, .bp                 { color: var(--syn-literal); }
+  .nc, .nn, .ne            { color: var(--syn-name); }
+  .nf, .fm                 { color: var(--syn-name); }
+  .nd                      { color: var(--syn-keyword); }
+  .ni, .no                 { color: var(--syn-literal); }
+  .nt                      { color: var(--syn-keyword); } // HTML/XML tags
+
+  // --- Literals -------------------------------------------------------------
+  .s, .sa, .sb, .sc, .s1, .s2, .sd, .se, .sh, .si, .sx, .sr, .ss, .dl {
+    color: var(--syn-string);
+  }
+  .m, .mb, .mf, .mh, .mi, .mo, .il { color: var(--syn-literal); }
+
+  // --- Punctuation ----------------------------------------------------------
+  .p, .pi { color: var(--syn-punct); }
+
+  // --- Diff / generic -------------------------------------------------------
+  .gd { color: var(--syn-error); background: rgba(253, 164, 175, 0.10); }
+  .gi { color: var(--syn-string); background: rgba(94, 234, 212, 0.10); }
+  .gh, .gu { color: var(--syn-comment); font-weight: 600; }
+  .ge { font-style: italic; }
+  .gs { font-weight: 600; }
+  .gl, .gt, .gr { color: var(--syn-error); }
+  .gp { color: var(--syn-comment); }
+
+  // --- Errors ---------------------------------------------------------------
+  .err {
+    color: var(--syn-error);
+    background: rgba(253, 164, 175, 0.10);
+  }
+
+  .w { color: var(--text-faint); }
+
+  // --- Line numbers ---------------------------------------------------------
+  .lineno, .gutter {
+    color: var(--text-faint);
+    user-select: none;
+    padding-right: var(--space-3);
+  }
+}

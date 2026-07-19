@@ -1,0 +1,206 @@
+// =============================================================================
+// Heroes — home landing + project page headers
+// =============================================================================
+
+// --- Home hero --------------------------------------------------------------
+// Type-led, not image-led. The old version put a photographic banner behind
+// centred text at 30% filter, which fought the copy for attention.
+
+.hero {
+  position: relative;
+  padding-block: var(--space-9) var(--space-7);
+  overflow: hidden;
+}
+
+// Faint grid + a single radial accent glow. Purely atmospheric, low contrast.
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.35;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 64rem;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.hero__title {
+  font-size: var(--text-display);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.hero__title-accent {
+  color: var(--accent);
+}
+
+.hero__lead {
+  margin-top: var(--space-5);
+  max-width: 46rem;
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  color: var(--text-muted);
+}
+
+.hero__actions {
+  margin-top: var(--space-6);
+}
+
+// Small live-status pill — the one bit of motion on the page.
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 var(--accent-line);
+  animation: pulse-dot 2.4s var(--ease) infinite;
+}
+
+@keyframes pulse-dot {
+  0%   { box-shadow: 0 0 0 0 var(--accent-line); }
+  70%  { box-shadow: 0 0 0 7px rgba(94, 234, 212, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(94, 234, 212, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-dot {
+    animation: none;
+  }
+}
+
+// --- Page header ------------------------------------------------------------
+// Simple text header for interior pages.
+
+.page-header {
+  padding-block: var(--space-8) var(--space-6);
+  border-bottom: 1px solid var(--border);
+}
+
+.page-header__title {
+  font-size: var(--text-3xl);
+}
+
+.page-header__lead {
+  margin-top: var(--space-3);
+  max-width: var(--content-width);
+  font-size: var(--text-lg);
+  color: var(--text-muted);
+  line-height: var(--leading-snug);
+}
+
+// --- Project header ---------------------------------------------------------
+// Keeps the project's screenshot, but as a framed asset beside the copy rather
+// than a washed-out full-bleed background behind it.
+
+.project-header {
+  padding-block: var(--space-8) var(--space-7);
+  border-bottom: 1px solid var(--border);
+}
+
+.project-header__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: center;
+}
+
+@media (min-width: 62rem) {
+  .project-header__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: var(--space-7);
+  }
+}
+
+.project-header__title {
+  font-size: var(--text-3xl);
+  margin-top: var(--space-4);
+}
+
+.project-header__lead {
+  margin-top: var(--space-4);
+  color: var(--text-muted);
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+}
+
+.project-header__actions {
+  margin-top: var(--space-5);
+}
+
+.project-header__media {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-subtle);
+  box-shadow: var(--shadow-lg);
+
+  img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+}
+
+// --- 404 --------------------------------------------------------------------
+
+.notfound {
+  padding-block: var(--space-8) var(--space-9);
+  text-align: center;
+}
+
+.notfound__code {
+  font-family: var(--font-mono);
+  font-size: clamp(4rem, 14vw, 8rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  opacity: 0.9;
+}
+
+.notfound__text {
+  margin: var(--space-5) 0 var(--space-6);
+  color: var(--text-muted);
+
+  code {
+    word-break: break-all;
+  }
+}
+
+.notfound .btn-row {
+  justify-content: center;
+}
+
+// --- Back link --------------------------------------------------------------
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+
+  &:hover {
+    color: var(--accent);
+  }
+}

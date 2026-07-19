@@ -1,14 +1,10 @@
-# main links
+# Primary navigation. Rendered by _includes/nav.html.
+# Any entry whose url contains "://" is treated as external automatically.
+# Keep internal links relative so local preview and production both work.
 main:
+  - title: "Projects"
+    url: /projects/
+  - title: "About"
+    url: /aboutme/
   - title: "GitHub"
     url: https://github.com/GamehunterKaan
-  - title: "About Me"
-    url: https://kaangultekin.net/aboutme/
-  # - title: "About"
-  #   url: https://mmistakes.github.io/minimal-mistakes/about/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/

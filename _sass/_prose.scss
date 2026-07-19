@@ -1,0 +1,242 @@
+// =============================================================================
+// Prose — long-form markdown content (project write-ups, about page)
+// Scoped so authors can keep writing plain markdown and get sane output.
+// =============================================================================
+
+// --- Project body: prose + sticky TOC ---------------------------------------
+
+.project-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-7);
+
+  // TOC rides alongside the prose only when there's room for it.
+  @media (min-width: 64rem) {
+    grid-template-columns: minmax(0, 1fr) 15rem;
+  }
+
+  // Keep the reading measure comfortable even though the container is now wide.
+  .prose {
+    max-width: 46rem;
+    width: 100%;
+  }
+}
+
+.toc {
+  display: none;
+
+  @media (min-width: 64rem) {
+    display: block;
+    align-self: start;
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-5));
+    max-height: calc(100vh - var(--nav-height) - var(--space-7));
+    overflow-y: auto;
+  }
+}
+
+.toc__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: var(--space-3);
+}
+
+.toc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--border);
+}
+
+.toc__item a {
+  display: block;
+  padding: var(--space-1) 0 var(--space-1) var(--space-4);
+  margin-left: -1px;
+  border-left: 1px solid transparent;
+  color: var(--text-faint);
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  transition: color var(--duration-fast) var(--ease),
+              border-color var(--duration-fast) var(--ease);
+
+  &:hover {
+    color: var(--text);
+  }
+}
+
+// Nested (h3) entries sit in a touch further and quieter.
+.toc__item--sub a {
+  padding-left: var(--space-5);
+  font-size: var(--text-xs);
+}
+
+.toc__item.is-active a {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+
+.prose {
+  color: var(--text-muted);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  // Long unbroken strings (bare URLs, inline code holding a link) break rather
+  // than push the page sideways on narrow screens. Doesn't touch <pre>, whose
+  // `white-space: pre` keeps code blocks intact and scrolling.
+  overflow-wrap: break-word;
+
+  // --- Flow ---------------------------------------------------------------
+  // Spacing comes from a single owl rule rather than per-element margins, so
+  // rhythm stays even no matter what order elements appear in.
+  > * + * {
+    margin-top: var(--space-4);
+  }
+
+  h1, h2, h3, h4 {
+    color: var(--text);
+  }
+
+  > h2 {
+    margin-top: var(--space-8);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border);
+    font-size: var(--text-2xl);
+  }
+
+  > h3 {
+    margin-top: var(--space-6);
+    font-size: var(--text-xl);
+  }
+
+  > h4 {
+    margin-top: var(--space-5);
+  }
+
+  // First heading shouldn't push the page open with a rule + big gap.
+  > :first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  a {
+    text-decoration: underline;
+    text-decoration-color: var(--accent-line);
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color var(--duration-fast) var(--ease),
+                color var(--duration-fast) var(--ease);
+
+    &:hover {
+      text-decoration-color: var(--accent);
+    }
+  }
+
+  // --- Lists --------------------------------------------------------------
+
+  ul, ol {
+    padding-left: var(--space-5);
+  }
+
+  li + li {
+    margin-top: var(--space-2);
+  }
+
+  li::marker {
+    color: var(--text-faint);
+  }
+
+  ul li::marker {
+    color: var(--accent-dim);
+  }
+
+  // --- Media --------------------------------------------------------------
+
+  img {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-subtle);
+  }
+
+  figure {
+    margin: var(--space-6) 0;
+  }
+
+  figcaption {
+    margin-top: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+    text-align: center;
+  }
+
+  // --- Quotes -------------------------------------------------------------
+
+  blockquote {
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--accent-dim);
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  // --- Tables -------------------------------------------------------------
+  // kramdown emits bare <table> with no wrapper, so the table itself has to be
+  // the scroll container. display:block + overflow-x lets a wide table scroll
+  // on its own instead of forcing the whole page sideways on mobile.
+
+  table {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: var(--text-sm);
+  }
+
+  th, td {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    background: var(--bg-subtle);
+    color: var(--text);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+
+  // --- Code ---------------------------------------------------------------
+
+  pre {
+    margin-block: var(--space-5);
+  }
+
+  // --- Mermaid ------------------------------------------------------------
+
+  .mermaid {
+    margin-block: var(--space-6);
+    padding: var(--space-5);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    text-align: center;
+  }
+
+  hr {
+    margin-block: var(--space-7);
+  }
+}

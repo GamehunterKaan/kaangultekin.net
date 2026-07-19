@@ -1,14 +1,14 @@
 ---
 title: BadUSB PoCs
-layout: splash
+layout: project
 permalink: /projects/badusb-pocs/
 use_mermaid: true
-classes: wide
+order: 4
+card_description: >
+  Proof-of-concepts showcasing peripheral-based attack vectors — built for
+  research and awareness.
 header:
-  title: BadUSB PoCs
-  overlay_color: "#242730ff"
-  overlay_image: /assets/images/badusb.jpg
-  overlay_filter: 0.3
+  overlay_image: /assets/images/badusb.webp
   actions:
     - label: "<i class='fas fa-code'></i> View On GitHub"
       url: "https://github.com/stars/GamehunterKaan/lists/badusb-pocs"
@@ -16,14 +16,14 @@ excerpt: >
   A collection of proof-of-concept scripts demonstrating various BadUSB attack vectors, from browser interaction to Meterpreter session establishment.
 ---
 
-# BadUSB Attacks — Overview, Research & Defensive Guidance
+## BadUSB Attacks — Overview, Research & Defensive Guidance
 
 
 > **Audience & intent:** This page explains the **concepts, architecture, and defensive implications** of BadUSB-style proof-of-concepts. It avoids step-by-step instructions and executable payloads. Always test only in isolated, authorized labs.
 
 ---
 
-## Executive summary
+### Executive summary
 
 BadUSB attacks abuse the trust operating systems place in USB peripherals by presenting attacker-controlled capabilities (HID/keyboard, network, storage, etc.). The PoCs collected here illustrate common impact vectors — UI automation and credential risk, rapid hardware-triggered post-exploitation, and legacy scripting triggers. These artifacts are research-focused and intended to inform detection, purple-team exercises, and defensive hardening.
 
@@ -31,15 +31,15 @@ BadUSB attacks abuse the trust operating systems place in USB peripherals by pre
 
 ---
 
-## What is a BadUSB attack? (high level)
-![BadUSB Concept Illustration](/assets//images/badusb-hero.jpg)
+### What is a BadUSB attack? (high level)
+![BadUSB Concept Illustration](/assets/images/badusb-hero.webp)
 
 - **Conceptual definition:** A BadUSB attack uses a USB device’s programmable interfaces to cause a host to perform unintended actions. Because USB devices are auto-enumerated and often trusted, a malicious peripheral can masquerade as normal hardware while performing harmful operations.  
 - **Why it matters:** USB is widely available and frequently physically accessible. Unmediated device capabilities (keyboard input, new network interfaces, mounted volumes) create an attack surface with real consequences for endpoints and networks.
 
 ---
 
-## Threat model & attacker capabilities (non-actionable)
+### Threat model & attacker capabilities (non-actionable)
 
 - **Physical access requirement:** Many BadUSB scenarios require physical or proxied physical access (dropped devices, swapped peripherals, or compromised supply chains).  
 - **Device impersonation:** Attackers can present HID (keyboard), RNDIS (network), or mass-storage device classes, each with distinct defensive challenges.  
@@ -48,7 +48,7 @@ BadUSB attacks abuse the trust operating systems place in USB peripherals by pre
 
 ---
 
-## High-level architecture & common components (conceptual)
+### High-level architecture & common components (conceptual)
 
 Most BadUSB PoCs share these conceptual components:
 
@@ -61,7 +61,7 @@ Focus on **behavioral patterns** (attach → rapid UI automation, new interface 
 
 ---
 
-## Conceptual flow (non-actionable)
+### Conceptual flow (non-actionable)
 
 <div class="mermaid">
 flowchart LR
@@ -80,11 +80,11 @@ flowchart LR
 
 ---
 
-## Per-project conceptual summaries
+### Per-project conceptual summaries
 
 > **Note:** The summaries below are high-level and defensive in nature. Consult each repo’s README for project context and lab documentation.
 
-### BadUSB-Browser — browser-focused UI automation & credential risk
+#### BadUSB-Browser — browser-focused UI automation & credential risk
 
 **Concept:** Demonstrates how an input-emulating device can automate browser interactions (open pages, navigate, submit forms) that could lead to credential exposure when combined with malicious landing pages or social engineering.
 **Research value:** Highlights detection points around rapid GUI automation and unusual browser activity following device attach.
@@ -92,7 +92,7 @@ flowchart LR
 
 ---
 
-### BadUSB-Meterpreter — hardware-triggered chaining to post-exploitation tooling
+#### BadUSB-Meterpreter — hardware-triggered chaining to post-exploitation tooling
 
 **Concept:** Shows how a quick hardware-trigger can hand off to post-exploitation frameworks, reducing an attacker’s time-to-breach in a lab scenario.
 **Research value:** Useful for measuring telemetry gaps between attach events and remote sessions and for developing early-warning detections.
@@ -100,7 +100,7 @@ flowchart LR
 
 ---
 
-### VBSBadUSB — legacy scripting as a trigger vector
+#### VBSBadUSB — legacy scripting as a trigger vector
 
 **Concept:** Uses lightweight legacy scripting (VBScript) as a practical demonstration that older interpreters can still be abused when invoked by peripheral-driven actions.
 **Research value:** Reinforces the need to inventory and control legacy scripting engines and to monitor their invocation patterns.
@@ -108,7 +108,7 @@ flowchart LR
 
 ---
 
-## Detection hypotheses & SOC playbook snippets (conceptual)
+### Detection hypotheses & SOC playbook snippets (conceptual)
 
 Translate these hypotheses into telemetry rules and test them in controlled labs:
 
@@ -125,7 +125,7 @@ Translate these hypotheses into telemetry rules and test them in controlled labs
 
 ---
 
-## Defensive controls & recommendations
+### Defensive controls & recommendations
 
 **Administrative & policy controls**
 
@@ -152,7 +152,7 @@ Translate these hypotheses into telemetry rules and test them in controlled labs
 
 ---
 
-## Safe lab setup & ethics checklist
+### Safe lab setup & ethics checklist
 
 * Test only in isolated lab environments with no production connectivity.
 * Obtain explicit authorization and document scope, objectives, and rollback steps.
@@ -161,7 +161,7 @@ Translate these hypotheses into telemetry rules and test them in controlled labs
 
 ---
 
-## How defenders can use these PoCs
+### How defenders can use these PoCs
 
 * **Threat modeling:** Understand plausible peripheral-driven attack vectors for your environment.
 * **Detection development:** Derive behavior-based detections from PoC patterns (attach → activity → egress).
@@ -170,7 +170,7 @@ Translate these hypotheses into telemetry rules and test them in controlled labs
 
 ---
 
-## Recommended references
+### Recommended references
 
 * Curated BadUSB PoCs list: [https://github.com/stars/GamehunterKaan/lists/badusb-pocs](https://github.com/stars/GamehunterKaan/lists/badusb-pocs)
 * Individual PoCs (examples):
@@ -183,7 +183,7 @@ Search for vendor advisories and peer-reviewed papers for deeper academic backgr
 
 ---
 
-## Closing notes
+### Closing notes
 
 BadUSB research surfaces detection gaps and informs practical defenses. The goal of these PoCs is to help defenders build resilient telemetry, refine response playbooks, and raise organizational awareness. If desired, this page can be extended with non-actionable diagrams (PNG/SVG) for SOC training, a detection-rule template (pseudocode/logic only), or a research-report template to include in each repository’s README.
 

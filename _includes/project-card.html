@@ -1,0 +1,46 @@
+{%- comment -%}
+  Project card. Usage: {% include project-card.html project=p heading=2 %}
+
+  All copy comes from the project page's own front matter, so the listings can
+  never drift out of sync with the project pages themselves.
+
+  `heading` sets the title's level so the card slots into whatever outline the
+  host page has: 2 under the /projects/ page h1, 3 under the home page's h2
+  section heading. Defaults to 3.
+{%- endcomment -%}
+
+{%- assign p = include.project -%}
+{%- assign blurb = p.card_description | default: p.excerpt -%}
+{%- assign repo = p.header.actions[0].url -%}
+{%- assign hl = include.heading | default: 3 -%}
+
+<article class="project-card">
+  {%- if p.header.overlay_image -%}
+    <a class="project-card__image" href="{{ p.url | relative_url }}" tabindex="-1" aria-hidden="true">
+      <img
+        src="{{ p.header.overlay_image | relative_url }}"
+        alt=""
+        loading="lazy"
+        width="800" height="450">
+    </a>
+  {%- endif -%}
+
+  <div class="project-card__body">
+    <h{{ hl }} class="project-card__title">
+      <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+    </h{{ hl }}>
+
+    <p class="project-card__desc">
+      {{ blurb | markdownify | strip_html | strip }}
+    </p>
+
+    <div class="project-card__actions">
+      <a class="btn btn--secondary" href="{{ p.url | relative_url }}">Details</a>
+      {%- if repo -%}
+        <a class="btn btn--ghost" href="{{ repo }}" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github" aria-hidden="true"></i> GitHub
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</article>

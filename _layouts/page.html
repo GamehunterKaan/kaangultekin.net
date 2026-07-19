@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+{%- comment -%}
+  Standard interior page. Set `wide: true` in front matter for pages whose
+  content is a grid rather than prose.
+{%- endcomment -%}
+
+{%- if page.title -%}
+  <div class="page-header">
+    <div class="container{% unless page.wide %} container--prose{% endunless %}">
+      <h1 class="page-header__title">{{ page.title }}</h1>
+      {%- if page.excerpt -%}
+        <p class="page-header__lead">{{ page.excerpt | markdownify | strip_html | strip }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+<div class="section">
+  <div class="container{% unless page.wide %} container--prose{% endunless %}">
+    <div class="{% unless page.wide %}prose{% endunless %}">
+      {{ content }}
+    </div>
+  </div>
+</div>
