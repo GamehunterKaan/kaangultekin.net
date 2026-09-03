@@ -20,7 +20,7 @@ excerpt: >
 
 Çanakkale's municipal bus system has no official app. Passengers rely on a seasonal PDF timetable buried on the municipality website, with no way to know where a bus actually is, which bus to take between two points, or when to expect the next one.
 
-**Çanakkale Hat & Sefer** solves all of that in a single HTML file served from GitHub Pages. It parses the municipality's PDF timetables automatically, pulls live bus positions from the kentkart API, plans trips with real-time ETA estimates, and delivers push notifications when your bus is approaching — even when your phone screen is off.
+**Çanakkale Hat & Sefer** solves all of that as a static site served from GitHub Pages. It parses the municipality's PDF timetables automatically, pulls live bus positions from the kentkart API, plans trips with real-time ETA estimates, and delivers push notifications when your bus is approaching — even when your phone screen is off.
 
 No app store, no native install, no backend server. Everything runs in the browser.
 
@@ -49,10 +49,28 @@ Tap the map (or use GPS) to pick a start and destination. The planner finds all 
 - **Live bus data** — shows buses approaching your boarding stop right now with stop-level ETAs
 - **Schedule fallback** — when kentkart returns no live data, the next scheduled departure is used instead. On Bayram, Arefe, or any dated special day, the planner consults the matching schedule instead of the regular weekday one
 - **Stop browser** — tap any stop on the map to see which routes serve it and when the next bus comes
+- **Place search** — reach a destination you can't point at by searching its name (see below)
 
 <p>
   <img src="/assets/images/17hatsefer-planner.webp" width="49%" alt="Trip planner showing route options sorted by ETA">
   <img src="/assets/images/17hatsefer-one-transfer.webp" width="49%" alt="One transfer trip map view">
+</p>
+
+---
+
+### Yer Ara — Place Search
+
+Picking a destination used to mean tapping it on the map, which only works if you already know where it is. A search bar over the map removes that limit: type a venue, a shop, a street or a stop — *Container Hall*, *Migros*, *Kordon* — and the map flies there and drops a pin. The card that opens names the nearest bus stop with its distance and hands the point straight to the planner as **📍 Buradan başla** or **🏁 Buraya git**.
+
+- **Two sources in one list** — saved places, bus stops and 6,400+ local businesses match instantly from a POI index bundled with the app, so this half works with **no network at all**; [Photon](https://photon.komoot.io/) adds the streets and addresses a POI extract has no concept of. Results are de-duplicated across the two, Turkish-folded so `kordon` finds *Kordon*, and ranked so a place actually named *Container Hall* beats a long company title that merely contains the word
+- **Why bundle an index instead of just geocoding** — OpenStreetMap, which every free geocoder indexes, does not have most Turkish businesses. *Container Hall Çanakkale* — a real venue 129 m from a bus stop — has **zero** matches in raw OSM across the entire Çanakkale bounding box, while [Overture Maps](https://overturemaps.org/) carries it at 0.99 confidence, because Overture merges Meta, Microsoft, Foursquare and AllThePlaces listings on top of OSM
+- **Kept honest** — crowd-sourced business data fails in two ways that need different answers. Listings nothing has confirmed in over a year are dropped automatically (3% of the extract, almost entirely Foursquare and Microsoft rows). Wrong coordinates on otherwise-current listings can't be filtered at all, so those are corrected by hand in a small overrides file that is re-applied on every monthly rebuild
+- **Restricted to the map area** — anything outside the Çanakkale bounding box is unroutable by the planner anyway, so it never appears
+- Google Places is deliberately not used: its terms tie results to a Google basemap, and a static site cannot hide an API key
+
+<p>
+  <img src="/assets/images/17hatsefer-search.webp" width="49%" alt="Search dropdown showing a matching stop above local places from the bundled index">
+  <img src="/assets/images/17hatsefer-search-place.webp" width="49%" alt="A searched place pinned on the map with its nearest stop and the two planner actions">
 </p>
 
 ---
@@ -121,10 +139,11 @@ A gear icon in the header opens a settings screen with theme (dark / light / fol
 1. **GitHub Actions** runs hourly, downloading every PDF timetable the municipality publishes — regular weekday and weekend plus any special-day PDFs. The workflow fast-skips when the source hasn't changed since the last run.
 2. A Node.js script parses the PDFs with pdf.js (server-side), extracts departure times per route and direction using column-based coordinate matching, and writes `data/schedule.json`.
 3. A second script fetches all kentkart route, stop, and path data and writes `data/stops.json`, stripping the live bus positions (which change every minute) so the file stays cacheable.
-4. Both JSON files are committed to the repository and served as static assets via GitHub Pages.
-5. **The browser app** fetches these two files on first load. A service worker caches the app shell, the JSON data, and OSM tiles so the app keeps working without network.
-6. Live bus positions are fetched directly from the kentkart API by the browser on demand (trip planner, live tracker, stop panel) — no proxy needed.
-7. **The Cloudflare Worker** polls kentkart every minute for subscribed routes and sends Web Push notifications when the target bus is approaching.
+4. **A separate monthly workflow** downloads an [Overture Maps](https://overturemaps.org/) POI extract clipped to the Çanakkale bounding box, filters it by confidence and freshness, applies hand corrections, and writes `data/places.json` — the index behind the map's place search. Monthly rather than hourly because Overture cuts one release a month.
+5. All three JSON files are committed to the repository and served as static assets via GitHub Pages.
+6. **The browser app** fetches the schedule and stop files on first load, and the POI index lazily on the first search. A service worker caches the app shell, the JSON data, and OSM tiles so the app keeps working without network.
+7. Live bus positions are fetched directly from the kentkart API by the browser on demand (trip planner, live tracker, stop panel) — no proxy needed.
+8. **The Cloudflare Worker** polls kentkart every minute for subscribed routes and sends Web Push notifications when the target bus is approaching.
 
 ---
 
@@ -209,10 +228,22 @@ flowchart TD
     K --> Q["git commit && git push"]
     P --> Q
 
+    R["Monthly cron"] --> S["overturemaps download<br/>(bbox from core.js)"]
+    S --> T["build-places.mjs"]
+    T --> U["Drop below 0.5 confidence"]
+    U --> V["Drop listings unconfirmed &gt; 1 year"]
+    V --> W["Dedupe same name within 60 m"]
+    W --> X["Apply data/places-overrides.json<br/>(drop / fix / add)"]
+    X --> Y["data/places.json + deny rules"]
+    Y --> Z["git commit && git push"]
+
     style A fill:#1a3a5c,stroke:#4a90d9,color:#fff
     style K fill:#166534,stroke:#4ade80,color:#fff
     style P fill:#166534,stroke:#4ade80,color:#fff
     style Q fill:#166534,stroke:#4ade80,color:#fff
+    style R fill:#1a3a5c,stroke:#4a90d9,color:#fff
+    style Y fill:#166534,stroke:#4ade80,color:#fff
+    style Z fill:#166534,stroke:#4ade80,color:#fff
 </div>
 
 ---
@@ -223,12 +254,17 @@ flowchart TD
 
 | Component | Where it runs | Purpose |
 |-----------|--------------|---------|
-| `index.html` | Browser | Entire app — schedule display, trip planner, live map, notifications UI |
+| `index.html` | Browser | Markup and CSS — the app's shell |
+| `ui.js` | Browser | DOM, Leaflet, localStorage, push, offline — everything that touches the browser |
+| `core.js` | Browser / Node | Headless logic: trip planning, schedules, guided steps, taxi, i18n. No DOM, no Leaflet, so it is importable on its own and CI-enforced to stay that way |
 | `sw.js` | Browser (Service Worker) | Web Push delivery + offline cache (app shell, JSON, OSM tiles) |
 | `data/schedule.json` | GitHub Pages (static) | Parsed timetables + kentkart route colors, rebuilt hourly |
 | `data/stops.json` | GitHub Pages (static) | All stops, route paths, kentkart route metadata, rebuilt hourly |
+| `data/places.json` | GitHub Pages (static) | POI index behind the map search — ~6,400 places plus geocoder deny rules, rebuilt monthly |
+| `data/places-overrides.json` | Repository | Hand corrections (drop / fix / add) re-applied over the POI extract on every rebuild |
 | `scripts/fetch-schedule.mjs` | GitHub Actions (Node.js) | PDF download + parsing → schedule.json |
 | `scripts/fetch-stops.mjs` | GitHub Actions (Node.js) | Kentkart bulk fetch → stops.json |
+| `scripts/build-places.mjs` | GitHub Actions (Node.js) | Overture extract → filtered, corrected places.json |
 | `worker/index.js` | Cloudflare Workers | Push notification delivery — cron trigger, KV subscription storage |
 
 ---
@@ -336,6 +372,7 @@ Walking distances come from Valhalla pedestrian routing — a stop counts as rea
 | Routing | [Valhalla](https://valhalla.openstreetmap.org/) — pedestrian distance-matrix for trip walks, shortest-path car route for the taxi estimate |
 | PDF parsing | [pdf.js](https://mozilla.github.io/pdf.js/) (Node.js, server-side in CI) |
 | Live bus data | [Kentkart](https://kentkart.com) public API |
+| Place search | [Overture Maps](https://overturemaps.org/) POI extract bundled as static JSON, plus [Photon](https://photon.komoot.io/) for live street/address geocoding |
 | Push notifications | Web Push (RFC 8030 / 8291 / 8292) via [Cloudflare Workers](https://workers.cloudflare.com/) |
 | Offline | Service worker — precached app shell, stale-while-revalidate JSON, cache-first OSM tiles |
 | CI/CD | GitHub Actions — hourly cron, commits JSON to repo |
@@ -349,7 +386,7 @@ Walking distances come from Valhalla pedestrian routing — a stop counts as rea
 The app runs entirely on free tiers:
 
 - **GitHub Pages** — hosts the static files including the pre-built JSON data
-- **GitHub Actions** — rebuilds schedule and stop data hourly with fast-skip when nothing has changed (a few minutes of compute per day)
+- **GitHub Actions** — rebuilds schedule and stop data hourly with fast-skip when nothing has changed (a few minutes of compute per day), and the POI index monthly
 - **Cloudflare Workers** — push notification delivery (free tier: 100k requests/day, 1k KV ops/day)
 
 To deploy your own instance:
