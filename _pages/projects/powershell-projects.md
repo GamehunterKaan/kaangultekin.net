@@ -3,7 +3,7 @@ title: PowerShell Projects
 layout: project
 permalink: /projects/powershell-projects/
 use_mermaid: true
-order: 5
+order: 6
 card_description: >
   PowerShell utilities and a research-oriented fileless PoC focused on
   automation and defense testing.

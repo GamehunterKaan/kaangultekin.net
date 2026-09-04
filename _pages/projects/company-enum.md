@@ -3,7 +3,7 @@ title: CompanyEnum
 use_mermaid: true
 layout: project
 permalink: /projects/company-enum/
-order: 6
+order: 7
 card_description: >
   An OSINT tool for gathering and visualizing public company data through an
   interactive web UI.

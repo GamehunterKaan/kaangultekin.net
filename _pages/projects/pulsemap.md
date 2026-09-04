@@ -3,7 +3,7 @@ title: Pulsemap
 layout: project
 permalink: /projects/pulsemap/
 use_mermaid: true
-order: 3
+order: 4
 card_description: >
   Real-time network packet flow visualizer with animated comet trails, anomaly
   detection, and deep traffic analysis.

@@ -3,7 +3,7 @@ title: Çanakkale Hat & Sefer
 layout: project
 permalink: /projects/canakkale-hat-sefer/
 use_mermaid: true
-order: 2
+order: 3
 card_description: >
   Mobile-first PWA for Çanakkale's public bus network — live tracking, trip
   planning, schedules, and push notifications. No app store, no backend.
