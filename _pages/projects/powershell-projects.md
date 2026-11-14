@@ -5,85 +5,68 @@ permalink: /projects/powershell-projects/
 use_mermaid: true
 order: 6
 card_description: >
-  PowerShell utilities and a research-oriented fileless PoC focused on
-  automation and defense testing.
+  A network scanner and a file search in plain PowerShell, so they run on a
+  stock Windows machine with nothing to install. Plus some research I keep
+  private.
 header:
   overlay_image: /assets/images/powershell-tools.webp
   actions:
-    - label: "<i class='fas fa-code'></i> View On GitHub"
+    - label: "<i class='fab fa-github'></i> The list on GitHub"
       url: "https://github.com/stars/GamehunterKaan/lists/powershell-projects"
 excerpt: >
-  A collection of PowerShell projects, including open-source utilities for network scanning and file discovery, alongside internal research on fileless techniques for defensive validation.
+  Two small tools that only need the PowerShell already on every Windows machine, and a research project on in-memory techniques that stays unpublished.
 ---
 
-## PowerShell Projects — Catalog, Research & Defensive Guidance
-A defender- and researcher-oriented summary of PowerShell projects I maintain. This page outlines project goals, conceptual architecture, defensive implications, and how teams can responsibly use the work for detection tuning and purple-team exercises.
+## What's here
 
+Two small tools from March 2022. Both are a single PowerShell script that runs
+on a stock Windows machine, which is the whole point: sometimes the machine
+you're on is one where you can't install anything.
 
-### Executive summary
+### PowerShell-Network-Scanner
 
-PowerShell is a built-in automation platform widely used by administrators, defenders, and researchers. The projects summarized here span utilities, network/recon tooling, and focused research. One significant internal research area is a fileless, in-memory PowerShell research effort. That work is intended for defensive testing, detection development, and coordinated purple-team validation; it is available under controlled conditions and is not published as a weaponized artifact.
+Finds the live hosts on the local network, then checks each one for the 1,000
+ports Nmap scans by default. It won't replace Nmap, but it's there when Nmap
+isn't.
+[Source on GitHub](https://github.com/GamehunterKaan/PowerShell-Network-Scanner).
 
-### Categories (at a glance)
+### PowerShell-File-Search
+
+Searches every drive for text files that contain a string you give it. Handy
+during triage, when you need to know where a value was written down.
+[Source on GitHub](https://github.com/GamehunterKaan/PowerShell-File-Search).
+
+## Fileless PowerShell research
+
+I've also spent time on how in-memory PowerShell techniques show up in endpoint
+telemetry, and where they don't. That work isn't published and won't be. What's
+useful to defenders out of it is detection ideas and test cases, not code, and
+code is the part that would be misused.
+
+The loop it follows is the ordinary one for detection work:
 
 <div class="mermaid">
 flowchart TB
-  A[PowerShell Projects] --> B["Utilities"]
-  A --> C["Network &amp; Recon"]
-  A --> D["Research (internal/private)"]
-  A --> E["Automation & Orchestration"]
-  B --> B1["PowerShell-File-Search"]
-  C --> C1["PowerShell-Network-Scanner"]
-  D --> D1["Fileless PowerShell Research (internal)"]
-  E --> E1["Supporting automation scripts"]
+  Lab[Isolated lab] --> Run[Run a technique under test]
+  Run --> Collect[Collect process and script telemetry]
+  Collect --> Idea[Write a detection idea]
+  Idea --> Tune[Tune the rule]
+  Tune --> Check[Re-run and check it fires]
+  Check --> Run
 </div>
 
-- **Utilities:** File discovery, log helpers, and small admin aids used for incident triage.  
-- **Network & Recon:** Lightweight discovery and mapping tools for controlled lab recon.  
-- **Research (internal/private):** Focused work on detection gaps and memory-resident behaviors; access is coordinated.  
-- **Automation & Orchestration:** Scripts to provision labs, collect telemetry, and run repeatable tests.
+Some of what comes out of it is general enough to share:
 
----
+- **Turn on script block logging.** Event ID 4104 records the PowerShell that
+  actually ran, after deobfuscation, including code that never touched the disk.
+- **Keep AMSI working.** Most in-memory PowerShell tradecraft starts by trying
+  to switch it off, so a failed or tampered AMSI is a signal in itself.
+- **Use Constrained Language Mode** for users who don't need the full
+  language, enforced through application control rather than an environment
+  variable.
+- **Watch the parent process.** PowerShell started by Office, a browser or a
+  script host is worth a second look far more often than PowerShell started
+  from a terminal.
 
-### Project summaries (short, 2–3 lines each)
-
-#### 🔹 PowerShell-File-Search  
-A fast PowerShell utility for locating and filtering files across endpoints—useful for incident triage and targeted artifact collection.  
-**Use:** IR and admin helper. · **Link:** `https://github.com/GamehunterKaan/PowerShell-File-Search`
-
-#### 🔹 PowerShell-Network-Scanner  
-Lightweight discovery tool to find live hosts and enumerate basic services in test environments.  
-**Use:** Recon and mapping in controlled exercises. · **Link:** `https://github.com/GamehunterKaan/PowerShell-Network-Scanner`
-
-#### 🔹 Fileless PowerShell Research *(internal / access-controlled)*  
-A defensive research program that examines in-memory (fileless) behaviors and related telemetry. The research focuses on detection hypotheses, SOC playbooks, and sanitized testcases for purple-team validation. Access is granted only under written authorization and defined scope.  
-**Use:** Detection development, SOC training, and internal validation. ·
-
----
-
-### Research: fileless PowerShell (internal, defensive)
-
-> **Important:** The content below is descriptive and defensive. It intentionally excludes operational details and implementation techniques.
-
-#### Purpose & scope
-The internal fileless research is intended to help defenders understand how memory-resident techniques manifest in telemetry and to provide sanitized testcases that improve detection coverage and incident response playbooks. It is **not** publicly released as an exploit toolkit.
-
-#### Research goals (defensive)
-- Surface observable telemetry patterns that distinguish suspicious in-memory activity from benign administration tasks.  
-- Produce detection hypotheses, telemetry requirements, and SOC playbooks.  
-- Create sanitized, reproducible testcases for purple-team validation and EDR tuning.
-
-<div class="mermaid">
-flowchart LR
-  Lab[Authorized Lab] --> Execute[Controlled In-Memory Tests]
-  Execute --> Telemetry[Collect Process & Memory Telemetry]
-  Telemetry --> Hypotheses[Form Detection Hypotheses]
-  Hypotheses --> Tune[Tune EDR & SOC Rules]
-  Tune --> Validate[Purple-Team Validation]
-</div>
-
----
-
-### Access & coordination
-
-Because the internal fileless research involves sensitive techniques, raw artifacts and testcases are available **only** under coordinated engagements with written authorization and defined scope. If you are a researcher, SOC team, or vendor seeking access for defensive validation, contact me to arrange a controlled engagement.
+If you're on a SOC or EDR team and want to compare notes, or need test cases
+for an authorized engagement, [email me](mailto:kaan@kaangultekin.net).

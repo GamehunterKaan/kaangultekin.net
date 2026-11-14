@@ -5,14 +5,15 @@ permalink: /projects/fundhunter/
 use_mermaid: true
 order: 2
 card_description: >
-  Every investment fund in Türkiye and what it actually holds — 2,063 funds and
-  648 Borsa İstanbul listings, composition, returns and risk, with no backend.
+  Every investment fund in Türkiye and what it actually holds: 2,063 funds and
+  648 Borsa İstanbul listings, read out of their monthly filings. Runs entirely
+  in the browser.
 header:
   overlay_image: /assets/images/fundhunter.webp
   actions:
-    - label: "<i class='fas fa-code'></i> View On GitHub"
+    - label: "<i class='fab fa-github'></i> Source on GitHub"
       url: "https://github.com/GamehunterKaan/fundhunter/"
-    - label: "<i class='fas fa-arrow-up-right-from-square'></i> Live Site"
+    - label: "<i class='fas fa-arrow-up-right-from-square'></i> Open FundHunter"
       url: "https://fundhunter.kaangultekin.net/"
 excerpt: >
   Every investment fund in Türkiye, and what they actually hold. 2,063 funds and 648 Borsa İstanbul listings — composition, returns, risk and ownership — filtered entirely in the browser. No backend, no build step.

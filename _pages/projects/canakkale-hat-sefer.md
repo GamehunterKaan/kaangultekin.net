@@ -5,15 +5,18 @@ permalink: /projects/canakkale-hat-sefer/
 use_mermaid: true
 order: 3
 card_description: >
-  Mobile-first PWA for Çanakkale's public bus network — live tracking, trip
-  planning, schedules, and push notifications. No app store, no backend.
+  Çanakkale's buses have no official app, so I made one: live bus positions,
+  a trip planner, the municipality's PDF timetables turned into something
+  usable, and alerts when your bus is close.
 header:
   overlay_image: /assets/images/canakkale-hat-sefer.webp
   actions:
-    - label: "<i class='fas fa-code'></i> View On GitHub"
+    - label: "<i class='fab fa-github'></i> Source on GitHub"
       url: "https://github.com/GamehunterKaan/canakkale-hat-sefer/"
+    - label: "<i class='fas fa-arrow-up-right-from-square'></i> Open the app"
+      url: "https://17hatsefer.kaangultekin.net/"
 excerpt: >
-  Mobile-first PWA for Çanakkale's public bus network — live tracking, trip planning, schedules, and push notifications. No app store, no backend, no frameworks.
+  A bus app for Çanakkale, the city I live in: live tracking, trip planning, timetables and push notifications. It's a static site — no app store, no backend, no framework.
 ---
 
 ## Introduction

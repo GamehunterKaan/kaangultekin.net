@@ -15,9 +15,9 @@ locale                   : "en-US"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
 title                    : "Kaan Gültekin"
 title_separator          : "-"
-subtitle                 : "Software Engineer & Cybersecurity Researcher"
+subtitle                 : "Software engineer and security researcher"
 name                     : "Kaan Gültekin"
-description              : "Personal website of Kaan Gültekin"
+description              : "Kaan Gültekin builds security tools, open-source software, and the occasional app his city was missing."
 url                      : "https://kaangultekin.net" # needed for canonical + Open Graph absolute URLs
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "GamehunterKaan/kaangultekin.net"
@@ -111,7 +111,7 @@ analytics:
 author:
   name             : "Kaan Gültekin"
   avatar           : "/assets/images/bio-photo.webp"
-  bio              : Sofware Engineering Student - Sofware Developer - Open Source Enthusiast - Cybersecurity Researcher
+  bio              : "Software engineer, founding engineer at SolonGate, author of AutoPWN Suite."
   location         : "Turkiye"
   email            : kaan@kaangultekin.net
   links:
@@ -121,8 +121,8 @@ author:
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
+    - label: "X"
+      icon: "fab fa-fw fa-x-twitter"
       url: "https://x.com/kaangultekin01"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"

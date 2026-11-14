@@ -69,7 +69,12 @@
   "name": {{ site.author.name | jsonify }},
   "url": {{ site.url | default: "https://kaangultekin.net" | jsonify }},
   "email": {{ site.author.email | jsonify }},
-  "jobTitle": {{ site.subtitle | jsonify }},
+  "jobTitle": "Founding Engineer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "SolonGate",
+    "url": "https://solongate.com/"
+  },
   "sameAs": [
     "https://github.com/GamehunterKaan",
     "https://www.linkedin.com/in/kaan-gultekin/",

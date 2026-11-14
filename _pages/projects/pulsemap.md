@@ -5,24 +5,34 @@ permalink: /projects/pulsemap/
 use_mermaid: true
 order: 4
 card_description: >
-  Real-time network packet flow visualizer with animated comet trails, anomaly
-  detection, and deep traffic analysis.
+  Load a packet capture or sniff a live interface and watch the traffic move
+  across a graph. It flags port scans and floods as they happen, rebuilds TCP
+  streams and pulls files out of HTTP.
 header:
   overlay_image: /assets/images/pulsemap-default.webp
   actions:
-    - label: "<i class='fas fa-code'></i> View On GitHub"
+    - label: "<i class='fab fa-github'></i> Source on GitHub"
       url: "https://github.com/GamehunterKaan/pulsemap/"
 excerpt: >
-  Real-time network packet flow visualizer with animated comet trails, anomaly detection, and deep traffic analysis
+  A packet capture you can watch: every packet becomes a dot travelling between the hosts it connects, so the busy flows, the scanners and the odd one out are visible at a glance.
 ---
 
-## Introduction
+## What it's for
 
-Network traffic is invisible by default — hundreds of connections happening simultaneously, anomalies buried in noise, and no intuitive way to understand what is talking to what. **Pulsemap** makes it visible.
+Wireshark is the right tool for reading a capture packet by packet. It's a
+poor one for seeing the shape of it: which hosts talk the most, which one
+suddenly touches forty ports, when the burst started. Pulsemap is for that
+first look.
 
-Packets become animated dots traveling along the edges of a live force-directed graph. Heavy flows thicken. Anomalous nodes pulse red. You can seek through a capture like a video, drill into any TCP stream, export a filtered slice as a `.pcap`, and plot every external IP on a world map — all from a single browser tab with no external dependencies beyond Python.
+Every packet becomes a dot travelling along an edge between two hosts on a
+live graph. Busy connections get thicker, and a host that trips one of the
+anomaly rules pulses red. You can scrub through a capture like a video, open
+any TCP stream, export a filtered slice as a new `.pcap`, and put every
+external IP on a world map, all in one browser tab.
 
-Built on Flask + SocketIO (threading mode), Scapy, and D3.js v7. Supports both `.pcap` file replay and live interface capture.
+It's Flask and Socket.IO on the server, Scapy for parsing and sniffing, and
+D3.js v7 in the browser. It replays `.pcap` and `.pcapng` files and can also
+capture live from a network interface.
 
 ![Pulsemap default view](/assets/images/pulsemap-default.webp)
 
